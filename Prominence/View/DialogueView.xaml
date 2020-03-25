@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Prominence.ViewModel"
+             mc:Ignorable="d"
+             x:Class="Prominence.View.DialogueView"
+             BackgroundImageSource="Resources/incubation.png">
+    <ContentPage.BindingContext>
+        <local:DialogueViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.05*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                   BackgroundColor="Transparent" HorizontalTextAlignment="Center"
+                   Text="Test 1" />
+            <CollectionView Grid.Row="1" Grid.Column="1"
+                    ItemsSource="{Binding Log}" 
+                    BackgroundColor="Transparent" 
+                    VerticalOptions="End" 
+                    VerticalScrollBarVisibility="Always"
+                    ItemsUpdatingScrollMode="KeepLastItemInView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label
+                                Margin="5"
+                                Text="{Binding Text}" 
+                                FontSize="Medium" 
+                                HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
+                                TextColor="{Binding TextColor}" 
+                                BackgroundColor="Transparent"
+                                />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CollectionView Grid.Row="2" Grid.Column="1"
+                    ItemsSource="{Binding Buttons}" BackgroundColor="Transparent">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Button 
+                                Text="{Binding Text}" 
+                                Command="{Binding Command}" 
+                                FontSize="Medium" 
+                                HorizontalOptions="Center" 
+                                TextColor="White" 
+                                WidthRequest="350"
+                                BackgroundColor="{Binding Color}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+
+        
+        
+    </ContentPage.Content>
+</ContentPage>
