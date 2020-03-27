@@ -57,11 +57,13 @@ namespace Prominence.Model
     /// </summary>
     public class FrameModel
     {
+        public string Name;
         public List<DialogueModel> Dialogue;
         public List<ButtonModel> Buttons;
 
-        public FrameModel(List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        public FrameModel(string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
         {
+            Name = name;
             Dialogue = dialogue;
             Buttons = buttons;
         }
@@ -73,6 +75,7 @@ namespace Prominence.Model
     /// </summary>
     public interface SceneModel
     {
+        string Name { get; }
         Action OnEnter { get; } // Eg. change the background of the screen
         Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
         Dictionary<string, FrameModel> Frames { get; } // How do we exit a scene? How do we connect these buttons to the next screen?
@@ -101,6 +104,8 @@ namespace Prominence.Model
 
 public class ActModel
     {
+        public string Name;
+
         public Action OnEnter;
         public Action OnExit;
 
@@ -119,8 +124,9 @@ public class ActModel
     /// </summary>
     public class FilmModel
     {
-        public Dictionary<string, ActModel> Acts;
+        public string Name;
 
+        public Dictionary<string, ActModel> Acts;
         public FilmModel(Dictionary<string, ActModel> acts)
         {
             Acts = acts;

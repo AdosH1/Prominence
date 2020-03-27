@@ -8,6 +8,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
 {
     public class IncubationScene : SceneModel
     {
+        public string Name { get { return "incubation"; } }
         public  Action OnEnter { get { return null; } }
         public  Action OnExit { get { return null; } }
 
@@ -15,16 +16,17 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         {
             get { return
                 new Dictionary<string, FrameModel>() {
-                    {"Wakeup", Wakeup},
-                    {"TalkToDrone", TalkToDrone},
-                    {"DrillingContinues", DrillingContinues},
-                    {"DroneLeaves", DroneLeaves},
-                    {"InspectRoom", InspectRoom},
+                    {Wakeup.Name, Wakeup},
+                    {TalkToDrone.Name, TalkToDrone},
+                    {DrillingContinues.Name, DrillingContinues},
+                    {DroneLeaves.Name, DroneLeaves},
+                    {InspectRoom.Name, InspectRoom},
                 };
             }
         }
 
         public readonly static FrameModel Wakeup = new FrameModel(
+            "Wakeup",
             new List<DialogueModel>() { 
                 new DialogueModel("..."),
                 new DialogueModel("You wake up."),
@@ -40,6 +42,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         );
 
         readonly static FrameModel TalkToDrone = new FrameModel(
+            "TalkToDrone",
             new List<DialogueModel>() {
                 new DialogueModel("\"Hello?\" You ask. \"Who's there?\""),
                 new DialogueModel("The drilling continues.", color: Color.Red, textAlignment: TextAlignment.Center),
@@ -51,6 +54,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         );
 
         readonly static FrameModel DrillingContinues = new FrameModel(
+            "DrillingContinues",
             new List<DialogueModel>() {
                 new DialogueModel("The drilling continues."),
             },
@@ -61,6 +65,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         );
 
         readonly static FrameModel DroneLeaves = new FrameModel(
+            "DroneLeaves",
             new List<DialogueModel>() {
                 new DialogueModel("Suddenly, your vision flickers on and you begin being lowered down."),
                 new DialogueModel("Looking to your side, you can just make out a drone hovering out of the room and into a hallway. It turns left."),
@@ -74,6 +79,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         );
 
         readonly static FrameModel InspectRoom = new FrameModel(
+            "InspectRoom",
             new List<DialogueModel>() {
                 new DialogueModel("Everything in the room has a plain metal surface."),
                 new DialogueModel("The seat you were in has many circular connection points that match the metallic sockets around your body."),
