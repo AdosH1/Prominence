@@ -112,6 +112,7 @@ namespace Prominence.Controllers
                 var strengthStr = content.Split(':')[1];
                 double.TryParse(strengthStr, out double strength);
                 player.Strength = strength;
+                
 
                 // Magic
                 content = streamReader.ReadLine();

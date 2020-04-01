@@ -6,9 +6,12 @@ using Prominence.Model.Interfaces;
 
 namespace Prominence.Model
 {
-    public class PlayerModel
+    public class PlayerModel : ICreatureEntity
     {
-        public string Name;
+        public string Name { get; set; }
+        public double Experience { get; set; }
+        public double Health { get; set; }
+        public double MaxHealth { get; set; }
 
         public string Film;
         public string Act;
@@ -20,11 +23,12 @@ namespace Prominence.Model
 
         public List<IItemEntity> Inventory; // use item hashes?
         public double Energy;
+        public double MaxEnergy;
         public DateTime LastLogin;
 
-        public double Strength;
-        public double Magic;
-        public double Speed;
+        public double Strength { get; set; }
+        public double Magic { get; set; }
+        public double Speed { get; set; }
 
         public double Resistance;
 

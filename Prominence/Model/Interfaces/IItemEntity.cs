@@ -6,8 +6,6 @@ namespace Prominence.Model.Interfaces
 {
     public interface IItemEntity
     {
-
         string Id { get; }
-
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using Prominence.Model;
 using Prominence.Resources.DialogueData.Sequoia;
+using Prominence.View;
 using Xamarin.Forms;
 
 namespace Prominence.ViewModel
@@ -22,6 +23,7 @@ namespace Prominence.ViewModel
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
 
+
         public DialogueViewModel()
         {
             Log = new ObservableCollection<Label>();
@@ -29,7 +31,6 @@ namespace Prominence.ViewModel
 
             CurrentFilm = SequoiaFilm.Sequoia;
             Traverse(null);
-
         }
 
         public void ClearScreen(bool clearAll = false)
@@ -64,18 +65,29 @@ namespace Prominence.ViewModel
 
         public void SetScene(SceneModel scene)
         {
-            if (CurrentScene != null)
-                CurrentScene.OnExit.Invoke();
+            if (CurrentScene != null) {
+                if (CurrentScene.OnExit != null)
+                    CurrentScene.OnExit.Invoke();
+            }
+                
             CurrentScene = scene;
-            CurrentScene.OnEnter.Invoke();
+
+            if (CurrentScene.OnEnter != null)
+                CurrentScene.OnEnter.Invoke();
         }
 
         public void SetAct(ActModel act)
         {
-            if (CurrentAct != null)
-                CurrentAct.OnExit.Invoke();
+            if (CurrentAct != null) {
+                if (CurrentAct.OnExit != null)
+                    CurrentAct.OnExit.Invoke();
+            }
+
             CurrentAct = act;
-            CurrentAct.OnEnter.Invoke();
+
+            if (CurrentAct.OnEnter != null) 
+                CurrentAct.OnEnter.Invoke();
+            
         }
 
         public void LoadFrame(FrameModel Frame)

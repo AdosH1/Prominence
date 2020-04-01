@@ -13,3 +13,5 @@ C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstanda
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstandard2.0\Prominence.pdb
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstandard2.0\XamlC.stamp
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstandard2.0\Prominence.csproj.CoreCompileInputs.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstandard2.0\View\StatisticsView.xaml.g.cs
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence\obj\Debug\netstandard2.0\View\CombatView.xaml.g.cs
