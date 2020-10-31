@@ -89,9 +89,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\incubation.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Prominence\Prominence.csproj">
       <Project>{03D8B4E8-CC30-4814-B623-E65CE3528A0E}</Project>
       <Name>Prominence</Name>

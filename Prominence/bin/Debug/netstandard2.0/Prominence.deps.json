@@ -9,6 +9,7 @@
     ".NETStandard,Version=v2.0/": {
       "Prominence/1.0.0": {
         "dependencies": {
+          "Combat": "1.0.0",
           "Microsoft.CodeAnalysis.FxCopAnalyzers": "2.9.8",
           "NETStandard.Library": "2.0.3",
           "Xamarin.Essentials": "1.3.1",
@@ -69,6 +70,11 @@
             "assemblyVersion": "2.0.0.0",
             "fileVersion": "4.3.0.336"
           }
+        }
+      },
+      "Combat/1.0.0": {
+        "runtime": {
+          "Combat.dll": {}
         }
       }
     }
@@ -148,6 +154,11 @@
       "sha512": "sha512-kXrbXKJvXYF4cKjs1Jsb+pQFEnFGl0AONYSeABjgOJqN/o5Y4zC0XXQ68xiUI81PKQTuRB5F3oDom2t5ccJDZw==",
       "path": "xamarin.forms/4.3.0.908675",
       "hashPath": "xamarin.forms.4.3.0.908675.nupkg.sha512"
+    },
+    "Combat/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

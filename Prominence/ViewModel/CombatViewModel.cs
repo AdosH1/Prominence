@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using System.ComponentModel;
 using Prominence.Model.Interfaces;
 using Prominence.Model;
+using Combat.Interfaces;
 
 namespace Prominence.ViewModel 
 {
@@ -56,17 +57,63 @@ namespace Prominence.ViewModel
             }
         }
 
-        public CombatViewModel(ICreatureEntity creature)
+        public CombatViewModel(PlayerModel player)
         {
-            _playerHealth = creature.Health;
-            _playerMaxHealth = creature.MaxHealth;
+            _playerHealth = player.Health;
+            _playerMaxHealth = player.MaxHealth;
 
-            var player = (PlayerModel)creature;
-            if (player != null)
-            {
-                _playerEnergy = player.Energy;
-                _playerMaxEnergy = player.MaxEnergy;
+
+            _playerEnergy = player.Energy;
+            _playerMaxEnergy = player.MaxEnergy;
+            
+        }
+
+        public void GetPlayerAction()
+        {
+
+        }
+
+        public void ResolveStartOfTurnEffects(PlayerModel player, ICombatCreature creature)
+        {
+            foreach (var status in player.Statuses) {
+                status.StartOfTurn();
             }
+            foreach (var status in creature.Statuses) {
+                status.StartOfTurn();
+            }
+        }
+
+        public void ResolvePrePlayerCombatEffects(PlayerModel player, ICombatCreature creature)
+        {
+            foreach (var status in player.Statuses)
+            {
+                status.PrePlayerCombat();
+            }
+            foreach (var status in creature.Statuses) 
+            {
+                status.PrePlayerCombat();
+            }
+        }
+
+        public bool Fight(PlayerModel player, ICombatCreature creature, Func<bool> battleCondition, Func<bool> winCondition)
+        {
+
+
+            while (battleCondition())
+            {
+
+                ResolveStartOfTurnEffects(player, creature);
+
+                GetPlayerAction();
+
+                ResolvePrePlayerCombatEffects(player, creature);
+
+
+            }
+
+            return winCondition();
+
+
         }
 
 

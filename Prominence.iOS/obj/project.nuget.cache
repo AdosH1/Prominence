@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3Ezz83w/Q39qr4lDyFUCBAqZS/9+vRmdHkGcpVKQKe+iWt+tjh4IWKq9ZwfuOny7JW+0H8g0lAI4SqS/0+wnvg==",
+  "dgSpecHash": "kMWDQiiG38JqlUQUJIyDkNrA01WPWmhthUM5Q4wofBt+0jSA0hAXgryNl2Bvouoec7k7+VzYsBtuN1CfVFNo7w==",
   "success": true,
   "projectFilePath": "C:\\Users\\adenh\\source\\repos\\Prominence\\Prominence\\Prominence.iOS\\Prominence.iOS.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\adenh\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
+    "C:\\Users\\adenh\\.nuget\\packages\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\xamarin.forms\\4.3.0.908675\\xamarin.forms.4.3.0.908675.nupkg.sha512"
   ],
   "logs": []

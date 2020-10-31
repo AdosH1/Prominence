@@ -46,4 +46,8 @@
   <ItemGroup>
     <Folder Include="Resources\Images\Sequoia\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Combat\Combat.csproj" />
+  </ItemGroup>
 </Project>

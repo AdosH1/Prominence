@@ -21,7 +21,7 @@ namespace Prominence.Model
             if (condition == null)
                 condition = () => { return true; };
             if (color == null)
-                color = Color.White;
+                color = Color.Black;
             if (textAlignment == null)
                 textAlignment = TextAlignment.Start;
             

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Prominence.Model;
 using Prominence.Model.Interfaces;
+using Combat.Interfaces;
 
 namespace Prominence.Model
 {
-    public class PlayerModel : ICreatureEntity
+    public class PlayerModel : ICombatEntity, ICreatureEntity
     {
         public string Name { get; set; }
         public double Experience { get; set; }
@@ -30,7 +31,8 @@ namespace Prominence.Model
         public double Magic { get; set; }
         public double Speed { get; set; }
 
-        public double Resistance;
+        public List<IStatusEffect> Statuses { get; set; }
+        public Dictionary<Element, double> Resistances { get; set; }
 
         public IItemEntity ActiveWeapon;
         public IItemEntity ActiveArmor;

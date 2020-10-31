@@ -56,3 +56,6 @@ C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimul
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.csproj.CopyComplete
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.exe
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.pdb
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\bin\iPhoneSimulator\Debug\Combat.dll
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\bin\iPhoneSimulator\Debug\Combat.pdb
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.csproj.CoreCompileInputs.cache

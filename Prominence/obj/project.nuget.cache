@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "L3k2AHtRC4WKJ+flM6yy9ZVarf/WO8iRRzKslTt2XXn7v1nN74HuSC8E9gfUCcVv0WlCItDquJtk3CnrHVnm9w==",
+  "dgSpecHash": "g97QYMaXmEztTE78dZ5yuwsBA2TP9l0oUF5LFPEJAoMi9JGdbI0QwTo/BDSIRY34F/9QLDNI3D5he23jflm2xA==",
   "success": true,
   "projectFilePath": "C:\\Users\\adenh\\source\\repos\\Prominence\\Prominence\\Prominence\\Prominence.csproj",
   "expectedPackageFiles": [
@@ -12,7 +12,7 @@
     "C:\\Users\\adenh\\.nuget\\packages\\microsoft.netframework.analyzers\\2.9.8\\microsoft.netframework.analyzers.2.9.8.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
+    "C:\\Users\\adenh\\.nuget\\packages\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\xamarin.forms\\4.3.0.908675\\xamarin.forms.4.3.0.908675.nupkg.sha512"
   ],
   "logs": []

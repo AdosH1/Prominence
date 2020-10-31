@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
+using System.Threading.Tasks;
 using Prominence.Model;
 using Prominence.Resources.DialogueData.Sequoia;
 using Prominence.View;
@@ -23,6 +25,14 @@ namespace Prominence.ViewModel
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
 
+        char[] superthinChars = new char[] { 'f', 'i', 'j', 'l', 'r', 't', '!', '(', ')', '-', '*', '^', '/', '\\', '|', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '.', '/', '?', '`', '~', ' ', '\n' };
+        char[] thinChars = new char[] { 'a', 'c', 'd', 'e',  'n', 'o',  's', 'u', 'v',  'x', 'y', 'z', 'b',  'g', 'h',  'k', 'p', 'q' };
+        char[] medChars = new char[] {
+                'm','w',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'Y',
+                '$', '%', '&', '=', '_', '+', '<', '>'};
+        char[] largeChars = new char[] { 'M', '@', '#', 'Q', 'W', 'X', 'Z' };
+
 
         public DialogueViewModel()
         {
@@ -41,7 +51,90 @@ namespace Prominence.ViewModel
             Buttons.Clear();
         }
 
-        public void AddButtonClickedText(string text)
+        public string GetSmartScrambleString(string text, int length)
+        {
+
+            var numIndicesSuperThin = superthinChars.Length - 1;
+            var numIndicesThin = thinChars.Length - 1;
+            var numIndicesMed = medChars.Length - 1;
+            var numIndicesLarge = largeChars.Length - 1;
+
+            var scrambledString = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++)
+            {
+                if (superthinChars.Contains(text[i]))
+                {
+                    scrambledString.Append(superthinChars[random.Next(0, numIndicesSuperThin)]);
+                    continue;
+                }
+                if (thinChars.Contains(text[i]))
+                {
+                    scrambledString.Append(thinChars[random.Next(0, numIndicesThin)]);
+                    continue;
+                }
+                if (medChars.Contains(text[i]))
+                {
+                    scrambledString.Append(medChars[random.Next(0, numIndicesMed)]);
+                    continue;
+                }
+                if (largeChars.Contains(text[i]))
+                {
+                    scrambledString.Append(largeChars[random.Next(0, numIndicesLarge)]);
+                    continue;
+                }
+                Console.WriteLine($"I missed a character {text[i]}");
+            }
+
+            return scrambledString.ToString();
+        }
+
+        public string GetScrambleString(int length)
+        {
+            var chars = new char[] {
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+                '@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '_', '+', '/', '\\', '|', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '<', '.', '>', '/', '?', '`', '~'};
+
+            var numChars = chars.Length;
+            var numIndices = numChars - 1;
+
+            var scrambledString = new StringBuilder();
+            Random random = new Random();
+
+            for (int i = 0; i < length; i++) {
+                scrambledString.Append(chars[random.Next(0, numIndices)]);
+            }
+
+            return scrambledString.ToString();
+        }
+
+        public async Task<bool> SlowlyRevealText(Label label, string text)
+        {
+            var len = text.Length;
+            //var currString = GetScrambleString(len);
+            var currString = GetSmartScrambleString(text, len);
+
+            var strBuilder = new StringBuilder(currString);
+
+            label.Text = strBuilder.ToString(); ;
+            Log.Add(label);
+
+            for (var i = 0; i < len; i++)
+            {
+                strBuilder.Insert(i+1, text[i]);
+                strBuilder.Remove(i, 1);
+
+                label.Text = strBuilder.ToString();
+
+                await Task.Delay(5);
+            }
+
+            return true;
+        }
+
+        public async void AddButtonClickedText(string text)
         {
             string breaker = "--------------------------";
 
@@ -49,7 +142,7 @@ namespace Prominence.ViewModel
             label1.Text = breaker;
             label1.HorizontalTextAlignment = TextAlignment.Center;
             label1.FontSize = 12;
-            label1.TextColor = Color.White;
+            label1.TextColor = Color.Black;
             Log.Add(label1);
 
             var label2 = new Label();
@@ -57,6 +150,7 @@ namespace Prominence.ViewModel
             label2.HorizontalTextAlignment = TextAlignment.Center;
             label2.FontSize = 12;
             label2.TextColor = Color.Red;
+            //var result = await SlowlyRevealText(label2, text);
             Log.Add(label2);
 
             Log.Add(label1);
@@ -90,7 +184,7 @@ namespace Prominence.ViewModel
             
         }
 
-        public void LoadFrame(FrameModel Frame)
+        public async void LoadFrame(FrameModel Frame)
         {
             ClearScreen();
 
@@ -104,7 +198,9 @@ namespace Prominence.ViewModel
                     label.Text = dialogue.Text;
                     label.TextColor = dialogue.Color;
                     label.HorizontalTextAlignment = dialogue.TextAlignment;
-                    Log.Add(label);
+
+                    var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
+                    //Log.Add(label);
                 }
             }
 

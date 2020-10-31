@@ -99,6 +99,16 @@
           "build/Xamarin.Forms.props": {},
           "build/Xamarin.Forms.targets": {}
         }
+      },
+      "Combat/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Combat.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Combat.dll": {}
+        }
       }
     }
   },
@@ -985,10 +995,16 @@
         "xamarin.forms.4.3.0.908675.nupkg.sha512",
         "xamarin.forms.nuspec"
       ]
+    },
+    "Combat/1.0.0": {
+      "type": "project",
+      "path": "../../Combat/Combat.csproj",
+      "msbuildProject": "../../Combat/Combat.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
+      "Combat >= 1.0.0",
       "Microsoft.CodeAnalysis.FxCopAnalyzers >= 2.9.8",
       "NETStandard.Library >= 2.0.3",
       "Xamarin.Essentials >= 1.3.1",
@@ -1027,7 +1043,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\adenh\\source\\repos\\Prominence\\Combat\\Combat.csproj": {
+              "projectPath": "C:\\Users\\adenh\\source\\repos\\Prominence\\Combat\\Combat.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1070,7 +1090,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -38,7 +38,7 @@ namespace Prominence.Controllers
                 streamWriter.WriteLine("Strength:" + player.Strength.ToString());
                 streamWriter.WriteLine("Magic:" + player.Magic.ToString());
                 streamWriter.WriteLine("Speed:" + player.Speed.ToString());
-                streamWriter.WriteLine("Resistance:" + player.Resistance.ToString());
+                //streamWriter.WriteLine("Resistance:" + player.Resistance.ToString());
                 streamWriter.WriteLine("Energy:" + player.Energy.ToString());
 
                 var items = string.Join(",", player.Inventory.SelectMany(x => x.Id));
@@ -127,10 +127,10 @@ namespace Prominence.Controllers
                 player.Speed = speed;
 
                 // Resistance
-                content = streamReader.ReadLine();
-                var resistanceStr = content.Split(':')[1];
-                double.TryParse(resistanceStr, out double resistance);
-                player.Resistance = resistance;
+                //content = streamReader.ReadLine();
+                //var resistanceStr = content.Split(':')[1];
+                //double.TryParse(resistanceStr, out double resistance);
+                //player.Resistance = resistance;
 
                 // ====== Items ====== // 
                 // Inventory

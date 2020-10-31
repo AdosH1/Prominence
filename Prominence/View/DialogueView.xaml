@@ -39,11 +39,13 @@
             
             
             <CollectionView Grid.Row="1" Grid.Column="1"
+                    x:Name="LogCollection"
                     ItemsSource="{Binding Log}" 
                     BackgroundColor="Transparent" 
                     VerticalOptions="End" 
                     VerticalScrollBarVisibility="Always"
-                    ItemsUpdatingScrollMode="KeepLastItemInView">
+                    ItemsUpdatingScrollMode="KeepLastItemInView"
+                    >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>

@@ -15,5 +15,6 @@ namespace Prominence.Model.Interfaces
         double Magic { get; set; }
         double Speed { get; set; }
 
+
     }
 }
