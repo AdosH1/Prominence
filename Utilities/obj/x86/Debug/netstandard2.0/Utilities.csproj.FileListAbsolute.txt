@@ -1,0 +1,9 @@
+C:\Users\adenh\source\repos\Prominence\Utilities\bin\x86\Debug\netstandard2.0\Utilities.deps.json
+C:\Users\adenh\source\repos\Prominence\Utilities\bin\x86\Debug\netstandard2.0\Utilities.dll
+C:\Users\adenh\source\repos\Prominence\Utilities\bin\x86\Debug\netstandard2.0\Utilities.pdb
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.csprojAssemblyReference.cache
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.AssemblyInfoInputs.cache
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.AssemblyInfo.cs
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.csproj.CoreCompileInputs.cache
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.dll
+C:\Users\adenh\source\repos\Prominence\Utilities\obj\x86\Debug\netstandard2.0\Utilities.pdb

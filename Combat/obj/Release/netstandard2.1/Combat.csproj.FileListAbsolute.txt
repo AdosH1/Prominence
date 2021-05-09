@@ -1,0 +1,9 @@
+C:\Users\adenh\source\repos\Prominence\Combat\bin\Release\netstandard2.1\Combat.deps.json
+C:\Users\adenh\source\repos\Prominence\Combat\bin\Release\netstandard2.1\Combat.dll
+C:\Users\adenh\source\repos\Prominence\Combat\bin\Release\netstandard2.1\Combat.pdb
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.csprojAssemblyReference.cache
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.AssemblyInfoInputs.cache
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.AssemblyInfo.cs
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.csproj.CoreCompileInputs.cache
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.dll
+C:\Users\adenh\source\repos\Prominence\Combat\obj\Release\netstandard2.1\Combat.pdb
