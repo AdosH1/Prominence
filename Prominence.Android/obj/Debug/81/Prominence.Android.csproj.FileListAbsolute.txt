@@ -429,3 +429,12 @@ C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\8
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\android\compressed_assemblies.x86.o
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\android\compressed_assemblies.x86_64.o
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\stamp\_CleanIntermediateIfNeeded.stamp
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\6\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\10\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\12\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\13\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\15\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\16\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\17\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\19\jl\files.cache
+C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.Android\obj\Debug\81\lp\20\jl\files.cache

@@ -12,7 +12,7 @@ namespace Prominence.Controllers
     {
 
         string saveFolderPath;
-        const string saveFileName = "save";
+        const string saveFileName = "prominence-savefile";
 
 
         public SaveController()
@@ -41,8 +41,10 @@ namespace Prominence.Controllers
                 //streamWriter.WriteLine("Resistance:" + player.Resistance.ToString());
                 streamWriter.WriteLine("Energy:" + player.Energy.ToString());
 
-                var items = string.Join(",", player.Inventory.SelectMany(x => x.Id));
-                streamWriter.WriteLine("Inventory:" + items);
+                streamWriter.WriteLine("Inventory:" + string.Join(",", player.Inventory));
+
+                var flagstr = string.Join(";", player.Flags.Select(x => x.Key + "=" + x.Value));
+                streamWriter.WriteLine("Flags:" + string.Join(",", player.Flags));
 
                 streamWriter.WriteLine("ActiveWeapon:" + player.ActiveWeapon.Id);
                 streamWriter.WriteLine("ActiveArmor:" + player.ActiveArmor.Id);
@@ -134,16 +136,43 @@ namespace Prominence.Controllers
 
                 // ====== Items ====== // 
                 // Inventory
+                //content = streamReader.ReadLine();
+                //var inventoryStr = content.Split(':')[1];
+                //var inventory = new List<IItemEntity>();
+
+                //var ids = inventoryStr.Split(',');
+                //foreach (var id in ids)
+                //{
+                //    // search for item ids here
+                //}
+                //player.Inventory = inventory;
                 content = streamReader.ReadLine();
                 var inventoryStr = content.Split(':')[1];
-                var inventory = new List<IItemEntity>();
-
-                var ids = inventoryStr.Split(',');
-                foreach (var id in ids)
-                {
-                    // search for item ids here
-                }
+                var inventory = inventoryStr.Split(',').ToList();
                 player.Inventory = inventory;
+
+                // Flags
+                content = streamReader.ReadLine();
+                var flagsStr = content.Split(':')[1];
+                var flags = flagsStr.Split(';').ToList();
+
+                Dictionary<string, int> flagDict = new Dictionary<string, int>();
+                foreach (var flag in flags)
+                {
+                    var trimmed = flag.TrimEnd(';');
+                    var split = trimmed.Split('=');
+
+                    var key = split[0];
+                    int value;
+                    if (!int.TryParse(split[1], out value))
+                    {
+                        value = 1;
+                    }
+
+                    flagDict[key] = value;
+                }
+
+                player.Flags = flagDict;
 
                 // Active Weapon
                 // Search item here or null

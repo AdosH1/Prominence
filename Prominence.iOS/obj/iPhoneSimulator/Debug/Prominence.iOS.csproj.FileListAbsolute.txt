@@ -52,7 +52,6 @@ C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimul
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\coremlc\_BundleResourceWithLogicalName.items
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\optimized\
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.csprojAssemblyReference.cache
-C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\XamlC.stamp
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.csproj.CopyComplete
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.exe
 C:\Users\adenh\source\repos\Prominence\Prominence\Prominence.iOS\obj\iPhoneSimulator\Debug\Prominence.iOS.pdb

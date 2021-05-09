@@ -17,29 +17,47 @@ namespace Prominence.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public FilmModel CurrentFilm;
-        public ActModel CurrentAct;
-        public SceneModel CurrentScene;
+        public IFilmModel CurrentFilm;
+        public IActModel CurrentAct;
+        public ISceneModel CurrentScene;
         public FrameModel CurrentFrame;
+        public PlayerModel Player;
 
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
 
         char[] superthinChars = new char[] { 'f', 'i', 'j', 'l', 'r', 't', '!', '(', ')', '-', '*', '^', '/', '\\', '|', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '.', '/', '?', '`', '~', ' ', '\n' };
-        char[] thinChars = new char[] { 'a', 'c', 'd', 'e',  'n', 'o',  's', 'u', 'v',  'x', 'y', 'z', 'b',  'g', 'h',  'k', 'p', 'q' };
+        char[] thinChars = new char[] { 'a', 'c', 'd', 'e',  'n', 'o',  's', 'u', 'v',  'x', 'y', 'z', 'b',  'g', 'h',  'k', 'p', 'q', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' };
         char[] medChars = new char[] {
                 'm','w',
                 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'V', 'Y',
                 '$', '%', '&', '=', '_', '+', '<', '>'};
         char[] largeChars = new char[] { 'M', '@', '#', 'Q', 'W', 'X', 'Z' };
 
+        public PlayerModel CreateBasePlayer()
+        {
+            var player = new PlayerModel();
+            player.Name = "Ados";
+            player.Strength = 1;
+            player.Magic = 1;
+            player.Speed= 1;
+
+            
+
+            return player;
+        }
 
         public DialogueViewModel()
         {
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
 
-            CurrentFilm = SequoiaFilm.Sequoia;
+            Player = CreateBasePlayer();
+
+            var promFilm = new ProminenceFilm();
+            promFilm.Initialise(Player);
+            CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
+            //ProminenceFilm.Player = Player;
             Traverse(null);
         }
 
@@ -128,7 +146,8 @@ namespace Prominence.ViewModel
 
                 label.Text = strBuilder.ToString();
 
-                await Task.Delay(5);
+                await Task.Delay(10);
+
             }
 
             return true;
@@ -157,7 +176,7 @@ namespace Prominence.ViewModel
             
         }
 
-        public void SetScene(SceneModel scene)
+        public void SetScene(ISceneModel scene)
         {
             if (CurrentScene != null) {
                 if (CurrentScene.OnExit != null)
@@ -170,8 +189,10 @@ namespace Prominence.ViewModel
                 CurrentScene.OnEnter.Invoke();
         }
 
-        public void SetAct(ActModel act)
+        public void SetAct(IActModel act)
         {
+            if (act.Player == null) act.Player = Player;
+
             if (CurrentAct != null) {
                 if (CurrentAct.OnExit != null)
                     CurrentAct.OnExit.Invoke();
@@ -184,10 +205,17 @@ namespace Prominence.ViewModel
             
         }
 
+        public void Visited(FrameModel frame)
+        {
+            if (!Player.Visited.Contains(frame.Name))            
+                Player.Visited.Add(frame.Name);
+        }
+
         public async void LoadFrame(FrameModel Frame)
         {
             ClearScreen();
 
+            Visited(Frame);
             CurrentFrame = Frame;
             // Load dialogue
             foreach (var dialogue in Frame.Dialogue)
@@ -200,6 +228,13 @@ namespace Prominence.ViewModel
                     label.HorizontalTextAlignment = dialogue.TextAlignment;
 
                     var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
+
+                    await dialogue.Action.Invoke().ConfigureAwait(false); ;
+                    //dialogue.Action.Invoke();
+                    //Console.WriteLine(test);
+                    //await Task.Run(async () => { await Task.Delay(3000); });
+                    //var test =
+                    //await Task.Run(() => { _ = dialogue.Action; });
                     //Log.Add(label);
                 }
             }
@@ -225,9 +260,11 @@ namespace Prominence.ViewModel
                     Buttons.Add(btn);
                 }
             }
+            
+            Player.AddVisited($"{Frame.Film.Name}-{Frame.Act.Name}-{Frame.Scene.Name}-{Frame.Name}");
         }
 
-        public bool TraverseScene(SceneModel scene, string location = null)
+        public bool TraverseScene(ISceneModel scene, string location = null)
         {
             if (scene == null) 
                 return false;
@@ -235,6 +272,8 @@ namespace Prominence.ViewModel
             // If no location, load first frame in scene
             if (location == null)
             {
+                //var test = scene.Frames;
+                //var test2 = scene.Frames.Keys;
                 var firstFrame = scene.Frames.Keys.First();
                 SetScene(scene);
                 LoadFrame(scene.Frames[firstFrame]);
@@ -253,7 +292,7 @@ namespace Prominence.ViewModel
             return false;
         }
 
-        public bool TraverseAct(ActModel act, string location = null)
+        public bool TraverseAct(IActModel act, string location = null)
         {
             if (act == null)
                 return false;
@@ -284,7 +323,7 @@ namespace Prominence.ViewModel
             return false;
         }
 
-        public bool TraverseFilm(FilmModel film, string location)
+        public bool TraverseFilm(IFilmModel film, string location)
         {
             if (film == null)
                 return false;
@@ -292,8 +331,7 @@ namespace Prominence.ViewModel
             // If no location, load first act in film
             if (location == null)
             {
-                var firstAct= film.Acts.Keys.First();
-                CurrentFilm = film;
+                var firstAct = film.Acts.Keys.First();
                 TraverseAct(film.Acts[firstAct]);
                 return true;
             }

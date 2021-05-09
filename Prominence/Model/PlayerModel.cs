@@ -9,33 +9,82 @@ namespace Prominence.Model
 {
     public class PlayerModel : ICombatEntity, ICreatureEntity
     {
-        public string Name { get; set; }
-        public double Experience { get; set; }
-        public double Health { get; set; }
-        public double MaxHealth { get; set; }
+        public string Name { get; set; } = "Ados";
+        public double Experience { get; set; } = 0;
+        public double Health { get; set; } = 1;
+        public double MaxHealth { get; set; } = 1;
 
         public string Film;
         public string Act;
         public string Scene;
         public string Frame;
 
-        public List<string> Visited;
-        public List<string> Log;
+        public List<string> Visited = new List<string>();
+        public List<string> Log = new List<string>();
 
-        public List<IItemEntity> Inventory; // use item hashes?
+        public List<string> Inventory = new List<string>(); // use item hashes?
+        //public List<string> Flags = new List<string>(); 
+        public Dictionary<string, int> Flags = new Dictionary<string, int>();
         public double Energy;
         public double MaxEnergy;
         public DateTime LastLogin;
 
-        public double Strength { get; set; }
-        public double Magic { get; set; }
-        public double Speed { get; set; }
+        public double Strength { get; set; } = 1;
+        public double Magic { get; set; } = 1;
+        public double Speed { get; set; } = 1;
 
         public List<IStatusEffect> Statuses { get; set; }
         public Dictionary<Element, double> Resistances { get; set; }
 
         public IItemEntity ActiveWeapon;
         public IItemEntity ActiveArmor;
+
+        public bool HasItem(string item)
+        {
+            return Inventory.Contains(item);
+        }
+        public void AddItem(string item)
+        {
+            Inventory.Add(item);
+        }
+
+        public bool HasVisited(string location)
+        {
+            return Visited.Contains(location);
+        }
+
+        public void AddVisited(string location)
+        {
+            Visited.Add(location);
+        }
+
+        public bool HasFlag(string flag)
+        {
+            return Flags.ContainsKey(flag);
+        }
+
+        public int GetFlag(string flag)
+        {
+            if (Flags.ContainsKey(flag))
+            {
+                return Flags[flag];
+            }
+            return 0;
+        }
+
+        public void IncrementFlag(string flag)
+        {
+            if (Flags.ContainsKey(flag))
+            {
+                Flags[flag] += 1;
+            }
+            else
+            {
+                Flags[flag] = 1;
+            }
+        }
+
+
 
     }
 }
