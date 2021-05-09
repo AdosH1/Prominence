@@ -7,16 +7,17 @@ using Prominence.Resources.DialogueData.Sequoia.Act_1;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
-    public static class SequoiaFilm
+    public class SequoiaFilm : IFilmModel
     {
-        public readonly static FilmModel Sequoia = new FilmModel(
-            new Dictionary<string, ActModel>()
-            {
-                { "Awakening", AwakeningAct.Awakening }
-            }
-        );
+        //public readonly static IFilmModel Sequoia = new IFilmModel(
+        //    new Dictionary<string, IActModel>()
+        //    {
+        //        { "Awakening", AwakeningAct.Awakening }
+        //    }
+        //);
 
+        public string Name { get { return "Sequoia";  } }
 
-
+        public Dictionary<string, IActModel> Acts { get; set; }
     }
 }

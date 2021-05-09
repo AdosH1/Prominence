@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "g97QYMaXmEztTE78dZ5yuwsBA2TP9l0oUF5LFPEJAoMi9JGdbI0QwTo/BDSIRY34F/9QLDNI3D5he23jflm2xA==",
+  "dgSpecHash": "OIBS44LPKhLoTZ1vm8PXCYrV1n6Oh23jm4E07ZzhuQ1sM9jYpa5FYWPZCDv1JP3Llv1O2bFY7JA2k6eVdqLueg==",
   "success": true,
   "projectFilePath": "C:\\Users\\adenh\\source\\repos\\Prominence\\Prominence\\Prominence\\Prominence.csproj",
   "expectedPackageFiles": [
@@ -8,12 +8,10 @@
     "C:\\Users\\adenh\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\2.9.8\\microsoft.codeanalysis.versioncheckanalyzer.2.9.8.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\microsoft.codequality.analyzers\\2.9.8\\microsoft.codequality.analyzers.2.9.8.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\microsoft.netcore.analyzers\\2.9.8\\microsoft.netcore.analyzers.2.9.8.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\microsoft.netframework.analyzers\\2.9.8\\microsoft.netframework.analyzers.2.9.8.nupkg.sha512",
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\adenh\\.nuget\\packages\\xamarin.essentials\\1.3.1\\xamarin.essentials.1.3.1.nupkg.sha512",
-    "C:\\Users\\adenh\\.nuget\\packages\\xamarin.forms\\4.3.0.908675\\xamarin.forms.4.3.0.908675.nupkg.sha512"
+    "C:\\Users\\adenh\\.nuget\\packages\\xamarin.forms\\5.0.0.2012\\xamarin.forms.5.0.0.2012.nupkg.sha512"
   ],
   "logs": []
 }

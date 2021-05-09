@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Prominence.Model
@@ -11,36 +12,69 @@ namespace Prominence.Model
         public Func<bool> Condition;
         public Color Color;
         public TextAlignment TextAlignment;
+        //public Task<bool> Action;
+        //public Action Action;
+        public Func<Task> Action;
+
+        //public DialogueModel(
+        //    string text,
+        //    Func<bool> condition = null,
+        //    Color? color = null,
+        //    TextAlignment? textAlignment = null,
+        //    Task<bool> action = null)
+        //{
+        //    if (condition == null)
+        //        condition = () => { return true; };
+        //    if (color == null)
+        //        color = Color.White;
+        //    if (textAlignment == null)
+        //        textAlignment = TextAlignment.Start;
+        //    if (action == null)
+        //        action = new Task<bool>(() => { return true; });
+
+        //    Text = text;
+        //    Condition = condition;
+        //    Color = (Color)color;
+        //    TextAlignment = (TextAlignment)textAlignment;
+        //    Action = action;
+
+        //}
 
         public DialogueModel(
-            string text, 
+            string text,
             Func<bool> condition = null,
             Color? color = null,
-            TextAlignment? textAlignment = null)
+            TextAlignment? textAlignment = null,
+            Func<Task> action = null)
         {
             if (condition == null)
                 condition = () => { return true; };
             if (color == null)
-                color = Color.Black;
+                color = Color.White;
             if (textAlignment == null)
                 textAlignment = TextAlignment.Start;
-            
+            if (action == null)
+                action = new Func<Task>(async () => { return; });//new Action(() => { return; });
+
             Text = text;
             Condition = condition;
             Color = (Color)color;
             TextAlignment = (TextAlignment)textAlignment;
+            Action = action;
+
         }
 
     }
 
-    public class ButtonModel
+        public class ButtonModel
     {
         public string Text;
         public string Jump; // string or int? How should we handle this?
-        public Action Action;
+        //public Action Action;
+        public Func<Task> Action;
         public Func<bool> Condition;
 
-        public ButtonModel(string text, string jump, Func<bool> condition = null, Action action = null)
+        public ButtonModel(string text, string jump, Func<bool> condition = null, Func<Task> action = null)
         {
             if (condition == null)
                 condition = () => { return true; };
@@ -57,15 +91,31 @@ namespace Prominence.Model
     /// </summary>
     public class FrameModel
     {
+        public IFilmModel Film;
+        public IActModel Act;
+        public ISceneModel Scene;
         public string Name;
         public List<DialogueModel> Dialogue;
         public List<ButtonModel> Buttons;
 
-        public FrameModel(string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        /// <summary>
+        /// Only use this constructor for connecting frames together (eg. construct with Name only)
+        /// </summary>
+        public FrameModel() { }
+
+        public FrameModel(IFilmModel film, IActModel act, ISceneModel scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
         {
+            Film = film;
+            Act = act;
+            Scene = scene;
             Name = name;
             Dialogue = dialogue;
             Buttons = buttons;
+        }
+
+        public string GetLocation()
+        {
+            return $"{Film.Name}-{Act.Name}-{Scene.Name}-{Name}";
         }
 
     }
@@ -73,63 +123,56 @@ namespace Prominence.Model
     /// <summary>
     /// A collection of frames, logically grouped.
     /// </summary>
-    public interface SceneModel
+    public interface ISceneModel
     {
-        string Name { get; }
-        Action OnEnter { get; } // Eg. change the background of the screen
-        Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
-        Dictionary<string, FrameModel> Frames { get; } // How do we exit a scene? How do we connect these buttons to the next screen?
+        public IFilmModel Film { get; set; }
+        public IActModel Act { get; set; }
+        public string Name { get; }
+        public PlayerModel Player { get; set; }
+        public Action OnEnter { get; } // Eg. change the background of the screen
+        public Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
+        //private Dictionary<string, FrameModel> _frames;
+        public Dictionary<string, FrameModel> Frames { get; set; } // How do we exit a scene? How do we connect these buttons to the next screen?
 
-        //SceneModel(Dictionary<string, FrameModel> frames, Action onEnter = null, Action onExit = null)
-        //{
-        //    Frames = frames;
-        //    OnEnter = onEnter;
-        //    OnExit = onExit;
-        //}
-    }
-//public abstract class SceneModel
-//{
-//    public Action OnEnter; // Eg. change the background of the screen
-//    public Action OnExit; // If you do any funky, non-standard things here, undo them before leaving 
-
-//    public Dictionary<string, FrameModel> Frames; // How do we exit a scene? How do we connect these buttons to the next screen?
-
-//    public SceneModel(Dictionary<string, FrameModel> frames, Action onEnter = null, Action onExit = null)
-//    {
-//        Frames = frames;
-//        OnEnter = onEnter;
-//        OnExit = onExit;
-//    }
-//}
-
-public class ActModel
-    {
-        public string Name;
-
-        public Action OnEnter;
-        public Action OnExit;
-
-        public Dictionary<string, SceneModel> Scenes;
-
-        public ActModel(Dictionary<string, SceneModel> scenes, Action onEnter = null, Action onExit = null)
+        public string GetLocation()
         {
-            Scenes = scenes;
-            OnEnter = onEnter;
-            OnExit = onExit;
+            return $"{Film.Name}-{Act.Name}-{Name}";
         }
+
+    }
+
+    public interface IActModel
+    {
+        public IFilmModel Film { get; set; }
+        public string Name { get; }
+        public PlayerModel Player { get; set; }
+        public Action OnEnter { get; set; }
+        public Action OnExit { get; set; }
+        public Dictionary<string, ISceneModel> Scenes { get; set; }
+
+        public string GetLocation()
+        {
+            return $"{Film.Name}-{Name}";
+        }
+
+        //public ActModel(Dictionary<string, ISceneModel> scenes, Action onEnter = null, Action onExit = null)
+        //{
+
+        //}
     }
 
     /// <summary>
     /// A collection of scenes to create a story.
     /// </summary>
-    public class FilmModel
+    public interface IFilmModel
     {
-        public string Name;
+        public string Name { get; }
 
-        public Dictionary<string, ActModel> Acts;
-        public FilmModel(Dictionary<string, ActModel> acts)
+        public Dictionary<string, IActModel> Acts { get; set; }
+
+        public string GetLocation()
         {
-            Acts = acts;
+            return $"{Name}";
         }
     }
 
