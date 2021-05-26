@@ -25,6 +25,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         public FrameModel TryOpenPod = new FrameModel { Name = "TryOpenPod" };
         public FrameModel Upheaval = new FrameModel { Name = "Upheaval" };
         public FrameModel VillianLeaves = new FrameModel { Name = "VillianLeaves" };
+        public FrameModel ListenToTheRestOfTheMessage = new FrameModel { Name = "ListenToTheRestOfTheMessage" };
+        public FrameModel PunchThroughTheGlass = new FrameModel { Name = "PunchThroughTheGlass" };
 
         public EscapePodScene()
         {
@@ -47,6 +49,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
             TryOpenPod = CreateTryOpenPod(Film, Act, this, player, TryOpenPod.Name);
             Upheaval = CreateUpheaval(Film, Act, this, player, Upheaval.Name);
             VillianLeaves = CreateVillianLeaves(Film, Act, this, player, VillianLeaves.Name);
+            ListenToTheRestOfTheMessage = CreateListenToTheRestOfTheMessage(Film, Act, this, player, ListenToTheRestOfTheMessage.Name);
+            PunchThroughTheGlass = CreatePunchThroughTheGlass(Film, Act, this, player, PunchThroughTheGlass.Name);
 
             Frames = new Dictionary<string, FrameModel>() {
                     {Wakeup.Name, Wakeup},
@@ -205,15 +209,54 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 Scene,
                 Name,
                 new List<DialogueModel>() {
-                    new DialogueModel("The sleeper goes unconscious as fast as he woke up."),
-                    new DialogueModel("The blue skinned man slowly moves towards his defeated opponent and takes off their helmet, placing it next to their body."),
-                    new DialogueModel("The man leaves the rooms, heading left.", condition: new Func<bool>(() => { return Player.HasFlag("EscapePod_StayStill"); })),
-                    new DialogueModel("The sleeper goes unconscious as fast as he woke up.", condition: new Func<bool>(() => { return Player.HasFlag("EscapePod_OpenPod"); })),
+                    new DialogueModel("The scaled being begins mumbling to themselves as they pick up the stranger."),
+                    new DialogueModel("They carry the person out of the room, turning left out the hallway."),
+                    new DialogueModel("\"...areas are currently under lockdown. Avoid sectors...\". The message continues in the background."),
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Stay still.", ""),
-                    new ButtonModel("Smash open the pod.", ""),
+                    new ButtonModel("Listen to the rest of the message.", ListenToTheRestOfTheMessage.Name),
+                    new ButtonModel("Punch through the glass.", PunchThroughTheGlass.Name),
+                }
+            );
+        }
+
+        public FrameModel CreateListenToTheRestOfTheMessage(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        {
+            return new FrameModel(
+                Film,
+                Act,
+                Scene,
+                Name,
+                new List<DialogueModel>() {
+                    new DialogueModel("\"Please detour around the following sectors: \""),
+                    new DialogueModel("\"Western Greenhouse\""),
+                    new DialogueModel("\"Auditorium\""),
+                    new DialogueModel("\"Andreas Datacentre\""),
+                    new DialogueModel("\"Reason given: Sectors partially or completely flooded.\""),
+                    new DialogueModel("How did a spaceship get flooded?"),
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", ""),
+                }
+            );
+        }
+
+        public FrameModel CreatePunchThroughTheGlass(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        {
+            return new FrameModel(
+                Film,
+                Act,
+                Scene,
+                Name,
+                new List<DialogueModel>() {
+                    new DialogueModel("You punch through the cracked glass and the window shatters. The sound of shattering glass was deafening inside the pod."),
+                    new DialogueModel("As the glass settles, it opens up a cold, dark room. It is eerily quiet."),
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", ""),
                 }
             );
         }
