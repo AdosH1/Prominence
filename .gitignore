@@ -1,5 +1,10 @@
-Combat/obj/*
-Prominence/Prominence.Android/obj/*
-Prominence/Prominence.iOS/obj/*
-Prominence/Prominence/obj/*
-Utilities/obj/*
+Combat/bin/
+Combat/obj/
+Prominence/Prominence.Android/bin/
+Prominence/Prominence.Android/obj/
+Prominence/Prominence.iOS/bin/
+Prominence/Prominence.iOS/obj/
+Prominence/Prominence/bin/
+Prominence/Prominence/obj/
+Utilities/bin/
+Utilities/obj/
