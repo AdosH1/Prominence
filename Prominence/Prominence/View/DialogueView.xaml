@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ads="clr-namespace:Prominence.View.Controls"
              xmlns:local="clr-namespace:Prominence.ViewModel"
              mc:Ignorable="d"
              x:Class="Prominence.View.DialogueView"
@@ -12,7 +13,7 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         
-        <Grid>
+        <Grid x:Name="DialogueGrid" IsVisible="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="2*"/>
@@ -34,18 +35,17 @@
                         Clicked="LaunchStatView" Text="Stats" />
                 <Button Grid.Column="1"
                         Clicked="LaunchCombatView" Text="Combat" />
+                <Button Grid.Column="2"
+                        Clicked="LaunchInterstitialAd" Text="Ad-Test" />
             </Grid>
-            
-            
-            
+
             <CollectionView Grid.Row="1" Grid.Column="1"
                     x:Name="LogCollection"
                     ItemsSource="{Binding Log}" 
                     BackgroundColor="Transparent" 
                     VerticalOptions="End" 
                     VerticalScrollBarVisibility="Always"
-                    ItemsUpdatingScrollMode="KeepLastItemInView"
-                    >
+                    ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -78,10 +78,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
+            <ads:AdControlView x:Name="InterstitialAd" IsVisible="False"
+                Grid.Row="0" Grid.RowSpan="3"
+                Grid.Column="0"  Grid.ColumnSpan="3" BackgroundColor="Red" />
         </Grid>
+        
 
-        
-        
+
     </ContentPage.Content>
 </ContentPage>

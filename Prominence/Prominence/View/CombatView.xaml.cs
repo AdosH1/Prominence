@@ -18,28 +18,9 @@ namespace Prominence.View
             InitializeComponent();
         }
 
-        private void LaunchStatView(object sender, EventArgs e)
+        private void Back(object sender, EventArgs e)
         {
-            var player = new PlayerModel();
-            player.Name = "Ados";
-
-            player.Experience = 20000;
-            player.MaxHealth = 120;
-            player.Health = 85;
-
-            player.MaxEnergy = 100;
-            player.Energy = 68;
-
-            player.Strength = 1337;
-            player.Magic = 7331;
-            player.Speed = 1373;
-
-            var statsModel = new StatisticsViewModel(player);
-            var statsView = new StatisticsView();
-            statsView.BindingContext = statsModel;
-
-            Application.Current.MainPage.Navigation.PushModalAsync(statsView);
-            
+            Application.Current.MainPage.Navigation.PopModalAsync();
         }
     }
 }

@@ -12,33 +12,7 @@ namespace Prominence.Model
         public Func<bool> Condition;
         public Color Color;
         public TextAlignment TextAlignment;
-        //public Task<bool> Action;
-        //public Action Action;
         public Func<Task> Action;
-
-        //public DialogueModel(
-        //    string text,
-        //    Func<bool> condition = null,
-        //    Color? color = null,
-        //    TextAlignment? textAlignment = null,
-        //    Task<bool> action = null)
-        //{
-        //    if (condition == null)
-        //        condition = () => { return true; };
-        //    if (color == null)
-        //        color = Color.White;
-        //    if (textAlignment == null)
-        //        textAlignment = TextAlignment.Start;
-        //    if (action == null)
-        //        action = new Task<bool>(() => { return true; });
-
-        //    Text = text;
-        //    Condition = condition;
-        //    Color = (Color)color;
-        //    TextAlignment = (TextAlignment)textAlignment;
-        //    Action = action;
-
-        //}
 
         public DialogueModel(
             string text,
@@ -54,7 +28,7 @@ namespace Prominence.Model
             if (textAlignment == null)
                 textAlignment = TextAlignment.Start;
             if (action == null)
-                action = new Func<Task>(async () => { return; });//new Action(() => { return; });
+                action = new Func<Task>(async () => { return; });
 
             Text = text;
             Condition = condition;
@@ -155,10 +129,6 @@ namespace Prominence.Model
             return $"{Film.Name}-{Name}";
         }
 
-        //public ActModel(Dictionary<string, ISceneModel> scenes, Action onEnter = null, Action onExit = null)
-        //{
-
-        //}
     }
 
     /// <summary>

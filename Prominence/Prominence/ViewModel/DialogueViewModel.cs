@@ -42,8 +42,6 @@ namespace Prominence.ViewModel
             player.Magic = 1;
             player.Speed= 1;
 
-            
-
             return player;
         }
 
@@ -230,11 +228,6 @@ namespace Prominence.ViewModel
                     var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
 
                     await dialogue.Action.Invoke().ConfigureAwait(false); ;
-                    //dialogue.Action.Invoke();
-                    //Console.WriteLine(test);
-                    //await Task.Run(async () => { await Task.Delay(3000); });
-                    //var test =
-                    //await Task.Run(() => { _ = dialogue.Action; });
                     //Log.Add(label);
                 }
             }
@@ -272,8 +265,6 @@ namespace Prominence.ViewModel
             // If no location, load first frame in scene
             if (location == null)
             {
-                //var test = scene.Frames;
-                //var test2 = scene.Frames.Keys;
                 var firstFrame = scene.Frames.Keys.First();
                 SetScene(scene);
                 LoadFrame(scene.Frames[firstFrame]);
