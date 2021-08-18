@@ -17,15 +17,13 @@ namespace Prominence
         public MainPage()
         {
             InitializeComponent();
-
-
         }
 
-        protected override async void OnAppearing()
-        {
-            var dialogueView = new DialogueView();
-            await Application.Current.MainPage.Navigation.PushModalAsync(dialogueView);
-        }
+        //protected override async void OnAppearing()
+        //{
+        //    var dialogueView = new DialogueView();
+        //    await Application.Current.MainPage.Navigation.PushModalAsync(dialogueView);
+        //}
 
 
     }

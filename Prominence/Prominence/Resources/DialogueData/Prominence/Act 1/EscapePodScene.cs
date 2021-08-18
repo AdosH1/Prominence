@@ -33,14 +33,10 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
         public FrameModel InspectStasisPods = new FrameModel { Name = "InspectStasisPods" };
         public FrameModel PickUpDevice = new FrameModel { Name = "PickUpDevice" };
 
-
-
         public EscapePodScene()
         {
             
         }
-
-        // action: new Func<Task>(async () => { Player.IncrementFlag("EscapePod_OpenPod"); })
 
         public void Initialise(IFilmModel film, IActModel act, PlayerModel player)
         {

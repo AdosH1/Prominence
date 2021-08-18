@@ -10,34 +10,20 @@ namespace Prominence.Model
     public class PlayerModel : ICombatEntity, ICreatureEntity
     {
         public string Name { get; set; } = "Ados";
-        public double Experience { get; set; } = 0;
-        public double Health { get; set; } = 1;
-        public double MaxHealth { get; set; } = 1;
 
         public string Film;
         public string Act;
         public string Scene;
         public string Frame;
 
-        public List<string> Visited = new List<string>();
-        public List<string> Log = new List<string>();
-
-        public List<string> Inventory = new List<string>(); // use item hashes?
-        //public List<string> Flags = new List<string>(); 
-        public Dictionary<string, int> Flags = new Dictionary<string, int>();
         public double Energy;
         public double MaxEnergy;
         public DateTime LastLogin;
 
-        public double Strength { get; set; } = 1;
-        public double Magic { get; set; } = 1;
-        public double Speed { get; set; } = 1;
-
-        public List<IStatusEffect> Statuses { get; set; }
-        public Dictionary<Element, double> Resistances { get; set; }
-
-        public IItemEntity ActiveWeapon;
-        public IItemEntity ActiveArmor;
+        public List<string> Inventory = new List<string>(); // use item hashes?
+        public List<string> Visited = new List<string>();
+        public List<string> Log = new List<string>();
+        public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
         public bool HasItem(string item)
         {
@@ -83,6 +69,20 @@ namespace Prominence.Model
                 Flags[flag] = 1;
             }
         }
+
+
+        // ================== Unused models =============== //
+        public double Experience { get; set; } = 0;
+        public double Health { get; set; } = 1;
+        public double MaxHealth { get; set; } = 1;
+        public double Strength { get; set; } = 1;
+        public double Magic { get; set; } = 1;
+        public double Speed { get; set; } = 1;
+        public List<IStatusEffect> Statuses { get; set; }
+        public Dictionary<Element, double> Resistances { get; set; }
+
+        public IItemEntity ActiveWeapon;
+        public IItemEntity ActiveArmor;
 
 
 

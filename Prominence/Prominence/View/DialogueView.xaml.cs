@@ -18,21 +18,6 @@ namespace Prominence.View
     {
         public bool IsReady = false;
 
-        public async void Test()
-        {
-            var player = new PlayerModel();
-            player.Name = "Ados";
-            player.Strength = 1;
-            player.Magic = 2;
-
-            player.Speed = 3;
-            var statsModel = new StatisticsViewModel(player);
-            var statsView = new StatisticsView();
-            statsView.BindingContext = statsModel;
-
-            await Application.Current.MainPage.Navigation.PushModalAsync(statsView);
-        }
-
         public DialogueView()
         {
             InitializeComponent();
@@ -87,6 +72,12 @@ namespace Prominence.View
             combatView.BindingContext = combatModel;
 
             Application.Current.MainPage.Navigation.PushModalAsync(combatView);
+        }
+
+        private void LaunchInterstitialAd(object sender, EventArgs e)
+        {
+            DialogueGrid.IsVisible = false;
+            InterstitialAd.IsVisible = true;
         }
     }
 }

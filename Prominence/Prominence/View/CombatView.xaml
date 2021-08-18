@@ -11,7 +11,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.2*"/>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/> 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.05*"/>
@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Clicked="LaunchStatView" Text="Stats" />
+                <Button Clicked="Back" Text="Back" />
             </Grid>
 
             <StackLayout Grid.Row="1" Grid.Column="1">
