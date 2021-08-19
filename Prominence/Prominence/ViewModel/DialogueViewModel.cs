@@ -58,7 +58,54 @@ namespace Prominence.ViewModel
             promFilm.Initialise(Player);
             CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
             //ProminenceFilm.Player = Player;
+            
+            //Let's load the saved game
+            if(Application.Current.Properties.ContainsKey("visited"))
+            {
+                string[] visitedList = ((string)Application.Current.Properties["visited"]).Split(",");
+                Application.Current.Properties.Remove("visited");
+                Application.Current.SavePropertiesAsync();
+                foreach(string frameName in visitedList)
+                {
+                    if(getFrameModel(CurrentFilm, frameName) != null)
+                    {
+                        LoadFrame(getFrameModel(CurrentFilm, frameName));
+                    }
+                }
+                
+                for(int i = visitedList.Length - 1; i >= 0; i--)
+                {
+                    FrameModel currentFrame = getFrameModel(CurrentFilm, visitedList[i]);
+                    if(currentFrame != null)
+                    {
+                        CurrentFilm = currentFrame.Film;
+                        CurrentAct = currentFrame.Act;
+                        CurrentScene = currentFrame.Scene;
+                        CurrentFrame = currentFrame;
+                        break;
+                    }
+                }
+            }
             Traverse(null);
+        }
+
+
+        public FrameModel getFrameModel(IFilmModel film, string frameName)
+        {
+            foreach(KeyValuePair<string, IActModel> act in film.Acts)
+            {
+                foreach(KeyValuePair<string, ISceneModel> scene in act.Value.Scenes)
+                {
+                    foreach(KeyValuePair<string, FrameModel> frame in scene.Value.Frames)
+                    {
+                        if(frame.Value.Name == frameName)
+                        {
+                            return frame.Value;
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public void ClearScreen(bool clearAll = false)
@@ -216,8 +263,17 @@ namespace Prominence.ViewModel
             ClearScreen();
 
             Visited(Frame);
-            Application.Current.Properties["visited"] = Player.Visited;
-            await Application.Current.SavePropertiesAsync();
+            if(!Application.Current.Properties.ContainsKey("visited"))
+            {
+                Application.Current.Properties["visited"] = Frame.Name;
+            }
+            else
+            {
+                string visitedList = Application.Current.Properties["visited"] as string;
+                Application.Current.Properties["visited"] = string.Concat(visitedList, ",", Frame.Name);
+            }
+            
+            Application.Current.SavePropertiesAsync();
             CurrentFrame = Frame;
             // Load dialogue
             foreach (var dialogue in Frame.Dialogue)
