@@ -7,8 +7,6 @@ namespace Prominence.Model.Interfaces
 {
     public interface IInterstitialAd
     {
-
         Task Display(string adId);
-
     }
 }

@@ -22,10 +22,7 @@ namespace Prominence.Droid
         public Task Display(string adId)
         {
             var displayTask = new TaskCompletionSource<bool>();
-            InterstitialAd AdInterstitial = new InterstitialAd(Forms.Context)
-            {
-                AdUnitId = adId
-            };
+            InterstitialAd AdInterstitial = new InterstitialAd(Forms.Context) { AdUnitId = adId };
             {
                 var adInterstitialListener = new AdInterstitialListener(AdInterstitial)
                 {
@@ -72,10 +69,7 @@ namespace Prominence.Droid
             {
                 base.OnAdLoaded();
 
-                if (_interstitialAd.IsLoaded)
-                {
-                    _interstitialAd.Show();
-                }
+                if (_interstitialAd.IsLoaded) _interstitialAd.Show();
                 AdLoaded?.Invoke();
             }
 
