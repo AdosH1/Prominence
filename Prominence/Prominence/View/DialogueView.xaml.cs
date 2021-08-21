@@ -1,4 +1,6 @@
 ﻿using Prominence.Model;
+using Prominence.Model.Constants;
+using Prominence.Model.Interfaces;
 using Prominence.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -74,10 +76,11 @@ namespace Prominence.View
             Application.Current.MainPage.Navigation.PushModalAsync(combatView);
         }
 
-        private void LaunchInterstitialAd(object sender, EventArgs e)
+        private async void LaunchInterstitialAd(object sender, EventArgs e)
         {
-            DialogueGrid.IsVisible = false;
-            InterstitialAd.IsVisible = true;
+            await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(false);
         }
+
+        
     }
 }
