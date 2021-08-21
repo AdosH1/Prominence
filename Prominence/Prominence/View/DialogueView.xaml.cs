@@ -79,5 +79,14 @@ namespace Prominence.View
             DialogueGrid.IsVisible = false;
             InterstitialAd.IsVisible = true;
         }
+
+        private void LaunchResetSave(object sender, EventArgs e)
+        {
+            if(Application.Current.Properties.ContainsKey("visited"))
+            {
+                Application.Current.Properties.Remove("visited");
+                Application.Current.SavePropertiesAsync();
+            }
+        }
     }
 }

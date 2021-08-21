@@ -37,6 +37,8 @@
                         Clicked="LaunchCombatView" Text="Combat" />
                 <Button Grid.Column="2"
                         Clicked="LaunchInterstitialAd" Text="Ad-Test" />
+                <Button Grid.Column="3"
+                        Clicked="LaunchResetSave" Text="Reset" />
             </Grid>
 
             <CollectionView Grid.Row="1" Grid.Column="1"
