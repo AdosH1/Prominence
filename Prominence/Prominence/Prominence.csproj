@@ -51,6 +51,7 @@
 
   <ItemGroup>
     <Folder Include="Resources\Images\Sequoia\" />
+    <Folder Include="View\Controls\" />
   </ItemGroup>
 
   <ItemGroup>

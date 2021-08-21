@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Prominence.Model.Constants;
 
 namespace Prominence.Droid
 {
@@ -18,6 +19,9 @@ namespace Prominence.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
+
+            Android.Gms.Ads.MobileAds.Initialize(ApplicationContext, AdConstants.InterstitialAppId);
+            
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

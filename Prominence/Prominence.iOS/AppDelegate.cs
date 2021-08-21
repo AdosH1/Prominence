@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Prominence.Model.Constants;
 using UIKit;
 
 namespace Prominence.iOS
@@ -23,6 +24,7 @@ namespace Prominence.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Google.MobileAds.MobileAds.Configure(AdConstants.InterstitialAppId);
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
