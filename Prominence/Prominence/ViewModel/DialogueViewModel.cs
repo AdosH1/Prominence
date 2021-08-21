@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Prominence.Model;
+using Prominence.Resources.DialogueData.Sequoia;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
-using Prominence.Model;
-using Prominence.Resources.DialogueData.Sequoia;
-using Prominence.View;
 using Xamarin.Forms;
 
 namespace Prominence.ViewModel
@@ -63,20 +61,11 @@ namespace Prominence.ViewModel
             if(Application.Current.Properties.ContainsKey("visited"))
             {
                 string[] visitedList = ((string)Application.Current.Properties["visited"]).Split(",");
-                Application.Current.Properties.Remove("visited");
-                Application.Current.SavePropertiesAsync();
-                foreach(string frameName in visitedList)
-                {
-                    if(getFrameModel(CurrentFilm, frameName) != null)
-                    {
-                        LoadFrame(getFrameModel(CurrentFilm, frameName));
-                    }
-                }
-                
-                for(int i = visitedList.Length - 1; i >= 0; i--)
+
+                for (int i = visitedList.Length - 1; i >= 0; i--)
                 {
                     FrameModel currentFrame = getFrameModel(CurrentFilm, visitedList[i]);
-                    if(currentFrame != null)
+                    if (currentFrame != null)
                     {
                         CurrentFilm = currentFrame.Film;
                         CurrentAct = currentFrame.Act;
@@ -85,8 +74,29 @@ namespace Prominence.ViewModel
                         break;
                     }
                 }
+
+                Array.Resize(ref visitedList, visitedList.Length - 1);
+                Application.Current.Properties["visited"] = string.Join(",", visitedList);
+                Application.Current.SavePropertiesAsync();
+
+                foreach (string frameName in visitedList)
+                {
+                    if(getFrameModel(CurrentFilm, frameName) != null)
+                    {
+                        renderFrameText(getFrameModel(CurrentFilm, frameName), false);
+                    }
+                }
+                
             }
-            Traverse(null);
+            if(CurrentFrame != null)
+            {
+                Traverse(CurrentFrame.Name);
+            }
+            else
+            {
+                Traverse(null);
+            }
+            
         }
 
 
@@ -258,6 +268,31 @@ namespace Prominence.ViewModel
                 Player.Visited.Add(frame.Name);
         }
 
+        public void renderFrameText(FrameModel Frame, bool renderSlowly = true)
+        {
+            ClearScreen();
+            foreach (var dialogue in Frame.Dialogue)
+            {
+                if (dialogue.Condition())
+                {
+                    var label = new Label();
+                    label.Text = dialogue.Text;
+                    label.TextColor = dialogue.Color;
+                    label.HorizontalTextAlignment = dialogue.TextAlignment;
+
+                    if (renderSlowly)
+                    {
+                        var result = SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
+                    }
+                    else
+                    {
+                        Log.Add(label);
+                    }
+                    //await dialogue.Action.Invoke().ConfigureAwait(false);
+                }
+            }
+        }
+
         public async void LoadFrame(FrameModel Frame)
         {
             ClearScreen();
@@ -276,26 +311,9 @@ namespace Prominence.ViewModel
             Application.Current.SavePropertiesAsync();
             CurrentFrame = Frame;
             // Load dialogue
-            foreach (var dialogue in Frame.Dialogue)
-            {
-                if (dialogue.Condition())
-                {
-                    var label = new Label();
-                    label.Text = dialogue.Text;
-                    label.TextColor = dialogue.Color;
-                    label.HorizontalTextAlignment = dialogue.TextAlignment;
 
-                    var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
-
-                    await dialogue.Action.Invoke().ConfigureAwait(false); ;
-                    //dialogue.Action.Invoke();
-                    //Console.WriteLine(test);
-                    //await Task.Run(async () => { await Task.Delay(3000); });
-                    //var test =
-                    //await Task.Run(() => { _ = dialogue.Action; });
-                    //Log.Add(label);
-                }
-            }
+            renderFrameText(CurrentFrame);
+            
 
             // Load buttons
             foreach (var button in Frame.Buttons)
