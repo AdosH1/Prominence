@@ -38,9 +38,6 @@ namespace Prominence.ViewModel
         {
             var player = new PlayerModel();
             player.Name = "Ados";
-            player.Strength = 1;
-            player.Magic = 1;
-            player.Speed= 1;
 
             return player;
         }
@@ -50,7 +47,7 @@ namespace Prominence.ViewModel
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
 
-            Player = CreateBasePlayer();
+            Player = CreateBasePlayer();  
 
             var promFilm = new ProminenceFilm();
             promFilm.Initialise(Player);
@@ -129,7 +126,6 @@ namespace Prominence.ViewModel
         public async Task<bool> SlowlyRevealText(Label label, string text)
         {
             var len = text.Length;
-            //var currString = GetScrambleString(len);
             var currString = GetSmartScrambleString(text, len);
 
             var strBuilder = new StringBuilder(currString);
@@ -167,11 +163,9 @@ namespace Prominence.ViewModel
             label2.HorizontalTextAlignment = TextAlignment.Center;
             label2.FontSize = 12;
             label2.TextColor = Color.Red;
-            //var result = await SlowlyRevealText(label2, text);
             Log.Add(label2);
 
             Log.Add(label1);
-            
         }
 
         public void SetScene(ISceneModel scene)
@@ -200,7 +194,6 @@ namespace Prominence.ViewModel
 
             if (CurrentAct.OnEnter != null) 
                 CurrentAct.OnEnter.Invoke();
-            
         }
 
         public void Visited(FrameModel frame)
