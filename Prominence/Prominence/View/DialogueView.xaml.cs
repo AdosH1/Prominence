@@ -82,11 +82,8 @@ namespace Prominence.View
 
         private void LaunchResetSave(object sender, EventArgs e)
         {
-            if(Application.Current.Properties.ContainsKey("visited"))
-            {
-                Application.Current.Properties.Remove("visited");
-                Application.Current.SavePropertiesAsync();
-            }
+            Application.Current.Properties.Clear();
+            Application.Current.SavePropertiesAsync();
         }
     }
 }

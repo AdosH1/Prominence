@@ -1,5 +1,6 @@
 ﻿using Prominence.Model;
 using Prominence.Resources.DialogueData.Sequoia;
+using Prominence.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,8 @@ namespace Prominence.ViewModel
         public ISceneModel CurrentScene;
         public FrameModel CurrentFrame;
         public PlayerModel Player;
+        public SaveData SaveController;
+        public SaveState CurrentSave;
 
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
@@ -51,6 +54,7 @@ namespace Prominence.ViewModel
             Buttons = new ObservableCollection<Button>();
 
             Player = CreateBasePlayer();
+            SaveController = new SaveData();
 
             var promFilm = new ProminenceFilm();
             promFilm.Initialise(Player);
@@ -58,44 +62,73 @@ namespace Prominence.ViewModel
             //ProminenceFilm.Player = Player;
             
             //Let's load the saved game
-            if(Application.Current.Properties.ContainsKey("visited"))
+            if(Application.Current.Properties.ContainsKey(Player.Name))
             {
-                string[] visitedList = ((string)Application.Current.Properties["visited"]).Split(",");
-
-                for (int i = visitedList.Length - 1; i >= 0; i--)
+                CurrentSave = SaveController.LoadFromDisc<SaveState>(Player.Name);
+                if(CurrentSave.Log != null)
                 {
-                    FrameModel currentFrame = getFrameModel(CurrentFilm, visitedList[i]);
-                    if (currentFrame != null)
+                    Log.Clear();
+                    foreach(var item in CurrentSave.Log)
                     {
-                        CurrentFilm = currentFrame.Film;
-                        CurrentAct = currentFrame.Act;
-                        CurrentScene = currentFrame.Scene;
-                        CurrentFrame = currentFrame;
-                        break;
-                    }
-                }
-
-                Array.Resize(ref visitedList, visitedList.Length - 1);
-                Application.Current.Properties["visited"] = string.Join(",", visitedList);
-                Application.Current.SavePropertiesAsync();
-
-                foreach (string frameName in visitedList)
-                {
-                    if(getFrameModel(CurrentFilm, frameName) != null)
-                    {
-                        renderFrameText(getFrameModel(CurrentFilm, frameName), false);
+                        Log.Add(item);
                     }
                 }
                 
-            }
-            if(CurrentFrame != null)
-            {
-                Traverse(CurrentFrame.Name);
+                if(CurrentSave.CurrentFrame != null)
+                {
+                    //Traverse(CurrentSave.CurrentFrame);
+                    Traverse(null);
+                }
+                else
+                {
+                    Traverse(null);
+                }
             }
             else
             {
+                CurrentSave = new SaveState(player: Player.Name, film: CurrentFilm.Name);
                 Traverse(null);
             }
+            //if(Application.Current.Properties.ContainsKey("visited"))
+            //{
+            //    string[] visitedList = ((string)Application.Current.Properties["visited"]).Split(",");
+
+            //    for (int i = visitedList.Length - 1; i >= 0; i--)
+            //    {
+            //        FrameModel currentFrame = getFrameModel(CurrentFilm, visitedList[i]);
+            //        if (currentFrame != null)
+            //        {
+            //            CurrentFilm = currentFrame.Film;
+            //            CurrentAct = currentFrame.Act;
+            //            CurrentScene = currentFrame.Scene;
+            //            CurrentFrame = currentFrame;
+            //            break;
+            //        }
+            //    }
+
+            //    Array.Resize(ref visitedList, visitedList.Length - 1);
+            //    Application.Current.Properties["visited"] = string.Join(",", visitedList);
+            //    Application.Current.SavePropertiesAsync();
+
+            //    foreach (string frameName in visitedList)
+            //    {
+            //        if(getFrameModel(CurrentFilm, frameName) != null)
+            //        {
+            //            renderFrameText(getFrameModel(CurrentFilm, frameName), false);
+            //        }
+            //    }
+                
+            //}
+
+           
+            //if (CurrentFrame != null)
+            //{
+            //    Traverse(CurrentFrame.Name);
+            //}
+            //else
+            //{
+            //    Traverse(null);
+            //}
             
         }
 
@@ -268,7 +301,7 @@ namespace Prominence.ViewModel
                 Player.Visited.Add(frame.Name);
         }
 
-        public void renderFrameText(FrameModel Frame, bool renderSlowly = true)
+        public async void renderFrameText(FrameModel Frame, bool renderSlowly = true)
         {
             ClearScreen();
             foreach (var dialogue in Frame.Dialogue)
@@ -280,15 +313,9 @@ namespace Prominence.ViewModel
                     label.TextColor = dialogue.Color;
                     label.HorizontalTextAlignment = dialogue.TextAlignment;
 
-                    if (renderSlowly)
-                    {
-                        var result = SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
-                    }
-                    else
-                    {
-                        Log.Add(label);
-                    }
-                    //await dialogue.Action.Invoke().ConfigureAwait(false);
+                    var result = SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
+                    await dialogue.Action.Invoke().ConfigureAwait(false);
+                    
                 }
             }
         }
@@ -298,21 +325,23 @@ namespace Prominence.ViewModel
             ClearScreen();
 
             Visited(Frame);
-            if(!Application.Current.Properties.ContainsKey("visited"))
-            {
-                Application.Current.Properties["visited"] = Frame.Name;
-            }
-            else
-            {
-                string visitedList = Application.Current.Properties["visited"] as string;
-                Application.Current.Properties["visited"] = string.Concat(visitedList, ",", Frame.Name);
-            }
+            //if(!Application.Current.Properties.ContainsKey("visited"))
+            //{
+            //    Application.Current.Properties["visited"] = Frame.Name;
+            //}
+            //else
+            //{
+            //    string visitedList = Application.Current.Properties["visited"] as string;
+            //    Application.Current.Properties["visited"] = string.Concat(visitedList, ",", Frame.Name);
+            //}
             
-            Application.Current.SavePropertiesAsync();
+            //Application.Current.SavePropertiesAsync();
             CurrentFrame = Frame;
-            // Load dialogue
-
             renderFrameText(CurrentFrame);
+            // Load dialogue
+            CurrentSave.UpdateSaveState(player: Player.Name, film: CurrentFilm.Name, act: CurrentAct.Name, scene: CurrentScene.Name, frame: CurrentFrame.Name, log: Log);
+            SaveController.SaveToDisc<SaveState>(CurrentSave.playerName, CurrentSave);
+            
             
 
             // Load buttons
