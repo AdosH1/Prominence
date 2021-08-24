@@ -301,24 +301,6 @@ namespace Prominence.ViewModel
                 Player.Visited.Add(frame.Name);
         }
 
-        public async void renderFrameText(FrameModel Frame, bool renderSlowly = true)
-        {
-            ClearScreen();
-            foreach (var dialogue in Frame.Dialogue)
-            {
-                if (dialogue.Condition())
-                {
-                    var label = new Label();
-                    label.Text = dialogue.Text;
-                    label.TextColor = dialogue.Color;
-                    label.HorizontalTextAlignment = dialogue.TextAlignment;
-
-                    var result = SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
-                    await dialogue.Action.Invoke().ConfigureAwait(false);
-                    
-                }
-            }
-        }
 
         public async void LoadFrame(FrameModel Frame)
         {
@@ -337,8 +319,23 @@ namespace Prominence.ViewModel
             
             //Application.Current.SavePropertiesAsync();
             CurrentFrame = Frame;
-            renderFrameText(CurrentFrame);
-            // Load dialogue
+            ClearScreen();
+            foreach (var dialogue in Frame.Dialogue)
+            {
+                if (dialogue.Condition())
+                {
+                    var label = new Label();
+                    label.Text = dialogue.Text;
+                    label.TextColor = dialogue.Color;
+                    label.HorizontalTextAlignment = dialogue.TextAlignment;
+
+                    var result = SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
+                    await dialogue.Action.Invoke().ConfigureAwait(false);
+
+                }
+            }
+
+            // Save new frame state
             CurrentSave.UpdateSaveState(player: Player.Name, film: CurrentFilm.Name, act: CurrentAct.Name, scene: CurrentScene.Name, frame: CurrentFrame.Name, log: Log);
             SaveController.SaveToDisc<SaveState>(CurrentSave.playerName, CurrentSave);
             
