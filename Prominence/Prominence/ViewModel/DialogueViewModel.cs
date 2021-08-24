@@ -7,7 +7,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
-using Prominence.Resources.DialogueData.Sequoia;
+using Prominence.Resources.DialogueData.Prominence;
 using Prominence.View;
 using Xamarin.Forms;
 
@@ -34,25 +34,16 @@ namespace Prominence.ViewModel
                 '$', '%', '&', '=', '_', '+', '<', '>'};
         char[] largeChars = new char[] { 'M', '@', '#', 'Q', 'W', 'X', 'Z' };
 
-        public PlayerModel CreateBasePlayer()
-        {
-            var player = new PlayerModel();
-            player.Name = "Ados";
-
-            return player;
-        }
 
         public DialogueViewModel()
         {
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
-
-            Player = CreateBasePlayer();  
+            Player = new PlayerModel("Ados");
 
             var promFilm = new ProminenceFilm();
             promFilm.Initialise(Player);
             CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
-            //ProminenceFilm.Player = Player;
             Traverse(null);
         }
 
@@ -66,7 +57,6 @@ namespace Prominence.ViewModel
 
         public string GetSmartScrambleString(string text, int length)
         {
-
             var numIndicesSuperThin = superthinChars.Length - 1;
             var numIndicesThin = thinChars.Length - 1;
             var numIndicesMed = medChars.Length - 1;
@@ -98,26 +88,6 @@ namespace Prominence.ViewModel
                     continue;
                 }
                 Console.WriteLine($"I missed a character {text[i]}");
-            }
-
-            return scrambledString.ToString();
-        }
-
-        public string GetScrambleString(int length)
-        {
-            var chars = new char[] {
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-                'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-                '@', '!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '=', '_', '+', '/', '\\', '|', '{', '}', '[', ']', ';', ':', '\'', '"', ',', '<', '.', '>', '/', '?', '`', '~'};
-
-            var numChars = chars.Length;
-            var numIndices = numChars - 1;
-
-            var scrambledString = new StringBuilder();
-            Random random = new Random();
-
-            for (int i = 0; i < length; i++) {
-                scrambledString.Append(chars[random.Next(0, numIndices)]);
             }
 
             return scrambledString.ToString();
@@ -196,20 +166,13 @@ namespace Prominence.ViewModel
                 CurrentAct.OnEnter.Invoke();
         }
 
-        public void Visited(FrameModel frame)
-        {
-            if (!Player.Visited.Contains(frame.Name))            
-                Player.Visited.Add(frame.Name);
-        }
-
-        public async void LoadFrame(FrameModel Frame)
+        public async void LoadFrame(FrameModel frame)
         {
             ClearScreen();
 
-            Visited(Frame);
-            CurrentFrame = Frame;
+            CurrentFrame = frame;
             // Load dialogue
-            foreach (var dialogue in Frame.Dialogue)
+            foreach (var dialogue in frame.Dialogue)
             {
                 if (dialogue.Condition())
                 {
@@ -221,12 +184,11 @@ namespace Prominence.ViewModel
                     var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
 
                     await dialogue.Action.Invoke().ConfigureAwait(false); ;
-                    //Log.Add(label);
                 }
             }
 
             // Load buttons
-            foreach (var button in Frame.Buttons)
+            foreach (var button in frame.Buttons)
             {
                 if (button.Condition())
                 {
@@ -239,7 +201,7 @@ namespace Prominence.ViewModel
                          if (button.Action != null)
                              button.Action.Invoke();
 
-                         Traverse(button.Jump);
+                         Traverse(button.Jump.Name);
                     };
 
                     btn.Command = new Command(fn);
@@ -247,7 +209,7 @@ namespace Prominence.ViewModel
                 }
             }
             
-            Player.AddVisited($"{Frame.Film.Name}-{Frame.Act.Name}-{Frame.Scene.Name}-{Frame.Name}");
+            Player.AddVisited(frame.Location);
         }
 
         public bool TraverseScene(ISceneModel scene, string location = null)
