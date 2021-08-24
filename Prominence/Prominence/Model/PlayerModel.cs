@@ -24,6 +24,11 @@ namespace Prominence.Model
         public List<string> Log = new List<string>();
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
+        public PlayerModel(string name)
+        {
+            Name = name;
+        }
+
         public bool HasItem(string item)
         {
             return Inventory.Contains(item);
@@ -40,7 +45,8 @@ namespace Prominence.Model
 
         public void AddVisited(string location)
         {
-            Visited.Add(location);
+            if (!Visited.Contains(location))
+                Visited.Add(location);
         }
 
         public bool HasFlag(string flag)
