@@ -14,15 +14,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-[assembly: Dependency(typeof(IntistitialAd))]
+[assembly: Dependency(typeof(Prominence.Droid.InterstitialAd))]
 namespace Prominence.Droid
 {
-    public class IntistitialAd : IInterstitialAd
+    public class InterstitialAd : IInterstitialAd
     {
         public Task Display(string adId)
         {
             var displayTask = new TaskCompletionSource<bool>();
-            InterstitialAd AdInterstitial = new InterstitialAd(Forms.Context) { AdUnitId = adId };
+            Android.Gms.Ads.InterstitialAd AdInterstitial = new Android.Gms.Ads.InterstitialAd(Forms.Context) { AdUnitId = adId };
             {
                 var adInterstitialListener = new AdInterstitialListener(AdInterstitial)
                 {
@@ -54,9 +54,9 @@ namespace Prominence.Droid
 
         public class AdInterstitialListener : AdListener
         {
-            private readonly InterstitialAd _interstitialAd;
+            private readonly Android.Gms.Ads.InterstitialAd _interstitialAd;
 
-            public AdInterstitialListener(InterstitialAd interstitialAd)
+            public AdInterstitialListener(Android.Gms.Ads.InterstitialAd interstitialAd)
             {
                 _interstitialAd = interstitialAd;
             }

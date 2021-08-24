@@ -22,10 +22,13 @@
   <ItemGroup>
     <Compile Remove="Resources\DialogueData\NewFolder1\**" />
     <Compile Remove="Resources\DialogueData\NewFolder2\**" />
+    <Compile Remove="View\Controls\**" />
     <EmbeddedResource Remove="Resources\DialogueData\NewFolder1\**" />
     <EmbeddedResource Remove="Resources\DialogueData\NewFolder2\**" />
+    <EmbeddedResource Remove="View\Controls\**" />
     <None Remove="Resources\DialogueData\NewFolder1\**" />
     <None Remove="Resources\DialogueData\NewFolder2\**" />
+    <None Remove="View\Controls\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,23 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\CombatView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="View\DialogueView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="View\StatisticsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Resources\Images\Sequoia\" />
-    <Folder Include="View\Controls\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Combat\Combat.csproj" />
   </ItemGroup>
 </Project>
