@@ -7,16 +7,9 @@ using Xamarin.Forms;
 
 namespace Prominence.Resources.DialogueData.Prominence
 {
-    public class EscapePodScene : ISceneModel
+    public class EscapePodScene : SceneModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public Dictionary<string, FrameModel> Frames { get; set; }
-        public PlayerModel Player { get; set; }
         public string Name { get { return "EscapePod"; } }
-        public Action OnEnter { get { return null; } }
-        public Action OnExit { get { return null; } }
-
         public FrameModel Wakeup = new FrameModel { Name = "Wakeup" };
         public FrameModel LookAround = new FrameModel { Name = "LookAround" };
         public FrameModel ListenToMessage = new FrameModel { Name = "ListenToMessage" };
@@ -32,11 +25,7 @@ namespace Prominence.Resources.DialogueData.Prominence
         public FrameModel LookAroundCryostasisRoom = new FrameModel { Name = "LookAroundCryostasisRoom" };
         public FrameModel InspectStasisPods = new FrameModel { Name = "InspectStasisPods" };
         public FrameModel PickUpDevice = new FrameModel { Name = "PickUpDevice" };
-
-        public EscapePodScene()
-        {
-            
-        }
+        public EscapePodScene() { }
 
         public void Initialise(IFilmModel film, IActModel act, PlayerModel player)
         {

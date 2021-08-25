@@ -6,16 +6,10 @@ using Prominence.Resources.DialogueData;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
-    public class SequoiaFilm : IFilmModel
+    public class SequoiaFilm : FilmModel
     {
         public string Name { get { return "Sequoia"; } }
-        public PlayerModel Player { get; set; }
-        public Dictionary<string, IActModel> Acts { get; set; }
-
-        public SequoiaFilm()
-        {
-
-        }
+        public SequoiaFilm() { }
 
         public void Initialise(PlayerModel player)
         {

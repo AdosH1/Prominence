@@ -7,18 +7,10 @@ using Prominence.Resources.DialogueData;
 
 namespace Prominence.Resources.DialogueData.Prominence
 {
-    public class ProminenceFilm : IFilmModel
+    public class ProminenceFilm : FilmModel
     {
-
         public string Name { get { return "Prominence";  } }
-        public PlayerModel Player { get; set; }
-        public Dictionary<string, IActModel> Acts { get; set; }
-
-        public ProminenceFilm()
-        {
-            
-        }
-
+        public ProminenceFilm() { }
         public void Initialise(PlayerModel player)
         {
             Player = player;

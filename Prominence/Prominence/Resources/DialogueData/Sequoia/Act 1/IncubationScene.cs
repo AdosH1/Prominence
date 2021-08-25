@@ -7,28 +7,16 @@ using Xamarin.Forms;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
-    public class IncubationScene : ISceneModel
+    public class IncubationScene : SceneModel
     {
-
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public Dictionary<string, FrameModel> Frames { get; set; }
-        public PlayerModel Player { get; set; }
         public string Name { get { return "Incubation"; } }
-        public Action OnEnter { get { return null; } }
-        public Action OnExit { get { return null; } }
-
         public FrameModel Start = new FrameModel { Name = "Start" };
         public FrameModel Silent = new FrameModel { Name = "Silent" };
         public FrameModel TalkToDrone = new FrameModel { Name = "TalkToDrone" };
         public FrameModel DroneLeaves = new FrameModel { Name = "DroneLeaves" };
         public FrameModel InspectIncubationRoom = new FrameModel { Name = "InspectIncubationRoom" };
         public FrameModel IncubationHallway = new FrameModel { Name = "IncubationHallway" };
-
-        public IncubationScene()
-        {
-
-        }
+        public IncubationScene() { }
 
         public void Initialise(IFilmModel film, IActModel act, PlayerModel player)
         {
