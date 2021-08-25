@@ -35,19 +35,12 @@ namespace Prominence.Controllers
                 streamWriter.WriteLine("Scene:" + player.Scene);
                 streamWriter.WriteLine("Frame:" + player.Frame);
 
-                streamWriter.WriteLine("Strength:" + player.Strength.ToString());
-                streamWriter.WriteLine("Magic:" + player.Magic.ToString());
-                streamWriter.WriteLine("Speed:" + player.Speed.ToString());
-                //streamWriter.WriteLine("Resistance:" + player.Resistance.ToString());
                 streamWriter.WriteLine("Energy:" + player.Energy.ToString());
 
                 streamWriter.WriteLine("Inventory:" + string.Join(",", player.Inventory));
 
                 var flagstr = string.Join(";", player.Flags.Select(x => x.Key + "=" + x.Value));
                 streamWriter.WriteLine("Flags:" + string.Join(",", player.Flags));
-
-                streamWriter.WriteLine("ActiveWeapon:" + player.ActiveWeapon.Id);
-                streamWriter.WriteLine("ActiveArmor:" + player.ActiveArmor.Id);
 
                 streamWriter.WriteLine("Visited:" + string.Join(",", player.Visited));
                 streamWriter.WriteLine("Log:" + string.Join(",", player.Log));
@@ -58,7 +51,7 @@ namespace Prominence.Controllers
         public PlayerModel LoadState()
         {
             var savePath = Path.Combine(saveFolderPath, saveFileName);
-            var player = new PlayerModel();
+            var player = new PlayerModel(name: "Ados");
 
             using (var streamReader = new StreamReader(savePath))
             {
@@ -108,32 +101,6 @@ namespace Prominence.Controllers
                 var frame = content.Split(':')[1];
                 player.Frame = frame;
 
-                // ====== Stats ====== //
-                // Strength
-                content = streamReader.ReadLine();
-                var strengthStr = content.Split(':')[1];
-                double.TryParse(strengthStr, out double strength);
-                player.Strength = strength;
-                
-
-                // Magic
-                content = streamReader.ReadLine();
-                var magicStr = content.Split(':')[1];
-                double.TryParse(magicStr, out double magic);
-                player.Magic = magic;
-
-                // Speed
-                content = streamReader.ReadLine();
-                var speedStr = content.Split(':')[1];
-                double.TryParse(speedStr, out double speed);
-                player.Speed = speed;
-
-                // Resistance
-                //content = streamReader.ReadLine();
-                //var resistanceStr = content.Split(':')[1];
-                //double.TryParse(resistanceStr, out double resistance);
-                //player.Resistance = resistance;
-
                 // ====== Items ====== // 
                 // Inventory
                 //content = streamReader.ReadLine();
@@ -173,15 +140,6 @@ namespace Prominence.Controllers
                 }
 
                 player.Flags = flagDict;
-
-                // Active Weapon
-                // Search item here or null
-                player.ActiveWeapon = null;
-
-                // Active Armor
-                // Search item here or null
-                player.ActiveArmor = null;
-
 
             }
 

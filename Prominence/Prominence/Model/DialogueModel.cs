@@ -43,12 +43,11 @@ namespace Prominence.Model
         public class ButtonModel
     {
         public string Text;
-        public string Jump; // string or int? How should we handle this?
-        //public Action Action;
+        public FrameModel Jump;
         public Func<Task> Action;
         public Func<bool> Condition;
 
-        public ButtonModel(string text, string jump, Func<bool> condition = null, Func<Task> action = null)
+        public ButtonModel(string text, FrameModel jump, Func<bool> condition = null, Func<Task> action = null)
         {
             if (condition == null)
                 condition = () => { return true; };
@@ -65,12 +64,22 @@ namespace Prominence.Model
     /// </summary>
     public class FrameModel
     {
+        private string _name;
+
         public IFilmModel Film;
         public IActModel Act;
         public ISceneModel Scene;
         public string Name;
         public List<DialogueModel> Dialogue;
         public List<ButtonModel> Buttons;
+        public string Location 
+        { 
+            get 
+            { 
+                return $"{Film.Name}-{Act.Name}-{Scene.Name}-{Name}"; 
+            } 
+        }
+       
 
         /// <summary>
         /// Only use this constructor for connecting frames together (eg. construct with Name only)

@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ads="clr-namespace:Prominence.View.Controls"
              xmlns:local="clr-namespace:Prominence.ViewModel"
              mc:Ignorable="d"
              x:Class="Prominence.View.DialogueView"
@@ -32,10 +31,6 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
-                        Clicked="LaunchStatView" Text="Stats" />
-                <Button Grid.Column="1"
-                        Clicked="LaunchCombatView" Text="Combat" />
-                <Button Grid.Column="2"
                         Clicked="LaunchInterstitialAd" Text="Ad-Test" />
                 <Button Grid.Column="3"
                         Clicked="LaunchResetSave" Text="Reset" />
@@ -80,9 +75,6 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <ads:AdControlView x:Name="InterstitialAd" IsVisible="False"
-                Grid.Row="0" Grid.RowSpan="3"
-                Grid.Column="0"  Grid.ColumnSpan="3" BackgroundColor="Red" />
         </Grid>
         
 

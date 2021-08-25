@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using Prominence.Model;
 using Prominence.Model.Interfaces;
-using Combat.Interfaces;
 using Prominence.Model.SaveModel;
+
 
 namespace Prominence.Model
 {
-    public class PlayerModel : ICombatEntity, ICreatureEntity
+    public class PlayerModel
     {
         public string Name { get; set; } = "Ados";
 
@@ -27,6 +27,13 @@ namespace Prominence.Model
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
         public PlayerSaveModel SaveState;
+
+
+
+        public PlayerModel(string name)
+        {
+            Name = name;
+        }
 
         public void SavePlayerModel()
         {
@@ -53,7 +60,8 @@ namespace Prominence.Model
 
         public void AddVisited(string location)
         {
-            Visited.Add(location);
+            if (!Visited.Contains(location))
+                Visited.Add(location);
         }
 
         public bool HasFlag(string flag)
@@ -81,22 +89,5 @@ namespace Prominence.Model
                 Flags[flag] = 1;
             }
         }
-
-
-        // ================== Unused models =============== //
-        public double Experience { get; set; } = 0;
-        public double Health { get; set; } = 1;
-        public double MaxHealth { get; set; } = 1;
-        public double Strength { get; set; } = 1;
-        public double Magic { get; set; } = 1;
-        public double Speed { get; set; } = 1;
-        public List<IStatusEffect> Statuses { get; set; }
-        public Dictionary<Element, double> Resistances { get; set; }
-
-        public IItemEntity ActiveWeapon;
-        public IItemEntity ActiveArmor;
-
-
-
     }
 }

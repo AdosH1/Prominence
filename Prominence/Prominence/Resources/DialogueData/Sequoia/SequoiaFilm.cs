@@ -3,21 +3,30 @@ using System.Collections.Generic;
 using System.Text;
 using Prominence.Model;
 using Prominence.Resources.DialogueData;
-using Prominence.Resources.DialogueData.Sequoia.Act_1;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class SequoiaFilm : IFilmModel
     {
-        //public readonly static IFilmModel Sequoia = new IFilmModel(
-        //    new Dictionary<string, IActModel>()
-        //    {
-        //        { "Awakening", AwakeningAct.Awakening }
-        //    }
-        //);
-
-        public string Name { get { return "Sequoia";  } }
-
+        public string Name { get { return "Sequoia"; } }
+        public PlayerModel Player { get; set; }
         public Dictionary<string, IActModel> Acts { get; set; }
+
+        public SequoiaFilm()
+        {
+
+        }
+
+        public void Initialise(PlayerModel player)
+        {
+            Player = player;
+            var awakeningAct = new AwakeningAct();
+            awakeningAct.Initialise(this, player);
+
+            Acts = new Dictionary<string, IActModel>()
+            {
+                { awakeningAct.Name, awakeningAct }
+            };
+        }
     }
 }

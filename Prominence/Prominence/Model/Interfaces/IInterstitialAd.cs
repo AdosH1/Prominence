@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Prominence.Model.Interfaces
 {
-    public interface IItemEntity
+    public interface IInterstitialAd
     {
-        string Id { get; }
+        Task Display(string adId);
     }
 }

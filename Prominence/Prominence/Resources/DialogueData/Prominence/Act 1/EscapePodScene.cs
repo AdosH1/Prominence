@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Prominence.Model;
 using Xamarin.Forms;
 
-namespace Prominence.Resources.DialogueData.Sequoia.Act1
+namespace Prominence.Resources.DialogueData.Prominence
 {
     public class EscapePodScene : ISceneModel
     {
-        //public ISceneModel.Player Player;
         public IFilmModel Film { get; set; }
         public IActModel Act { get; set; }
+        public Dictionary<string, FrameModel> Frames { get; set; }
         public PlayerModel Player { get; set; }
         public string Name { get { return "EscapePod"; } }
         public Action OnEnter { get { return null; } }
@@ -87,8 +87,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Listen to the message.", ListenToMessage.Name),
-                    new ButtonModel("Look around.", LookAround.Name),
+                    new ButtonModel("Listen to the message.", ListenToMessage),
+                    new ButtonModel("Look around.", LookAround),
                 }
             );
         }
@@ -109,7 +109,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                   new ButtonModel("Continue", Interruption.Name),
+                   new ButtonModel("Continue", Interruption),
                 }
             );
         }
@@ -128,7 +128,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                },
                new List<ButtonModel>()
                {
-                new ButtonModel("Continue.", Interruption.Name),
+                new ButtonModel("Continue.", Interruption),
                }
            );
         }
@@ -141,15 +141,15 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 Scene,
                 Name,
                 new List<DialogueModel>() {
-                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{ListenToMessage.Name}"); })),
-                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{LookAround.Name}"); })),
+                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{ListenToMessage}"); })),
+                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{LookAround}"); })),
                     new DialogueModel("One is in a lightly armored space suit, with a large scaley being looming over, pinning them to the pod."),
                     new DialogueModel("You manage to take a deep breath."),
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Stay still.", StayStill.Name),
-                    new ButtonModel("Try open the pod.", TryOpenPod.Name),
+                    new ButtonModel("Stay still.", StayStill),
+                    new ButtonModel("Try open the pod.", TryOpenPod),
                 }
             );
         }
@@ -168,7 +168,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue.", Upheaval.Name),
+                    new ButtonModel("Continue.", Upheaval),
                 }
             );
         }
@@ -187,7 +187,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue.", Upheaval.Name),
+                    new ButtonModel("Continue.", Upheaval),
                 }
             );
         }
@@ -205,7 +205,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue.", VillianLeaves.Name),
+                    new ButtonModel("Continue.", VillianLeaves),
                 }
             );
         }
@@ -224,8 +224,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Listen to the rest of the message", ListenToRestOfTheMessage.Name),
-                    new ButtonModel("Smash through pod glass", PunchThroughThePodGlass.Name),
+                    new ButtonModel("Listen to the rest of the message", ListenToRestOfTheMessage),
+                    new ButtonModel("Smash through pod glass", PunchThroughThePodGlass),
                 }
             );
         }
@@ -249,7 +249,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue", PodAutoOpens.Name), 
+                    new ButtonModel("Continue", PodAutoOpens), 
                 }
             );
         }
@@ -268,7 +268,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue", CryostasisRoom.Name), 
+                    new ButtonModel("Continue", CryostasisRoom), 
                 }
             );
         }
@@ -287,7 +287,7 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue", CryostasisRoom.Name),
+                    new ButtonModel("Continue", CryostasisRoom),
                 }
             );
         }
@@ -306,8 +306,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Look around", LookAroundCryostasisRoom.Name), 
-                    new ButtonModel("Enter hallway", ""), /// TODO
+                    new ButtonModel("Look around", LookAroundCryostasisRoom), 
+                    //new ButtonModel("Enter hallway", ""), /// TODO
                 }
             );
         }
@@ -326,8 +326,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Inspect stasis pods", InspectStasisPods.Name),
-                    new ButtonModel("Exit room", ""), /// T ODO
+                    new ButtonModel("Inspect stasis pods", InspectStasisPods),
+                    //new ButtonModel("Exit room", ""), /// TODO
                 }
             );
         }
@@ -346,8 +346,8 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Pick up device", PickUpDevice.Name),
-                    new ButtonModel("Back", LookAroundCryostasisRoom.Name),
+                    new ButtonModel("Pick up device", PickUpDevice),
+                    new ButtonModel("Back", LookAroundCryostasisRoom),
                 }
             );
         }
@@ -371,19 +371,10 @@ namespace Prominence.Resources.DialogueData.Sequoia.Act1
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Listen to the rest of the message.", ""),
-                    new ButtonModel("Punch through the glass.", ""),
+                    //new ButtonModel("Listen to the rest of the message.", ""),
+                    //new ButtonModel("Punch through the glass.", ""),
                 }
             );
-        }
-
-
-
-        private Dictionary<string, FrameModel> _frames;
-        public Dictionary<string, FrameModel> Frames
-        {
-            get { return _frames; }
-            set { _frames = value; }
         }
 
     }

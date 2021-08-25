@@ -1,4 +1,6 @@
 ﻿using Prominence.Model;
+using Prominence.Model.Constants;
+using Prominence.Model.Interfaces;
 using Prominence.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -28,56 +30,9 @@ namespace Prominence.View
             IsReady = true;
         }
 
-        private void LaunchStatView(object sender, EventArgs e)
+        private async void LaunchInterstitialAd(object sender, EventArgs e)
         {
-            var player = new PlayerModel();
-            player.Name = "Ados";
-
-            player.Experience = 20000;
-            player.MaxHealth = 120;
-            player.Health = 85;
-
-            player.MaxEnergy = 100;
-            player.Energy = 68;
-
-            player.Strength = 1337;
-            player.Magic = 7331;
-            player.Speed = 1373;
-
-            var statsModel = new StatisticsViewModel(player);
-            var statsView = new StatisticsView();
-            statsView.BindingContext = statsModel;
-
-            Application.Current.MainPage.Navigation.PushModalAsync(statsView);
-        }
-
-        private void LaunchCombatView(object sender, EventArgs e)
-        {
-            var player = new PlayerModel();
-            player.Name = "Ados";
-
-            player.Experience = 20000;
-            player.MaxHealth = 120;
-            player.Health = 85;
-
-            player.MaxEnergy = 100;
-            player.Energy = 68;
-
-            player.Strength = 1337;
-            player.Magic = 7331;
-            player.Speed = 1373;
-
-            var combatModel = new CombatViewModel(player);
-            var combatView = new CombatView();
-            combatView.BindingContext = combatModel;
-
-            Application.Current.MainPage.Navigation.PushModalAsync(combatView);
-        }
-
-        private void LaunchInterstitialAd(object sender, EventArgs e)
-        {
-            DialogueGrid.IsVisible = false;
-            InterstitialAd.IsVisible = true;
+            await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true);
         }
 
         private void LaunchResetSave(object sender, EventArgs e)

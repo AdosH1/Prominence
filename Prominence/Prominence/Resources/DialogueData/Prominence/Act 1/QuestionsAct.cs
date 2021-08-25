@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Prominence.Model;
 using Prominence.Resources.DialogueData;
-using Prominence.Resources.DialogueData.Sequoia.Act1;
 
-namespace Prominence.Resources.DialogueData.Sequoia.Act_1
+namespace Prominence.Resources.DialogueData.Prominence
 {
     public class QuestionsAct : IActModel
     {
