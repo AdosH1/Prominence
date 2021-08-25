@@ -4,6 +4,7 @@ using System.Text;
 using Prominence.Model;
 using Prominence.Model.Interfaces;
 using Combat.Interfaces;
+using Prominence.Model.SaveModel;
 
 namespace Prominence.Model
 {
@@ -25,6 +26,17 @@ namespace Prominence.Model
         public List<string> Log = new List<string>();
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
+        public PlayerSaveModel SaveState;
+
+        public void SavePlayerModel()
+        {
+            UpdateSaveState();
+        }
+
+        public void UpdateSaveState()
+        {
+
+        }
         public bool HasItem(string item)
         {
             return Inventory.Contains(item);
