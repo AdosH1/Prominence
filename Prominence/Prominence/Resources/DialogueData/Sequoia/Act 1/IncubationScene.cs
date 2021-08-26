@@ -141,7 +141,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 new List<DialogueModel>() {
                     new DialogueModel("Dull blue lights line the ceiling along the hallway, many of them flicker every few seconds. It's as if there isn't enough electricity going through the system."),
                     new DialogueModel("To the left, you just make out the back of the drone heading down the hallway."),
-                    new DialogueModel("On the right the hallway turns, a faint red light can be seen projected on the floor.") 
+                    new DialogueModel("On the right the hallway turns, a faint red light can be seen projected on the floor.")
                 },
                 new List<ButtonModel>()
                 {
@@ -151,3 +151,4 @@ namespace Prominence.Resources.DialogueData.Sequoia
             );
         }
     }
+}
