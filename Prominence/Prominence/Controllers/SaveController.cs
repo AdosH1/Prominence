@@ -30,11 +30,6 @@ namespace Prominence.Controllers
                 streamWriter.WriteLine("Name:" + player.Name);
                 streamWriter.WriteLine("LastLogin:" + dateTime.Ticks.ToString());
 
-                streamWriter.WriteLine("Film:" + player.Film);
-                streamWriter.WriteLine("Act:" + player.Act);
-                streamWriter.WriteLine("Scene:" + player.Scene);
-                streamWriter.WriteLine("Frame:" + player.Frame);
-
                 streamWriter.WriteLine("Energy:" + player.Energy.ToString());
 
                 streamWriter.WriteLine("Inventory:" + string.Join(",", player.Inventory));
@@ -81,25 +76,7 @@ namespace Prominence.Controllers
                 player.Log = new List<string>(log.Split(','));
 
                 // ======= Frames and Scenes ====== //
-                // Film
-                content = streamReader.ReadLine();
-                var film = content.Split(':')[1];
-                player.Film = film;
 
-                // Act
-                content = streamReader.ReadLine();
-                var act = content.Split(':')[1];
-                player.Act = act;
-
-                // Scene
-                content = streamReader.ReadLine();
-                var scene = content.Split(':')[1];
-                player.Scene = scene;
-
-                // Frame
-                content = streamReader.ReadLine();
-                var frame = content.Split(':')[1];
-                player.Frame = frame;
 
                 // ====== Items ====== // 
                 // Inventory
