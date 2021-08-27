@@ -24,7 +24,6 @@ namespace Prominence.ViewModel
         public ISceneModel CurrentScene;
         public FrameModel CurrentFrame;
         public PlayerModel Player;
-        public SaveData SaveController;
         public SaveState CurrentSave;
 
         public ObservableCollection<Label> Log { get; set; }
@@ -44,7 +43,6 @@ namespace Prominence.ViewModel
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
 
-            SaveController = new SaveData();
 
             Player = new PlayerModel("Ados");
 
@@ -52,97 +50,7 @@ namespace Prominence.ViewModel
             var promFilm = new ProminenceFilm();
             promFilm.Initialise(Player);
             CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
-
-            //ProminenceFilm.Player = Player;
-            
-            //Let's load the saved game
-            if(Application.Current.Properties.ContainsKey(Player.Name))
-            {
-                CurrentSave = SaveController.LoadFromDisc<SaveState>(Player.Name);
-                if(CurrentSave.Log != null)
-                {
-                    Log.Clear();
-                    foreach(var item in CurrentSave.Log)
-                    {
-                        Log.Add(item);
-                    }
-                }
-                
-                if(CurrentSave.CurrentFrame != null)
-                {
-                    //Traverse(CurrentSave.CurrentFrame);
-                    Traverse(null);
-                }
-                else
-                {
-                    Traverse(null);
-                }
-            }
-            else
-            {
-                CurrentSave = new SaveState(player: Player.Name, film: CurrentFilm.Name);
-                Traverse(null);
-            }
-            //if(Application.Current.Properties.ContainsKey("visited"))
-            //{
-            //    string[] visitedList = ((string)Application.Current.Properties["visited"]).Split(",");
-
-            //    for (int i = visitedList.Length - 1; i >= 0; i--)
-            //    {
-            //        FrameModel currentFrame = getFrameModel(CurrentFilm, visitedList[i]);
-            //        if (currentFrame != null)
-            //        {
-            //            CurrentFilm = currentFrame.Film;
-            //            CurrentAct = currentFrame.Act;
-            //            CurrentScene = currentFrame.Scene;
-            //            CurrentFrame = currentFrame;
-            //            break;
-            //        }
-            //    }
-
-            //    Array.Resize(ref visitedList, visitedList.Length - 1);
-            //    Application.Current.Properties["visited"] = string.Join(",", visitedList);
-            //    Application.Current.SavePropertiesAsync();
-
-            //    foreach (string frameName in visitedList)
-            //    {
-            //        if(getFrameModel(CurrentFilm, frameName) != null)
-            //        {
-            //            renderFrameText(getFrameModel(CurrentFilm, frameName), false);
-            //        }
-            //    }
-                
-            //}
-
-           
-            //if (CurrentFrame != null)
-            //{
-            //    Traverse(CurrentFrame.Name);
-            //}
-            //else
-            //{
-            //    Traverse(null);
-            //}
-            
-        }
-
-
-        public FrameModel getFrameModel(IFilmModel film, string frameName)
-        {
-            foreach(KeyValuePair<string, IActModel> act in film.Acts)
-            {
-                foreach(KeyValuePair<string, ISceneModel> scene in act.Value.Scenes)
-                {
-                    foreach(KeyValuePair<string, FrameModel> frame in scene.Value.Frames)
-                    {
-                        if(frame.Value.Name == frameName)
-                        {
-                            return frame.Value;
-                        }
-                    }
-                }
-            }
-            return null;
+            Traverse(null);        
         }
 
         public void ClearScreen(bool clearAll = false)
@@ -265,24 +173,12 @@ namespace Prominence.ViewModel
         }
 
 
-        public async void LoadFrame(FrameModel Frame)
+        public async void LoadFrame(FrameModel frame)
         {
             ClearScreen();
+            CurrentFrame = frame;
 
-            //if(!Application.Current.Properties.ContainsKey("visited"))
-            //{
-            //    Application.Current.Properties["visited"] = Frame.Name;
-            //}
-            //else
-            //{
-            //    string visitedList = Application.Current.Properties["visited"] as string;
-            //    Application.Current.Properties["visited"] = string.Concat(visitedList, ",", Frame.Name);
-            //}
-            
-            //Application.Current.SavePropertiesAsync();
-            CurrentFrame = Frame;
-
-            foreach (var dialogue in Frame.Dialogue)
+            foreach (var dialogue in frame.Dialogue)
             {
                 if (dialogue.Condition())
                 {
@@ -296,15 +192,9 @@ namespace Prominence.ViewModel
 
                 }
             }
-
-            // Save new frame state
-            CurrentSave.UpdateSaveState(player: Player.Name, film: CurrentFilm.Name, act: CurrentAct.Name, scene: CurrentScene.Name, frame: CurrentFrame.Name, log: Log);
-            SaveController.SaveToDisc<SaveState>(CurrentSave.playerName, CurrentSave);
             
-            
-
             // Load buttons
-            foreach (var button in Frame.Buttons)
+            foreach (var button in frame.Buttons)
             {
                 if (button.Condition())
                 {
@@ -325,7 +215,7 @@ namespace Prominence.ViewModel
                 }
             }
             
-            Player.AddVisited(Frame.Location);
+            Player.AddVisited(frame.Location);
         }
 
         public bool TraverseScene(ISceneModel scene, string location = null)
@@ -336,8 +226,6 @@ namespace Prominence.ViewModel
             // If no location, load first frame in scene
             if (location == null)
             {
-                //var test = scene.Frames;
-                //var test2 = scene.Frames.Keys;
                 var firstFrame = scene.Frames.Keys.First();
                 SetScene(scene);
                 LoadFrame(scene.Frames[firstFrame]);

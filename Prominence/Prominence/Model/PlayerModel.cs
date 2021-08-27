@@ -26,8 +26,6 @@ namespace Prominence.Model
         public List<string> Log = new List<string>();
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
-        public PlayerSaveModel SaveState;
-
 
 
         public PlayerModel(string name)
@@ -35,15 +33,6 @@ namespace Prominence.Model
             Name = name;
         }
 
-        public void SavePlayerModel()
-        {
-            UpdateSaveState();
-        }
-
-        public void UpdateSaveState()
-        {
-
-        }
         public bool HasItem(string item)
         {
             return Inventory.Contains(item);
