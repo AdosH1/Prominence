@@ -27,5 +27,16 @@ namespace Prominence.Controllers
             return outputItem;
         }
 
+        public void SaveToAppProperties<T>(string propertiesKey, T objectToSave)
+        {
+            App.Current.Properties[propertiesKey] = JsonSerialize<T>(objectToSave);
+            App.Current.SavePropertiesAsync();
+        }
+
+        public T LoadFromAppProperties<T>(string propertiesKey)
+        {
+            return JsonDeserialize<T>(App.Current.Properties[propertiesKey] as string);
+        }
+
     }
 }
