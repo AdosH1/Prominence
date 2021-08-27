@@ -51,7 +51,7 @@ namespace Prominence.Controllers
         public PlayerModel LoadState()
         {
             var savePath = Path.Combine(saveFolderPath, saveFileName);
-            var player = new PlayerModel(name: "Ados");
+            var player = new PlayerModel("Ados");
 
             using (var streamReader = new StreamReader(savePath))
             {
