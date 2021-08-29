@@ -110,14 +110,6 @@ namespace Prominence.Model
             {
                 return $"{Film}-{Act}-{Scene}-{Frame}";
             }
-            set
-            {
-                var values = value.Split('-');
-                if (values.Length >= 1) Film = values[0];
-                if (values.Length >= 2) Act = values[1];
-                if (values.Length >= 3) Scene = values[2];
-                if (values.Length >= 4) Frame = values[3];
-            }
         }
 
         public LocationModel(string film = null, string act = null, string scene = null, string frame = null)
@@ -126,6 +118,14 @@ namespace Prominence.Model
             Act = act;
             Scene = scene;
             Frame = frame;
+        }
+        public LocationModel(string location)
+        {
+            var values = location.Split('-');
+            if (values.Length >= 1) Film = values[0];
+            if (values.Length >= 2) Act = values[1];
+            if (values.Length >= 3) Scene = values[2];
+            if (values.Length >= 4) Frame = values[3];
         }
     }
 
@@ -191,7 +191,6 @@ namespace Prominence.Model
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; } // Eg. change the background of the screen
         public Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
-        //private Dictionary<string, FrameModel> _frames;
         public Dictionary<string, FrameModel> Frames { get; set; } // How do we exit a scene? How do we connect these buttons to the next screen?
         public LocationModel Location();
     }
