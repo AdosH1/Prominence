@@ -33,9 +33,9 @@ namespace Prominence.Resources.DialogueData.Prominence
             Act = act;
             Player = player;
 
+            Wakeup = CreateWakeup(Film, Act, this.Name, player, Wakeup.Name);
             LookAround = CreateLookAround(Film, Act, this.Name, player, LookAround.Name);
             ListenToMessage = CreateListenToMessage(Film, Act, this.Name, player, ListenToMessage.Name);
-            Wakeup = CreateWakeup(Film, Act, this.Name, player, Wakeup.Name);
             Interruption = CreateInterruption(Film, Act, this.Name, player, Interruption.Name);
             StayStill = CreateStayStill(Film, Act, this.Name, player, StayStill.Name);
             TryOpenPod = CreateTryOpenPod(Film, Act, this.Name, player, TryOpenPod.Name);
