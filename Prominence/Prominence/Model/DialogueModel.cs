@@ -63,18 +63,23 @@ namespace Prominence.Model
     /// </summary>
     public class FrameModel : IFrameModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public ISceneModel Scene { get; set; }
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
         public string Name { get; set; }
         public List<DialogueModel> Dialogue { get; set; }
         public List<ButtonModel> Buttons { get; set; }
+
+        private LocationModel _location;
         public LocationModel Location
         {
             get
             {
-                return new LocationModel(Film, Act, Scene, this);
+                if (_location == null) 
+                    _location = new LocationModel(Film, Act, Scene, this.Name);
+                return _location;
             }
+            set { _location = value; }
         }
 
         /// <summary>
@@ -82,7 +87,7 @@ namespace Prominence.Model
         /// </summary>
         public FrameModel() { }
 
-        public FrameModel(IFilmModel film, IActModel act, ISceneModel scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        public FrameModel(string film, string act, string scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
         {
             Film = film;
             Act = act;
@@ -95,10 +100,10 @@ namespace Prominence.Model
 
     public class LocationModel
     {
-        public string Film;
-        public string Act;
-        public string Scene;
-        public string Frame;
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
+        public string Frame { get; set; }
         public string Location
         {
             get
@@ -115,19 +120,19 @@ namespace Prominence.Model
             }
         }
 
-        public LocationModel(IFilmModel film = null, IActModel act = null, ISceneModel scene = null, IFrameModel frame = null)
+        public LocationModel(string film = null, string act = null, string scene = null, string frame = null)
         {
-            Film = film != null ? film.Name : null;
-            Act = act != null ? act.Name : null;
-            Scene = scene != null ? scene.Name : null;
-            Frame = frame != null ? frame.Name : null;
+            Film = film;
+            Act = act;
+            Scene = scene;
+            Frame = frame;
         }
     }
 
     public class SceneModel : ISceneModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
+        public string Film { get; set; }
+        public string Act { get; set; }
         public string Name { get; set; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
@@ -135,13 +140,13 @@ namespace Prominence.Model
         public Dictionary<string, FrameModel> Frames { get; set; }
         public LocationModel Location()
         {
-            return new LocationModel(Film, Act, this);
+            return new LocationModel(Film, Act, this.Name);
         }
     }
 
     public class ActModel : IActModel
     {
-        public IFilmModel Film { get; set; }
+        public string Film { get; set; }
         public string Name { get; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
@@ -149,7 +154,7 @@ namespace Prominence.Model
         public Dictionary<string, ISceneModel> Scenes { get; set; }
         public LocationModel Location()
         {
-            return new LocationModel(Film, this);
+            return new LocationModel(Film, this.Name);
         }
     }
 
@@ -160,15 +165,15 @@ namespace Prominence.Model
         public Dictionary<string, IActModel> Acts { get; set; }
         public LocationModel Location()
         {
-            return new LocationModel(this);
+            return new LocationModel(this.Name);
         }
     }
 
     public interface IFrameModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public ISceneModel Scene { get; set; }
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
         public string Name { get; set; }
         public List<DialogueModel> Dialogue { get; set; }
         public List<ButtonModel> Buttons { get; set; }
@@ -180,8 +185,8 @@ namespace Prominence.Model
     /// </summary>
     public interface ISceneModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
+        public string Film { get; set; }
+        public string Act { get; set; }
         public string Name { get; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; } // Eg. change the background of the screen
@@ -193,7 +198,7 @@ namespace Prominence.Model
 
     public interface IActModel
     {
-        public IFilmModel Film { get; set; }
+        public string Film { get; set; }
         public string Name { get; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }

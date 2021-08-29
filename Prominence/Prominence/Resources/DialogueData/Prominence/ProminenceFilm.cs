@@ -9,13 +9,13 @@ namespace Prominence.Resources.DialogueData.Prominence
 {
     public class ProminenceFilm : FilmModel
     {
-        public string Name { get { return "Prominence";  } }
+        public string Name = "Prominence"; //{ get { return "Prominence";  } }
         public ProminenceFilm() { }
         public void Initialise(PlayerModel player)
         {
             Player = player;
             var questionsAct = new QuestionsAct();
-            questionsAct.Initialise(this, player);
+            questionsAct.Initialise(this.Name, player);
 
             Acts = new Dictionary<string, IActModel>()
             {

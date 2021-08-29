@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
 using Prominence.Resources.DialogueData.Prominence;
+using Prominence.Resources.DialogueData.Sequoia;
 using Prominence.View;
 using Xamarin.Forms;
 
@@ -41,9 +42,14 @@ namespace Prominence.ViewModel
             Buttons = new ObservableCollection<Button>();
             Player = new PlayerModel("Ados");
 
-            var promFilm = new ProminenceFilm();
-            promFilm.Initialise(Player);
-            CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
+            //var promFilm = new ProminenceFilm();
+            //promFilm.Initialise(Player);
+            //CurrentFilm = promFilm;
+
+            var seqFilm = new SequoiaFilm();
+            seqFilm.Initialise(Player);
+            CurrentFilm = seqFilm;
+
             Traverse(Player.Location);
         }
 

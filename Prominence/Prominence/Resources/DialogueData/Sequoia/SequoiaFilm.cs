@@ -15,7 +15,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
         {
             Player = player;
             var awakeningAct = new AwakeningAct();
-            awakeningAct.Initialise(this, player);
+            awakeningAct.Initialise(this.Name, player);
 
             Acts = new Dictionary<string, IActModel>()
             {

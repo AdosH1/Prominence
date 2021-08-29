@@ -11,12 +11,12 @@ namespace Prominence.Resources.DialogueData.Prominence
         public string Name { get { return "Questions"; } }
         public QuestionsAct() { }
 
-        public void Initialise(IFilmModel film, PlayerModel player, Action onEnter = null, Action onExit = null)
+        public void Initialise(string film, PlayerModel player, Action onEnter = null, Action onExit = null)
         {
             Film = film;
             Player = player;
             var escapePodScene = new EscapePodScene();
-            escapePodScene.Initialise(Film, this, player);
+            escapePodScene.Initialise(Film, this.Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
