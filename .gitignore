@@ -9,4 +9,4 @@ Prominence/Prominence/obj/
 Utilities/bin/
 Utilities/obj/
 .vs/*
-.csproj.user
+*.csproj.user
