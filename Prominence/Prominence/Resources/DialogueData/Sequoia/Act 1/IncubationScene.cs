@@ -7,41 +7,29 @@ using Xamarin.Forms;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
-    public class IncubationScene : ISceneModel
+    public class IncubationScene : SceneModel
     {
-
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public Dictionary<string, FrameModel> Frames { get; set; }
-        public PlayerModel Player { get; set; }
         public string Name { get { return "Incubation"; } }
-        public Action OnEnter { get { return null; } }
-        public Action OnExit { get { return null; } }
-
         public FrameModel Start = new FrameModel { Name = "Start" };
         public FrameModel Silent = new FrameModel { Name = "Silent" };
         public FrameModel TalkToDrone = new FrameModel { Name = "TalkToDrone" };
         public FrameModel DroneLeaves = new FrameModel { Name = "DroneLeaves" };
         public FrameModel InspectIncubationRoom = new FrameModel { Name = "InspectIncubationRoom" };
         public FrameModel IncubationHallway = new FrameModel { Name = "IncubationHallway" };
+        public IncubationScene() { }
 
-        public IncubationScene()
-        {
-
-        }
-
-        public void Initialise(IFilmModel film, IActModel act, PlayerModel player)
+        public void Initialise(string film, string act, PlayerModel player)
         {
             Film = film;
             Act = act;
             Player = player;
 
-            Start = CreateStart(Film, Act, this, player, Start.Name);
-            Silent = CreateStart(Film, Act, this, player, Silent.Name);
-            TalkToDrone = CreateStart(Film, Act, this, player, TalkToDrone.Name);
-            DroneLeaves = CreateStart(Film, Act, this, player, DroneLeaves.Name);
-            InspectIncubationRoom = CreateStart(Film, Act, this, player, InspectIncubationRoom.Name);
-            IncubationHallway = CreateStart(Film, Act, this, player, IncubationHallway.Name);
+            Start = CreateStart(Film, Act, this.Name, player, Start.Name);
+            Silent = CreateSilent(Film, Act, this.Name, player, Silent.Name);
+            TalkToDrone = CreateTalkToDrone(Film, Act, this.Name, player, TalkToDrone.Name);
+            DroneLeaves = CreateDroneLeaves(Film, Act, this.Name, player, DroneLeaves.Name);
+            InspectIncubationRoom = CreateInspectIncubationRoom(Film, Act, this.Name, player, InspectIncubationRoom.Name);
+            IncubationHallway = CreateIncubationHallway(Film, Act, this.Name, player, IncubationHallway.Name);
 
             Frames = new Dictionary<string, FrameModel>() {
                 {Start.Name, Start},
@@ -53,7 +41,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
             };
         }
 
-        public FrameModel CreateStart(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateStart(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -74,7 +62,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 }
             );
         }
-        public FrameModel CreateSilent(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateSilent(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                Film,
@@ -90,7 +78,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                }
             );
         }
-        public FrameModel CreateTalkToDrone(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateTalkToDrone(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -106,7 +94,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
             }
             );
         }
-        public FrameModel CreateDroneLeaves(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateDroneLeaves(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -125,7 +113,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 }
             );
         }
-        public FrameModel CreateInspectIncubationRoom(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateInspectIncubationRoom(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -143,7 +131,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 }
             );
         }
-        public FrameModel CreateIncubationHallway(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateIncubationHallway(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,

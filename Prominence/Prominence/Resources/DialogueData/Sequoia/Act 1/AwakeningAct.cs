@@ -6,28 +6,17 @@ using Prominence.Resources.DialogueData;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
-    public class AwakeningAct : IActModel
+    public class AwakeningAct : ActModel
     {
-        public IFilmModel Film { get; set; }
         public string Name { get { return "Awakening"; } }
-        public PlayerModel Player { get; set; }
+        public AwakeningAct() { }
 
-        public Action OnEnter { get; set; }
-        public Action OnExit { get; set; }
-
-        public Dictionary<string, ISceneModel> Scenes { get; set; }
-
-        public AwakeningAct()
-        {
-
-        }
-
-        public void Initialise(IFilmModel film, PlayerModel player, Action onEnter = null, Action onExit = null)
+        public void Initialise(string film, PlayerModel player, Action onEnter = null, Action onExit = null)
         {
             Film = film;
             Player = player;
             var incubationScene = new IncubationScene();
-            incubationScene.Initialise(Film, this, player);
+            incubationScene.Initialise(Film, this.Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
