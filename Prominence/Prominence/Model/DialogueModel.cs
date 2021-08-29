@@ -35,15 +35,14 @@ namespace Prominence.Model
             Color = (Color)color;
             TextAlignment = (TextAlignment)textAlignment;
             Action = action;
-
         }
 
     }
 
-        public class ButtonModel
-    {
+     public class ButtonModel
+     {
         public string Text;
-        public FrameModel Jump;
+        public LocationModel Jump;
         public Func<Task> Action;
         public Func<bool> Condition;
 
@@ -53,40 +52,42 @@ namespace Prominence.Model
                 condition = () => { return true; };
 
             Text = text;
-            Jump = jump;
+            Jump = jump.Location;
             Condition = condition;
             Action = action;
         }
-    }
+     }
 
     /// <summary>
     /// An individual screen, displaying text and loading buttons.
     /// </summary>
-    public class FrameModel
+    public class FrameModel : IFrameModel
     {
-        private string _name;
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
+        public string Name { get; set; }
+        public List<DialogueModel> Dialogue { get; set; }
+        public List<ButtonModel> Buttons { get; set; }
 
-        public IFilmModel Film;
-        public IActModel Act;
-        public ISceneModel Scene;
-        public string Name;
-        public List<DialogueModel> Dialogue;
-        public List<ButtonModel> Buttons;
-        public string Location 
-        { 
-            get 
-            { 
-                return $"{Film.Name}-{Act.Name}-{Scene.Name}-{Name}"; 
-            } 
+        private LocationModel _location;
+        public LocationModel Location
+        {
+            get
+            {
+                if (_location == null) 
+                    _location = new LocationModel(Film, Act, Scene, this.Name);
+                return _location;
+            }
+            set { _location = value; }
         }
-       
 
         /// <summary>
         /// Only use this constructor for connecting frames together (eg. construct with Name only)
         /// </summary>
         public FrameModel() { }
 
-        public FrameModel(IFilmModel film, IActModel act, ISceneModel scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        public FrameModel(string film, string act, string scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
         {
             Film = film;
             Act = act;
@@ -95,12 +96,88 @@ namespace Prominence.Model
             Dialogue = dialogue;
             Buttons = buttons;
         }
+    }
 
-        public string GetLocation()
+    public class LocationModel
+    {
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
+        public string Frame { get; set; }
+        public string Location
         {
-            return $"{Film.Name}-{Act.Name}-{Scene.Name}-{Name}";
+            get
+            {
+                return $"{Film}-{Act}-{Scene}-{Frame}";
+            }
         }
 
+        public LocationModel(string film = null, string act = null, string scene = null, string frame = null)
+        {
+            Film = film;
+            Act = act;
+            Scene = scene;
+            Frame = frame;
+        }
+        public LocationModel(string location)
+        {
+            var values = location.Split('-');
+            if (values.Length >= 1) Film = values[0];
+            if (values.Length >= 2) Act = values[1];
+            if (values.Length >= 3) Scene = values[2];
+            if (values.Length >= 4) Frame = values[3];
+        }
+    }
+
+    public class SceneModel : ISceneModel
+    {
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Name { get; set; }
+        public PlayerModel Player { get; set; }
+        public Action OnEnter { get; set; }
+        public Action OnExit { get; set; }
+        public Dictionary<string, FrameModel> Frames { get; set; }
+        public LocationModel Location()
+        {
+            return new LocationModel(Film, Act, this.Name);
+        }
+    }
+
+    public class ActModel : IActModel
+    {
+        public string Film { get; set; }
+        public string Name { get; }
+        public PlayerModel Player { get; set; }
+        public Action OnEnter { get; set; }
+        public Action OnExit { get; set; }
+        public Dictionary<string, ISceneModel> Scenes { get; set; }
+        public LocationModel Location()
+        {
+            return new LocationModel(Film, this.Name);
+        }
+    }
+
+    public class FilmModel : IFilmModel
+    {
+        public string Name { get; }
+        public PlayerModel Player { get; set; }
+        public Dictionary<string, IActModel> Acts { get; set; }
+        public LocationModel Location()
+        {
+            return new LocationModel(this.Name);
+        }
+    }
+
+    public interface IFrameModel
+    {
+        public string Film { get; set; }
+        public string Act { get; set; }
+        public string Scene { get; set; }
+        public string Name { get; set; }
+        public List<DialogueModel> Dialogue { get; set; }
+        public List<ButtonModel> Buttons { get; set; }
+        public LocationModel Location { get; }
     }
 
     /// <summary>
@@ -108,35 +185,25 @@ namespace Prominence.Model
     /// </summary>
     public interface ISceneModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
+        public string Film { get; set; }
+        public string Act { get; set; }
         public string Name { get; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; } // Eg. change the background of the screen
         public Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
-        //private Dictionary<string, FrameModel> _frames;
         public Dictionary<string, FrameModel> Frames { get; set; } // How do we exit a scene? How do we connect these buttons to the next screen?
-
-        public string GetLocation()
-        {
-            return $"{Film.Name}-{Act.Name}-{Name}";
-        }
-
+        public LocationModel Location();
     }
 
     public interface IActModel
     {
-        public IFilmModel Film { get; set; }
+        public string Film { get; set; }
         public string Name { get; }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
         public Action OnExit { get; set; }
         public Dictionary<string, ISceneModel> Scenes { get; set; }
-
-        public string GetLocation()
-        {
-            return $"{Film.Name}-{Name}";
-        }
+        public LocationModel Location();
 
     }
 
@@ -146,13 +213,8 @@ namespace Prominence.Model
     public interface IFilmModel
     {
         public string Name { get; }
-
         public Dictionary<string, IActModel> Acts { get; set; }
-
-        public string GetLocation()
-        {
-            return $"{Name}";
-        }
+        public LocationModel Location();
     }
 
 }

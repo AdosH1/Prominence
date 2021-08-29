@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
 using Prominence.Resources.DialogueData.Prominence;
+using Prominence.Resources.DialogueData.Sequoia;
 using Prominence.View;
 using Xamarin.Forms;
 
@@ -41,10 +42,15 @@ namespace Prominence.ViewModel
             Buttons = new ObservableCollection<Button>();
             Player = new PlayerModel("Ados");
 
-            var promFilm = new ProminenceFilm();
-            promFilm.Initialise(Player);
-            CurrentFilm = promFilm;//SequoiaFilm.Sequoia;
-            Traverse(null);
+            //var promFilm = new ProminenceFilm();
+            //promFilm.Initialise(Player);
+            //CurrentFilm = promFilm;
+
+            var seqFilm = new SequoiaFilm();
+            seqFilm.Initialise(Player);
+            CurrentFilm = seqFilm;
+
+            Traverse(Player.Location);
         }
 
         public void ClearScreen(bool clearAll = false)
@@ -111,7 +117,6 @@ namespace Prominence.ViewModel
                 label.Text = strBuilder.ToString();
 
                 await Task.Delay(10);
-
             }
 
             return true;
@@ -201,7 +206,7 @@ namespace Prominence.ViewModel
                          if (button.Action != null)
                              button.Action.Invoke();
 
-                         Traverse(button.Jump.Name);
+                         Traverse(button.Jump);
                     };
 
                     btn.Command = new Command(fn);
@@ -209,16 +214,16 @@ namespace Prominence.ViewModel
                 }
             }
             
-            Player.AddVisited(frame.Location);
+            Player.AddVisited(frame.Location.Location);
         }
 
-        public bool TraverseScene(ISceneModel scene, string location = null)
+        public bool TraverseScene(ISceneModel scene, LocationModel location)
         {
             if (scene == null) 
                 return false;
 
             // If no location, load first frame in scene
-            if (location == null)
+            if (location.Frame == null)
             {
                 var firstFrame = scene.Frames.Keys.First();
                 SetScene(scene);
@@ -228,7 +233,7 @@ namespace Prominence.ViewModel
 
             foreach (var frame in scene.Frames.Keys)
             {
-                if (frame == location)
+                if (frame == location.Frame)
                 {
                     SetScene(scene);
                     LoadFrame(scene.Frames[frame]);
@@ -238,23 +243,23 @@ namespace Prominence.ViewModel
             return false;
         }
 
-        public bool TraverseAct(IActModel act, string location = null)
+        public bool TraverseAct(IActModel act, LocationModel location)
         {
             if (act == null)
                 return false;
 
-            // If no location, load first scene in act
-            if (location == null)
+            // If no scene, load first scene in act
+            if (location.Scene == null)
             {
                 var firstScene = act.Scenes.Keys.First();
                 SetAct(act);
-                TraverseScene(act.Scenes[firstScene]);
+                TraverseScene(act.Scenes[firstScene], location);
                 return true;
             }
 
             foreach (var scene in act.Scenes.Keys)
             {
-                if (scene == location)
+                if (scene == location.Scene)
                 {
                     SetAct(act);
                     var firstScene = act.Scenes.Keys.First();
@@ -269,22 +274,22 @@ namespace Prominence.ViewModel
             return false;
         }
 
-        public bool TraverseFilm(IFilmModel film, string location)
+        public bool TraverseFilm(IFilmModel film, LocationModel location)
         {
             if (film == null)
                 return false;
 
             // If no location, load first act in film
-            if (location == null)
+            if (location.Act == null)
             {
                 var firstAct = film.Acts.Keys.First();
-                TraverseAct(film.Acts[firstAct]);
+                TraverseAct(film.Acts[firstAct], location);
                 return true;
             }
 
             foreach (var act in film.Acts.Keys)
             {
-                if (act == location)
+                if (act == location.Act)
                 {
                     CurrentFilm = film;
                     var firstAct = film.Acts.Keys.First();
@@ -299,7 +304,7 @@ namespace Prominence.ViewModel
             return false;
         }
 
-        public bool Traverse(string location)
+        public bool Traverse(LocationModel location)
         {
             // Attempt to find frame in current scene
             if (TraverseScene(CurrentScene, location))

@@ -7,16 +7,9 @@ using Xamarin.Forms;
 
 namespace Prominence.Resources.DialogueData.Prominence
 {
-    public class EscapePodScene : ISceneModel
+    public class EscapePodScene : SceneModel
     {
-        public IFilmModel Film { get; set; }
-        public IActModel Act { get; set; }
-        public Dictionary<string, FrameModel> Frames { get; set; }
-        public PlayerModel Player { get; set; }
         public string Name { get { return "EscapePod"; } }
-        public Action OnEnter { get { return null; } }
-        public Action OnExit { get { return null; } }
-
         public FrameModel Wakeup = new FrameModel { Name = "Wakeup" };
         public FrameModel LookAround = new FrameModel { Name = "LookAround" };
         public FrameModel ListenToMessage = new FrameModel { Name = "ListenToMessage" };
@@ -32,33 +25,29 @@ namespace Prominence.Resources.DialogueData.Prominence
         public FrameModel LookAroundCryostasisRoom = new FrameModel { Name = "LookAroundCryostasisRoom" };
         public FrameModel InspectStasisPods = new FrameModel { Name = "InspectStasisPods" };
         public FrameModel PickUpDevice = new FrameModel { Name = "PickUpDevice" };
+        public EscapePodScene() { }
 
-        public EscapePodScene()
-        {
-            
-        }
-
-        public void Initialise(IFilmModel film, IActModel act, PlayerModel player)
+        public void Initialise(string film, string act, PlayerModel player)
         {
             Film = film;
             Act = act;
             Player = player;
 
-            Wakeup = CreateWakeup(Film, Act, this, player, Wakeup.Name);
-            LookAround = CreateLookAround(Film, Act, this, player, LookAround.Name);
-            ListenToMessage = CreateListenToMessage(Film, Act, this, player, ListenToMessage.Name);
-            Interruption = CreateInterruption(Film, Act, this, player, Interruption.Name);
-            StayStill = CreateStayStill(Film, Act, this, player, StayStill.Name);
-            TryOpenPod = CreateTryOpenPod(Film, Act, this, player, TryOpenPod.Name);
-            Upheaval = CreateUpheaval(Film, Act, this, player, Upheaval.Name);
-            VillianLeaves = CreateVillianLeaves(Film, Act, this, player, VillianLeaves.Name);
-            ListenToRestOfTheMessage = CreateListenToRestOfTheMessage(Film, Act, this, player, ListenToRestOfTheMessage.Name);
-            PodAutoOpens = CreatePodAutoOpens(Film, Act, this, player, PodAutoOpens.Name);
-            PunchThroughThePodGlass = CreatePunchThroughThePodGlass(Film, Act, this, player, PunchThroughThePodGlass.Name);
-            CryostasisRoom = CreateCryostasisRoom(Film, Act, this, player, CryostasisRoom.Name);
-            LookAroundCryostasisRoom = CreateLookAroundCryostasisRoom(Film, Act, this, player, LookAroundCryostasisRoom.Name);
-            InspectStasisPods = CreateInspectStasisPods(Film, Act, this, player, InspectStasisPods.Name);
-            PickUpDevice = CreatePickUpDevice(Film, Act, this, player, PickUpDevice.Name);
+            Wakeup = CreateWakeup(Film, Act, this.Name, player, Wakeup.Name);
+            LookAround = CreateLookAround(Film, Act, this.Name, player, LookAround.Name);
+            ListenToMessage = CreateListenToMessage(Film, Act, this.Name, player, ListenToMessage.Name);
+            Interruption = CreateInterruption(Film, Act, this.Name, player, Interruption.Name);
+            StayStill = CreateStayStill(Film, Act, this.Name, player, StayStill.Name);
+            TryOpenPod = CreateTryOpenPod(Film, Act, this.Name, player, TryOpenPod.Name);
+            Upheaval = CreateUpheaval(Film, Act, this.Name, player, Upheaval.Name);
+            VillianLeaves = CreateVillianLeaves(Film, Act, this.Name, player, VillianLeaves.Name);
+            ListenToRestOfTheMessage = CreateListenToRestOfTheMessage(Film, Act, this.Name, player, ListenToRestOfTheMessage.Name);
+            PodAutoOpens = CreatePodAutoOpens(Film, Act, this.Name, player, PodAutoOpens.Name);
+            PunchThroughThePodGlass = CreatePunchThroughThePodGlass(Film, Act, this.Name, player, PunchThroughThePodGlass.Name);
+            CryostasisRoom = CreateCryostasisRoom(Film, Act, this.Name, player, CryostasisRoom.Name);
+            LookAroundCryostasisRoom = CreateLookAroundCryostasisRoom(Film, Act, this.Name, player, LookAroundCryostasisRoom.Name);
+            InspectStasisPods = CreateInspectStasisPods(Film, Act, this.Name, player, InspectStasisPods.Name);
+            PickUpDevice = CreatePickUpDevice(Film, Act, this.Name, player, PickUpDevice.Name);
 
             Frames = new Dictionary<string, FrameModel>() {
                     {Wakeup.Name, Wakeup},
@@ -72,7 +61,7 @@ namespace Prominence.Resources.DialogueData.Prominence
                 };
         }
 
-        public FrameModel CreateWakeup(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name) 
+        public FrameModel CreateWakeup(string Film, string Act, string Scene, PlayerModel Player, string Name) 
         {
             return new FrameModel(
                 Film,
@@ -93,8 +82,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        // TODO: This
-        public FrameModel CreateListenToMessage(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateListenToMessage(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -114,7 +102,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateLookAround(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateLookAround(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -133,7 +121,7 @@ namespace Prominence.Resources.DialogueData.Prominence
            );
         }
 
-        public FrameModel CreateInterruption(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateInterruption(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -141,8 +129,8 @@ namespace Prominence.Resources.DialogueData.Prominence
                 Scene,
                 Name,
                 new List<DialogueModel>() {
-                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{ListenToMessage}"); })),
-                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{Scene.GetLocation()}-{LookAround}"); })),
+                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{ListenToMessage.Location}"); })),
+                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{LookAround.Location}"); })),
                     new DialogueModel("One is in a lightly armored space suit, with a large scaley being looming over, pinning them to the pod."),
                     new DialogueModel("You manage to take a deep breath."),
                 },
@@ -154,7 +142,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateStayStill(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateStayStill(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -173,7 +161,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateTryOpenPod(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateTryOpenPod(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -183,7 +171,7 @@ namespace Prominence.Resources.DialogueData.Prominence
                 new List<DialogueModel>() {
                     new DialogueModel("You attempt to pull the emergency release latch, but the frozen handle is jammed and shatters in your hand."),
                     new DialogueModel("The blue scaley form sees you past his struggling opponent, but seems to pay you no mind."),
-                    
+
                 },
                 new List<ButtonModel>()
                 {
@@ -192,7 +180,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateUpheaval(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateUpheaval(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -210,7 +198,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateVillianLeaves(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateVillianLeaves(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -230,7 +218,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateListenToRestOfTheMessage(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateListenToRestOfTheMessage(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -249,12 +237,12 @@ namespace Prominence.Resources.DialogueData.Prominence
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue", PodAutoOpens), 
+                    new ButtonModel("Continue", PodAutoOpens),
                 }
             );
         }
 
-        public FrameModel CreatePodAutoOpens(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreatePodAutoOpens(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -268,12 +256,12 @@ namespace Prominence.Resources.DialogueData.Prominence
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue", CryostasisRoom), 
+                    new ButtonModel("Continue", CryostasisRoom),
                 }
             );
         }
 
-        public FrameModel CreatePunchThroughThePodGlass(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreatePunchThroughThePodGlass(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -292,7 +280,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateCryostasisRoom(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateCryostasisRoom(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -312,7 +300,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateLookAroundCryostasisRoom(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateLookAroundCryostasisRoom(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -332,7 +320,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreateInspectStasisPods(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreateInspectStasisPods(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,
@@ -342,7 +330,7 @@ namespace Prominence.Resources.DialogueData.Prominence
                 new List<DialogueModel>() {
                     new DialogueModel("Looking at the data plates, the people in the pods are from a very diverse background."),
                     new DialogueModel("You recall that people are usually grouped together into functional units, though it does not seem to be the case here."),
-                    new DialogueModel("From where the earlier struggle was occuring, you notice a small device was dropped.", new Func<bool>(() => { return !Player.HasVisited(PickUpDevice.Name); })), 
+                    new DialogueModel("From where the earlier struggle was occuring, you notice a small device was dropped.", new Func<bool>(() => { return !Player.HasVisited(PickUpDevice.Name); })),
                 },
                 new List<ButtonModel>()
                 {
@@ -352,7 +340,7 @@ namespace Prominence.Resources.DialogueData.Prominence
             );
         }
 
-        public FrameModel CreatePickUpDevice(IFilmModel Film, IActModel Act, ISceneModel Scene, PlayerModel Player, string Name)
+        public FrameModel CreatePickUpDevice(string Film, string Act, string Scene, PlayerModel Player, string Name)
         {
             return new FrameModel(
                 Film,

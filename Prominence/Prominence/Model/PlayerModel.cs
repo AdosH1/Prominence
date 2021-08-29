@@ -9,11 +9,7 @@ namespace Prominence.Model
     public class PlayerModel
     {
         public string Name { get; set; } = "Ados";
-
-        public string Film;
-        public string Act;
-        public string Scene;
-        public string Frame;
+        public LocationModel Location { get; set; }
 
         public double Energy;
         public double MaxEnergy;
@@ -27,6 +23,7 @@ namespace Prominence.Model
         public PlayerModel(string name)
         {
             Name = name;
+            Location = new LocationModel();
         }
 
         public bool HasItem(string item)
