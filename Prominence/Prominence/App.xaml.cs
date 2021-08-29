@@ -11,8 +11,7 @@ namespace Prominence
         {
             InitializeComponent();
 
-            //MainPage = new NavigationPage(new MainPage());
-            MainPage = new DialogueView();
+            MainPage = new DialogueView(); //= new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
