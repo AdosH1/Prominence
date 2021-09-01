@@ -7,6 +7,7 @@ trigger:
 - main
 
 pool:
+  name: 'Ados-Home'
   vmImage: 'windows-latest'
 
 variables:
