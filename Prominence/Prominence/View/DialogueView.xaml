@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Prominence.ViewModel"
              mc:Ignorable="d"
-             x:Class="Prominence.View.DialogueView"
-             BackgroundImageSource="Resources/incubation.png">
+             x:Class="Prominence.View.DialogueView">
     <ContentPage.BindingContext>
         <local:DialogueViewModel/>
     </ContentPage.BindingContext>
