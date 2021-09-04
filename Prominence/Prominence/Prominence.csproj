@@ -67,5 +67,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <ProjectReference Include="..\..\Utilities\Utilities.csproj" />
   </ItemGroup>
 </Project>

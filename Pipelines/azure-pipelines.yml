@@ -7,7 +7,8 @@ trigger:
 - main
 
 pool:
-  vmImage: 'macos-latest'
+  name: 'Ados-Home'
+  vmImage: 'windows-latest'
 
 variables:
   buildConfiguration: 'Release'
