@@ -17,7 +17,6 @@ namespace Prominence
             InitializeComponent();
 
             AssemblyContext.Initialise();
-            //GameController.Initialise();
             MainPage = new DialogueView();
         }
 
