@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Prominence.ViewModel"
              mc:Ignorable="d"
              x:Class="Prominence.View.DialogueView"
-             BackgroundImageSource="Resources/incubation.png">
+             BackgroundImageSource="{Binding Background}">
     <ContentPage.BindingContext>
         <local:DialogueViewModel/>
     </ContentPage.BindingContext>

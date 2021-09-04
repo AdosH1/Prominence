@@ -1,5 +1,10 @@
-﻿using Prominence.View;
+﻿using Prominence.Contexts;
+using Prominence.Controllers;
+using Prominence.Model.Constants;
+using Prominence.View;
 using System;
+using System.Drawing;
+using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +16,8 @@ namespace Prominence
         {
             InitializeComponent();
 
-            MainPage = new DialogueView(); //= new NavigationPage(new MainPage());
+            AssemblyContext.Initialise();
+            MainPage = new DialogueView();
         }
 
         protected override void OnStart()
