@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using Prominence.Model;
 using Prominence.Resources.DialogueData;
+using Prominence.Controllers;
+using Prominence.Model.Constants;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {

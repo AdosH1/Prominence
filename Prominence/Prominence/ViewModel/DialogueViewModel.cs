@@ -13,19 +13,41 @@ using Prominence.View;
 using Xamarin.Forms;
 using Utilities;
 using Prominence.Controllers;
+using System.Runtime.CompilerServices;
+using Prominence.Model.Constants;
 
 namespace Prominence.ViewModel
 {
     public class DialogueViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
+        private ImageSource _background { get; set; }
+        public ImageSource Background 
+        { 
+            get
+            {
+                return _background;
+            }
+            set
+            {
+                _background = value;
+                NotifyPropertyChanged("Background");
+            }
+        }
 
         public DialogueViewModel()
         {
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
+
+            GameController.ViewModel = this;
+            GameController.ChangeBackground(SequoiaConstants.Black);
             GameController.Player = new PlayerModel("Ados");
 
             var seqFilm = new SequoiaFilm();
@@ -130,6 +152,11 @@ namespace Prominence.ViewModel
                     Buttons.Add(btn);
                 }
             }
+        }
+
+        public void ChangeBackground(ImageSource source)
+        {
+            Background = source;
         }
     }
 }

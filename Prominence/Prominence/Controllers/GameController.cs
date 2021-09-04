@@ -3,16 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Prominence.ViewModel;
+using Prominence.Contexts;
+using Prominence.Model.Constants;
 
 namespace Prominence.Controllers
 {
-    public static class GameController
+    public class GameController
     {
         public static IFilmModel CurrentFilm;
         public static IActModel CurrentAct;
         public static ISceneModel CurrentScene;
         public static FrameModel CurrentFrame;
         public static PlayerModel Player;
+        public static DialogueViewModel ViewModel;
 
         public static FrameModel Traverse(LocationModel location)
         {
@@ -140,6 +144,12 @@ namespace Prominence.Controllers
 
             if (CurrentAct.OnEnter != null)
                 CurrentAct.OnEnter.Invoke();
+        }
+
+        public static void ChangeBackground(string background)
+        {
+            var bg = AssemblyContext.GetImageByName(background);
+            ViewModel.ChangeBackground(bg);
         }
 
     }

@@ -63,6 +63,16 @@ namespace Prominence.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] Icon {
+            get {
+                object obj = ResourceManager.GetObject("Icon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] Sequoia_Battery {
             get {
                 object obj = ResourceManager.GetObject("Sequoia.Battery", resourceCulture);
@@ -286,16 +296,6 @@ namespace Prominence.Properties {
         internal static byte[] Sequoia_TJunction {
             get {
                 object obj = ResourceManager.GetObject("Sequoia.TJunction", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] test_icon {
-            get {
-                object obj = ResourceManager.GetObject("test_icon", resourceCulture);
                 return ((byte[])(obj));
             }
         }

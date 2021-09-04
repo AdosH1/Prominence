@@ -4,6 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
 using Xamarin.Forms;
+using Prominence.Contexts;
+using Prominence.Model.Constants;
+using Prominence.Controllers;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
@@ -74,7 +77,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
             },
                new List<ButtonModel>()
                {
-                    new ButtonModel("Continue.", DroneLeaves)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.incubation); GC?.SetTextBackgroundVisiblity(true);}*/
+                    new ButtonModel("Continue.", DroneLeaves, action: new Func<Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Incubation); }))
                }
             );
         }
@@ -90,7 +93,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                     new DialogueModel("The drilling continues.") },
                     new List<ButtonModel>()
                 {
-                new ButtonModel("Continue.", DroneLeaves)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.incubation); GC?.SetTextBackgroundVisiblity(true);}*/
+                new ButtonModel("Continue.", DroneLeaves, action: new Func<Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Incubation); }))
             }
             );
         }
@@ -109,7 +112,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Inspect the room.", InspectIncubationRoom),
-                    new ButtonModel("Head into the hallway.", IncubationHallway)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.corridor)}*/
+                    new ButtonModel("Head into the hallway.", IncubationHallway, action: new Func<Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
                 }
             );
         }
@@ -127,7 +130,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                  },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue to the hallway.", IncubationHallway)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.corridor)}*/
+                    new ButtonModel("Continue to the hallway.", IncubationHallway, action: new Func<Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
                 }
             );
         }
