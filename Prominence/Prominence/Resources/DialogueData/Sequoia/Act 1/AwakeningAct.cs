@@ -16,11 +16,17 @@ namespace Prominence.Resources.DialogueData.Sequoia
             Film = film;
             Player = player;
             var incubationScene = new IncubationScene();
+            var droneRoomScene = new DroneRoomScene();
+
+            droneRoomScene.Initialise(Film, this.Name, player);
             incubationScene.Initialise(Film, this.Name, player);
+            
+
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
-                { incubationScene.Name, incubationScene }
+                { incubationScene.Name, incubationScene },
+                { droneRoomScene.Name, droneRoomScene }
             };
 
             OnEnter = onEnter;

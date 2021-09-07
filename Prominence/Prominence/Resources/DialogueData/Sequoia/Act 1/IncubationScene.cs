@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Prominence.Contexts;
 using Prominence.Model.Constants;
 using Prominence.Controllers;
+using Prominence.Resources.DialogueData.Sequoia;
 
 namespace Prominence.Resources.DialogueData.Sequoia
 {
@@ -74,7 +75,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                Name,
                new List<DialogueModel>() {
                     new DialogueModel("The drilling continues.")
-            },
+               },
                new List<ButtonModel>()
                {
                     new ButtonModel("Continue.", DroneLeaves, action: new Func<Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Incubation); }))
@@ -148,7 +149,7 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    //new ButtonModel("Follow the drone.", 200),
+                    new ButtonModel("Follow the drone.", DroneRoomScene.Entrance),
                     //new ButtonModel("Go towards the red light.", 300)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.computerroom)}*/
                 }
             );

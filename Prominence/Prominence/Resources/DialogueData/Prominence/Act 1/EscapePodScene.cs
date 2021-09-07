@@ -129,8 +129,8 @@ namespace Prominence.Resources.DialogueData.Prominence
                 Scene,
                 Name,
                 new List<DialogueModel>() {
-                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{ListenToMessage.Location}"); })),
-                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited($"{LookAround.Location}"); })),
+                    new DialogueModel("The two figures suddenly crash onto your pod, cracking a hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited(ListenToMessage.CurrentLocation); })),
+                    new DialogueModel("Suddenly one of them is shoved onto your pod, cracking the hole through the glass.", condition: new Func<bool>(() => { return Player.HasVisited(LookAround.CurrentLocation); })),
                     new DialogueModel("One is in a lightly armored space suit, with a large scaley being looming over, pinning them to the pod."),
                     new DialogueModel("You manage to take a deep breath."),
                 },

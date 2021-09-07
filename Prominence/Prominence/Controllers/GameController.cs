@@ -114,6 +114,7 @@ namespace Prominence.Controllers
         public static void EnterFrame(FrameModel frame)
         {
             CurrentFrame = frame;
+            Player.AddVisited(frame.CurrentLocation);
         }
 
         public static void EnterScene(ISceneModel scene)
