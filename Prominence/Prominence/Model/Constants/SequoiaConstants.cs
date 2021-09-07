@@ -6,6 +6,10 @@ namespace Prominence.Model.Constants
 {
     public static class SequoiaConstants
     {
+        // Items
+        public static readonly string DroneAccessCard = "Sequoia.DroneAccessCard";
+        public static readonly string SpareBattery = "Sequoia.SpareBattery";
+
         // Icons
         public static readonly string Battery = "Sequoia.Battery";
         public static readonly string Gear = "Sequoia.Gear";

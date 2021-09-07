@@ -81,6 +81,10 @@ namespace Prominence.Model
             }
             set { _location = value; }
         }
+        public string CurrentLocation
+        {
+            get { return Location.Location; }
+        }
 
         /// <summary>
         /// Only use this constructor for connecting frames together (eg. construct with Name only)
