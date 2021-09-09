@@ -67,6 +67,7 @@ namespace Prominence.Model
         public string Act { get; set; }
         public string Scene { get; set; }
         public string Name { get; set; }
+        public string BackgroundImage { get; set; }
         public List<DialogueModel> Dialogue { get; set; }
         public List<ButtonModel> Buttons { get; set; }
 
@@ -91,12 +92,17 @@ namespace Prominence.Model
         /// </summary>
         public FrameModel() { }
 
-        public FrameModel(string film, string act, string scene, string name, List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        public FrameModel(string film, string act, string scene, string name, string backgroundImage)
         {
             Film = film;
             Act = act;
             Scene = scene;
             Name = name;
+            BackgroundImage = backgroundImage;
+        }
+
+        public void Initialise(List<DialogueModel> dialogue, List<ButtonModel> buttons)
+        {
             Dialogue = dialogue;
             Buttons = buttons;
         }
@@ -135,16 +141,16 @@ namespace Prominence.Model
 
     public class SceneModel : ISceneModel
     {
-        public string Film { get; set; }
-        public string Act { get; set; }
-        public string Name { get; set; }
-        public PlayerModel Player { get; set; }
+        public static string Film { get; set; }
+        public static string Act { get; set; }
+        public static string Scene { get; set; }
+        public static PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
         public Action OnExit { get; set; }
         public Dictionary<string, FrameModel> Frames { get; set; }
         public LocationModel Location()
         {
-            return new LocationModel(Film, Act, this.Name);
+            return new LocationModel(Film, Act, Scene);
         }
     }
 
@@ -179,6 +185,7 @@ namespace Prominence.Model
         public string Act { get; set; }
         public string Scene { get; set; }
         public string Name { get; set; }
+        public string BackgroundImage { get; set; }
         public List<DialogueModel> Dialogue { get; set; }
         public List<ButtonModel> Buttons { get; set; }
         public LocationModel Location { get; }
@@ -189,10 +196,10 @@ namespace Prominence.Model
     /// </summary>
     public interface ISceneModel
     {
-        public string Film { get; set; }
-        public string Act { get; set; }
-        public string Name { get; }
-        public PlayerModel Player { get; set; }
+        public static string Film { get; set; }
+        public static string Act { get; set; }
+        public static string Name { get; }
+        public static PlayerModel Player { get; set; }
         public Action OnEnter { get; } // Eg. change the background of the screen
         public Action OnExit { get; } // If you do any funky, non-standard things here, undo them before leaving 
         public Dictionary<string, FrameModel> Frames { get; set; } // How do we exit a scene? How do we connect these buttons to the next screen?

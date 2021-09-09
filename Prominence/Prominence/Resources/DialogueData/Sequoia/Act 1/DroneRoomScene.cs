@@ -9,36 +9,40 @@ namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class DroneRoomScene : SceneModel
     {
-        public string Name { get { return "DroneRoom"; } }
-        public static FrameModel Entrance = new FrameModel { Name = "Entrance" };
-        public FrameModel DroneRoom = new FrameModel { Name = "DroneRoom" };
-        public FrameModel InspectTheRoom = new FrameModel { Name = "InspectTheRoom" };
-        public FrameModel InspectTheDrone1 = new FrameModel { Name = "InspectTheDrone1" };
-        public FrameModel InspectTheDrone2 = new FrameModel { Name = "InspectTheDrone2" };
-        public FrameModel InspectTheDrone3 = new FrameModel { Name = "InspectTheDrone3" };
-        public FrameModel InspectTheTable = new FrameModel { Name = "InspectTheTable" };
-        public FrameModel SmashDrawer = new FrameModel { Name = "SmashDrawer" };
-        public FrameModel LockpickDrawer = new FrameModel { Name = "LockpickDrawer" };
-        public FrameModel GrabBattery = new FrameModel { Name = "GrabBattery" };
-        public FrameModel TakeTheChip = new FrameModel { Name = "TakeTheChip" };
+        public static string Film;
+        public static string Act;
+        public static string Scene = "DroneRoom";
+        public static PlayerModel Player;
 
-        public void Initialise(string film, string act, PlayerModel player)
+        public static FrameModel Entrance;
+        public static FrameModel DroneRoom;
+        public static FrameModel InspectTheRoom;
+        public static FrameModel InspectTheDrone1;
+        public static FrameModel InspectTheDrone2;
+        public static FrameModel InspectTheDrone3;
+        public static FrameModel InspectTheTable;
+        public static FrameModel SmashDrawer;
+        public static FrameModel LockpickDrawer;
+        public static FrameModel GrabBattery;
+        public static FrameModel TakeTheChip;
+
+        public DroneRoomScene(string film, string act, PlayerModel player)
         {
             Film = film;
             Act = act;
             Player = player;
 
-            Entrance = CreateEntrance(Film, Act, this.Name, player, Entrance.Name);
-            DroneRoom = CreateDroneRoom(Film, Act, this.Name, player, DroneRoom.Name);
-            InspectTheRoom = CreateInspectTheRoom(Film, Act, this.Name, player, InspectTheRoom.Name);
-            InspectTheDrone1 = CreateInspectTheDrone1(Film, Act, this.Name, player, InspectTheDrone1.Name);
-            InspectTheDrone2 = CreateInspectTheDrone2(Film, Act, this.Name, player, InspectTheDrone2.Name);
-            InspectTheDrone3 = CreateInspectTheDrone3(Film, Act, this.Name, player, InspectTheDrone3.Name);
-            InspectTheTable = CreateInspectTheTable(Film, Act, this.Name, player, InspectTheTable.Name);
-            SmashDrawer = CreateSmashDrawer(Film, Act, this.Name, player, SmashDrawer.Name);
-            LockpickDrawer = CreateLockpickDrawer(Film, Act, this.Name, player, LockpickDrawer.Name);
-            GrabBattery = CreateGrabBattery(Film, Act, this.Name, player, GrabBattery.Name);
-            TakeTheChip = CreateTakeTheChip(Film, Act, this.Name, player, TakeTheChip.Name);
+            Entrance = new FrameModel(Film, Act, Scene, "Entrance", SequoiaConstants.Corridor);
+            DroneRoom = new FrameModel(Film, Act, Scene, "DroneRoom", SequoiaConstants.DroneRoom);
+            InspectTheRoom = new FrameModel(Film, Act, Scene, "InspectTheRoom", SequoiaConstants.DroneRoom);
+            InspectTheDrone1 = new FrameModel(Film, Act, Scene, "InspectTheDrone1", SequoiaConstants.Terminal);
+            InspectTheDrone2 = new FrameModel(Film, Act, Scene, "InspectTheDrone2", SequoiaConstants.Terminal);
+            InspectTheDrone3 = new FrameModel(Film, Act, Scene, "InspectTheDrone3", SequoiaConstants.Terminal);
+            InspectTheTable = new FrameModel(Film, Act, Scene, "InspectTheTable", SequoiaConstants.DroneRoom);
+            SmashDrawer = new FrameModel(Film, Act, Scene, "SmashDrawer", SequoiaConstants.DroneRoom);
+            LockpickDrawer = new FrameModel(Film, Act, Scene, "LockpickDrawer", SequoiaConstants.DroneRoom);
+            GrabBattery = new FrameModel(Film, Act, Scene, "GrabBattery", SequoiaConstants.DroneRoom);
+            TakeTheChip = new FrameModel(Film, Act, Scene, "TakeTheChip", SequoiaConstants.Terminal);
 
             Frames = new Dictionary<string, FrameModel>() {
                 {Entrance.Name, Entrance},
@@ -55,13 +59,24 @@ namespace Prominence.Resources.DialogueData.Sequoia
             };
         }
 
-        public FrameModel CreateEntrance(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void Initialise()
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
+            InitialiseEntrance(Entrance);
+            InitialiseDroneRoom(DroneRoom);
+            InitialiseInspectTheRoom(InspectTheRoom);
+            InitialiseInspectTheDrone1(InspectTheDrone1);
+            InitialiseInspectTheDrone2(InspectTheDrone2);
+            InitialiseInspectTheDrone3(InspectTheDrone3);
+            InitialiseInspectTheTable(InspectTheTable);
+            InitialiseSmashDrawer(SmashDrawer);
+            InitialiseLockpickDrawer(LockpickDrawer);
+            InitialiseGrabBattery(GrabBattery);
+            InitialiseTakeTheChip(TakeTheChip);
+        }
+
+        public static void InitialiseEntrance(FrameModel frame)
+        {
+            frame.Initialise(
                 new List<DialogueModel>() {  
                     // Visit first
                     new DialogueModel("The drone silently hovers further down the hallway.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
@@ -77,29 +92,21 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Enter Maintenance Room.", DroneRoom, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.DroneRoom); })),
-                    new ButtonModel("Go towards the red light.", DroneRoom, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.ComputerRoom); })),//300, fun(): Boolean { return !GameState.HasVisited.contains(300)}, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.computerroom)}),
+                    new ButtonModel("Enter Maintenance Room.", DroneRoom),
+                    new ButtonModel("Go towards the red light.", DroneRoom),//300, fun(): Boolean { return !GameState.HasVisited.contains(300)}, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.computerroom)}),
                     //new ButtonModel("Head to the office.", DroneRoom, 
                     //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.ComputerRoom); }) ),//fun(): Boolean {return GameState.HasVisited.contains(300)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.computerroom)}),
-                    new ButtonModel("Continue down the hallway.", DroneRoom, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.ResearchDoor); }) ), //400, fun(): Boolean {return !GameState.HasVisited.contains(400)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.researchdoor)}),
+                    new ButtonModel("Continue down the hallway.", DroneRoom), //400, fun(): Boolean {return !GameState.HasVisited.contains(400)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.researchdoor)}),
                     //new ButtonModel("Head to R&D Exit.", DroneRoom, 
                     //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.ComputerRoom); }))//400, fun(): Boolean {return GameState.HasVisited.contains(400)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.researchdoor)})
-                }
-            );
+                });
         }
 
 
         // ========= Drone Room ========= //
-        public FrameModel CreateDroneRoom(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseDroneRoom(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
+            frame.Initialise(
                 new List<DialogueModel>()
                 {
                     new DialogueModel("Many drones line the sides of a relatively small room, a thick layer of dust covers most of the them. They don't seem to have moved in a very long time."),
@@ -108,22 +115,16 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Survey the room.", InspectTheRoom),
-                    new ButtonModel("Inspect the drone.", InspectTheDrone1,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Terminal); })),
-                    new ButtonModel("Exit the room.", Entrance,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
+                    new ButtonModel("Inspect the drone.", InspectTheDrone1),
+                    new ButtonModel("Exit the room.", Entrance)
                 });
         }
 
         // ========= Inspect the Room ========= //
-        public FrameModel CreateInspectTheRoom(string Film, string Act, string Scene, PlayerModel Player, string Name)
-        { 
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+        public static void InitialiseInspectTheRoom(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("None of the drones in the room have power, even though they're docked in their charging stations."),
                     new DialogueModel("In the corner of the room there is a table covered in miscellaneous tools and schematics.")
@@ -131,22 +132,15 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Investigate the table.", InspectTheTable),
-                    new ButtonModel("Inspect the drone.", InspectTheDrone1, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { if (Player.HasVisited(InspectTheDrone1.CurrentLocation)) GameController.ChangeBackground(SequoiaConstants.Terminal); }) ),//buttonActions = {if (!GameState.HasVisited.contains(203)) GameState.GC?.ChangeBackground(R.drawable.terminal)}),
-                    new ButtonModel("Exit the room.", Entrance, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
-                }
-            );
+                    new ButtonModel("Inspect the drone.", InspectTheDrone1),//buttonActions = {if (!GameState.HasVisited.contains(203)) GameState.GC?.ChangeBackground(R.drawable.terminal)}),
+                    new ButtonModel("Exit the room.", Entrance)
+                });
         }
 
         // ========= Inspect the Drone ========= //
-        public FrameModel CreateInspectTheDrone1(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseInspectTheDrone1(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
+            frame.Initialise(
                 new List<DialogueModel>() {  
                     // First time visit
                     new DialogueModel("The drone has an interface on its back.", condition: new Func<bool>(() => { return !Player.HasVisited(InspectTheDrone1.CurrentLocation); })),
@@ -159,74 +153,56 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Take the chip.", TakeTheChip, 
+                    new ButtonModel("Take the chip.", TakeTheChip,
                         condition: new Func<bool>(() => { return Player.HasItem(SequoiaConstants.DroneAccessCard) && Player.HasVisited(InspectTheDrone1.CurrentLocation); })), //fun(): Unit { GameState.Inventory.add("Drone Id Card"); GC?.ShowItemNotification("Drone Access Card"); }),
-                    new ButtonModel("Read the terminal.", InspectTheDrone2, 
+                    new ButtonModel("Read the terminal.", InspectTheDrone2,
                         condition: new Func<bool>(() => { return !Player.HasVisited(InspectTheDrone1.CurrentLocation); })),
-                    new ButtonModel("Inspect the room.", InspectTheRoom, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.DroneRoom); })),
-                    new ButtonModel("Exit the room.", Entrance, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
-                }
-            );
+                    new ButtonModel("Inspect the room.", InspectTheRoom),
+                    new ButtonModel("Exit the room.", Entrance)
+                });
         }
 
         // ========= Inspect the Drone 2 ========= //
-        public FrameModel CreateInspectTheDrone2(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseInspectTheDrone2(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("  > Override successful."),
                     new DialogueModel("  > Running android initialization protocol... complete."),
                     new DialogueModel("  > Warning: Device is at critical battery levels."),
                     new DialogueModel("  > Returning to station... complete."),
                     new DialogueModel("  > Error: Device is not charging - please check your output port to begin charging."),
-                    new DialogueModel("  > Shutting down...") 
+                    new DialogueModel("  > Shutting down...")
                 },
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Continue.", InspectTheDrone3)
-                }
-            );
+                });
         }
 
         // ========= Inspect the Drone 3 ========= //
-        public FrameModel CreateInspectTheDrone3(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseInspectTheDrone3(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() {
-                new DialogueModel("The screen fades to black and a chip ejects from underneath the terminal.") },
+            frame.Initialise(
+                new List<DialogueModel>()
+                {
+                    new DialogueModel("The screen fades to black and a chip ejects from underneath the terminal.")
+                },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Take the chip.", TakeTheChip, 
-                        condition: new Func<bool>(() => { return !Player.HasItem(SequoiaConstants.DroneAccessCard); }), 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(SequoiaConstants.DroneAccessCard); })), //GC?.ShowItemNotification("Drone Access Card");}
-                    new ButtonModel("Inspect the room.", InspectTheRoom, 
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.DroneRoom); })),
-                    new ButtonModel("Exit the room.", Entrance,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor); }))
-                }
-            );
+                    new ButtonModel("Take the chip.", TakeTheChip,
+                        condition: new Func<bool>(() => { return !Player.HasItem(SequoiaConstants.DroneAccessCard); })), //GC?.ShowItemNotification("Drone Access Card");}
+                    new ButtonModel("Inspect the room.", InspectTheRoom),
+                    new ButtonModel("Exit the room.", Entrance)
+                });
         }
 
         // ========= Inspect the Table ========= //
-        public FrameModel CreateInspectTheTable(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseInspectTheTable(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("The table contains various tools like screw drivers, tweezers and clamps."),
                     new DialogueModel("There are schematics sprawled across the desk for several types of drones, along with charts on how to assemble them."),
@@ -242,47 +218,37 @@ namespace Prominence.Resources.DialogueData.Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Smash drawer open.", SmashDrawer,
-                        condition: new Func<bool>(() => { return !Player.HasVisited(SmashDrawer.CurrentLocation) && !Player.HasVisited(LockpickDrawer.CurrentLocation); })), 
+                        condition: new Func<bool>(() => { return !Player.HasVisited(SmashDrawer.CurrentLocation) && !Player.HasVisited(LockpickDrawer.CurrentLocation); })),
                     new ButtonModel("Attempt lockpick (with tweezers).", LockpickDrawer,
                         condition: new Func<bool>(() => { return !Player.HasVisited(SmashDrawer.CurrentLocation) && !Player.HasVisited(LockpickDrawer.CurrentLocation); })),
                     new ButtonModel("Take the spare battery.", GrabBattery,
-                        condition: new Func<bool>(() => { return !Player.HasVisited(LockpickDrawer.CurrentLocation); }),
+                        condition: new Func<bool>(() => { return Player.HasVisited(LockpickDrawer.CurrentLocation) && !Player.HasItem(SequoiaConstants.SpareBattery); }),
                         action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(SequoiaConstants.SpareBattery); })),// GC?.ShowItemNotification("Spare Battery"); }),
                     new ButtonModel("Return.", DroneRoom)
-                }
-            );
+                });
         }
 
         // ========= Smash Drawer ========= //
-        public FrameModel CreateSmashDrawer(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseSmashDrawer(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("You perform a downward stomp, angled into the lock of the drawer."),
                     new DialogueModel("With a loud snap, the whole thing caves in and its contents shatter on the floor."),
-                    new DialogueModel("It appears to have been holding a battery cell, its fluids now splattered across the floor.") 
+                    new DialogueModel("It appears to have been holding a battery cell, its fluids now splattered across the floor.")
                 },
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Return.", DroneRoom)
-                }
-            );
+                });
         }
 
         // ========= Lockpick Drawer ========= //
-        public FrameModel CreateLockpickDrawer(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseLockpickDrawer(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("You bend a pair of tweezers so that it fits within the lock."),
                     new DialogueModel("After a while of fiddling with the lock mechanism, you hear a distinct click. The drawer is now unlocked."),
@@ -293,55 +259,40 @@ namespace Prominence.Resources.DialogueData.Sequoia
                     new ButtonModel("Take the spare battery.", GrabBattery,
                         action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(SequoiaConstants.SpareBattery); })),//GC?.ShowItemNotification("Spare Battery");}),
                     new ButtonModel("Return.", DroneRoom)
-                }
-            );
+                });
         }
 
         // ========= Grab Battery ========= //
-        public FrameModel CreateGrabBattery(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseGrabBattery(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("The battery is hefty. A label on the side reads: Vespenergy - Power your way through the stars!"),
                     new DialogueModel("Vespenergy - Power your way through the stars!")
                  },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Inspect the drone.", InspectTheDrone1,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Terminal);})),
-                    new ButtonModel("Exit the room.", Entrance,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor);}))
-                }
-            );
+                    new ButtonModel("Inspect the drone.", InspectTheDrone1),
+                    new ButtonModel("Exit the room.", Entrance)
+                });
         }
 
         // ========= Take the Chip ========= //
-        public FrameModel CreateTakeTheChip(string Film, string Act, string Scene, PlayerModel Player, string Name)
+        public static void InitialiseTakeTheChip(FrameModel frame)
         {
-            return new FrameModel(
-                Film,
-                Act,
-                Scene,
-                Name,
-                new List<DialogueModel>() 
+            frame.Initialise(
+                new List<DialogueModel>()
                 {
                     new DialogueModel("You pull the chip out. On the back, the chip reads:"),
                     new DialogueModel("    Drone Identification Card"),
-                    new DialogueModel("    N1L-159") 
+                    new DialogueModel("    N1L-159")
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Inspect the room.", InspectTheRoom,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.DroneRoom);})),
-                    new ButtonModel("Exit the room.", Entrance,
-                        action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(SequoiaConstants.Corridor);})),
-                }
-            );
+                    new ButtonModel("Inspect the room.", InspectTheRoom),
+                    new ButtonModel("Exit the room.", Entrance),
+                });
         }
 
     }

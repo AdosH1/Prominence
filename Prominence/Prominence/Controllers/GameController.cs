@@ -114,7 +114,6 @@ namespace Prominence.Controllers
         public static void EnterFrame(FrameModel frame)
         {
             CurrentFrame = frame;
-            Player.AddVisited(frame.CurrentLocation);
         }
 
         public static void EnterScene(ISceneModel scene)
@@ -151,6 +150,11 @@ namespace Prominence.Controllers
         {
             var bg = AssemblyContext.GetImageByName(background);
             ViewModel.ChangeBackground(bg);
+        }
+
+        public static void Visited(FrameModel frame)
+        {
+            Player.AddVisited(frame.CurrentLocation);
         }
 
     }

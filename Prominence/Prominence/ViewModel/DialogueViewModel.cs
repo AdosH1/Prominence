@@ -7,7 +7,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
-using Prominence.Resources.DialogueData.Prominence;
+//using Prominence.Resources.DialogueData.Prominence;
 using Prominence.Resources.DialogueData.Sequoia;
 using Prominence.View;
 using Xamarin.Forms;
@@ -27,6 +27,7 @@ namespace Prominence.ViewModel
         }
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
+        private string CurrentBackgroundImage { get; set; }
         private ImageSource _background { get; set; }
         public ImageSource Background 
         { 
@@ -47,7 +48,7 @@ namespace Prominence.ViewModel
             Buttons = new ObservableCollection<Button>();
 
             GameController.ViewModel = this;
-            GameController.ChangeBackground(SequoiaConstants.Black);
+            //GameController.ChangeBackground(SequoiaConstants.Black);
             GameController.Player = new PlayerModel("Ados");
 
             var seqFilm = new SequoiaFilm();
@@ -113,6 +114,7 @@ namespace Prominence.ViewModel
         public async void LoadFrame(FrameModel frame)
         {
             ClearScreen();
+            CheckBackground(frame.BackgroundImage);
 
             // Load dialogue
             foreach (var dialogue in frame.Dialogue)
@@ -152,6 +154,16 @@ namespace Prominence.ViewModel
                     Buttons.Add(btn);
                 }
             }
+
+            // Set player visited
+            // I'd love to take this logic out - but visited must be done after frame is loaded, otherwise conditional dialogue logic does not work 
+            GameController.Visited(frame);
+        }
+
+        public void CheckBackground(string backgroundImage)
+        {
+            if (CurrentBackgroundImage != backgroundImage)
+                GameController.ChangeBackground(backgroundImage);
         }
 
         public void ChangeBackground(ImageSource source)

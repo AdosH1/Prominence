@@ -8,27 +8,29 @@ namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class AwakeningAct : ActModel
     {
-        public string Name { get { return "Awakening"; } }
-        public AwakeningAct() { }
-
-        public void Initialise(string film, PlayerModel player, Action onEnter = null, Action onExit = null)
+        public static readonly string Name = "Awakening";// { get { return "Awakening"; } }
+        public static IncubationScene IncubationScene;
+        public static DroneRoomScene DroneRoomScene;
+        public AwakeningAct(string film, PlayerModel player) 
         {
             Film = film;
             Player = player;
-            var incubationScene = new IncubationScene();
-            var droneRoomScene = new DroneRoomScene();
 
-            droneRoomScene.Initialise(Film, this.Name, player);
-            incubationScene.Initialise(Film, this.Name, player);
-            
-
+            IncubationScene = new IncubationScene(film, Name, player);
+            DroneRoomScene = new DroneRoomScene(film, Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
-                { incubationScene.Name, incubationScene },
-                { droneRoomScene.Name, droneRoomScene }
+                { IncubationScene.Scene, IncubationScene },
+                { DroneRoomScene.Scene, DroneRoomScene }
             };
+        }
 
+        public void Initialise( Action onEnter = null, Action onExit = null)
+        {
+            IncubationScene.Initialise();
+            DroneRoomScene.Initialise();
+            
             OnEnter = onEnter;
             OnExit = onExit;
         }
