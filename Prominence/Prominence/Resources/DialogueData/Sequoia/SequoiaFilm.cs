@@ -10,14 +10,14 @@ namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class SequoiaFilm : FilmModel
     {
-        public string Name { get { return "Sequoia"; } }
+        public string Name = "Sequoia";
         public SequoiaFilm() { }
 
         public void Initialise(PlayerModel player)
         {
             Player = player;
-            var awakeningAct = new AwakeningAct();
-            awakeningAct.Initialise(this.Name, player);
+            var awakeningAct = new AwakeningAct(this.Name, player);
+            awakeningAct.Initialise();
 
             Acts = new Dictionary<string, IActModel>()
             {
