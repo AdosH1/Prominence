@@ -10,18 +10,18 @@ namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class SequoiaFilm : FilmModel
     {
-        public string Name = "Sequoia";
+        public static readonly string Name = "Sequoia";
         public SequoiaFilm() { }
 
         public void Initialise(PlayerModel player)
         {
             Player = player;
-            var awakeningAct = new AwakeningAct(this.Name, player);
+            var awakeningAct = new AwakeningAct(Name, player);
             awakeningAct.Initialise();
 
             Acts = new Dictionary<string, IActModel>()
             {
-                { awakeningAct.Name, awakeningAct }
+                { AwakeningAct.Name, awakeningAct }
             };
         }
     }

@@ -8,9 +8,9 @@ namespace Prominence.Resources.DialogueData.Sequoia
 {
     public class AwakeningAct : ActModel
     {
-        public string Name = "Awakening";// { get { return "Awakening"; } }
-        public IncubationScene IncubationScene;
-        public DroneRoomScene DroneRoomScene;
+        public static readonly string Name = "Awakening";// { get { return "Awakening"; } }
+        public static IncubationScene IncubationScene;
+        public static DroneRoomScene DroneRoomScene;
         public AwakeningAct(string film, PlayerModel player) 
         {
             Film = film;
