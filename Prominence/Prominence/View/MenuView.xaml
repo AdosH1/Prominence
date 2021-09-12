@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Prominence.ViewModel"
+             x:Class="Prominence.View.MenuView"
+             BackgroundImageSource="{Binding Background}">
+    <ContentPage.BindingContext>
+        <local:MenuViewModel/>
+    </ContentPage.BindingContext>
+  <ContentPage.Content>
+        <Grid x:Name="ContextGrid" IsVisible="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.05*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.05*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ImageButton x:Name="MenuButton"
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Source="{Binding MenuButtonImage}"
+                        Clicked="ReturnFromMenuButton" />
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                <StackLayout>
+                    <CollectionView Grid.Row="1" Grid.Column="1" 
+                        x:Name="AchievementsCollection"
+                        ItemsSource="{Binding Achievements}" 
+                        BackgroundColor="Transparent" 
+                        VerticalOptions="End" 
+                        VerticalScrollBarVisibility="Always"
+                        ItemsUpdatingScrollMode="KeepLastItemInView">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <Label
+                                        Margin="5"
+                                        Text="{Binding Text}" 
+                                        FontSize="Medium" 
+                                        HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
+                                        TextColor="{Binding TextColor}" 
+                                        BackgroundColor="Transparent"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
