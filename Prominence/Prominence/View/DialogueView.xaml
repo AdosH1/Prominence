@@ -14,9 +14,10 @@
         
         <Grid x:Name="DialogueGrid" IsVisible="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="1.85*"/>
+                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.05*"/>
@@ -25,12 +26,18 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.2*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0"
+                <ImageButton x:Name="MenuButton"
+                        Grid.Column="0"
+                        BackgroundColor="Transparent"
+                        Source="{Binding MenuButtonImage}"
+                        Clicked="LaunchMenuButton" />
+                <Button x:Name="LaunchAdButton"
+                        Grid.Column="1"
                         Clicked="LaunchInterstitialAd" Text="Ad-Test" />
             </Grid>
 
@@ -56,7 +63,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <CollectionView Grid.Row="2" Grid.Column="1"
+            <CollectionView Grid.Row="3" Grid.Column="1"
                     ItemsSource="{Binding Buttons}" BackgroundColor="Transparent">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>

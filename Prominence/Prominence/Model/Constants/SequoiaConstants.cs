@@ -37,5 +37,16 @@ namespace Prominence.Model.Constants
         public static readonly string StorageRoom = "Sequoia.StorageRoom";
         public static readonly string Terminal = "Sequoia.Terminal";
         public static readonly string TJunction = "Sequoia.TJunction";
+
+        // Achievements
+        public static readonly string FullyCharged = "FullyCharged";
+        public static readonly string Merciful = "Merciful";
+        public static readonly string Persistent = "Persistent";
+        public static readonly string Firepower = "Firepower";
+        public static readonly string PerfectEscape = "PerfectEscape";
+        public static readonly string VespenergyAlwaysDelivers = "VespenergyAlwaysDelivers";
+
+
+
     }
 }

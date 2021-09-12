@@ -15,30 +15,33 @@ using Utilities;
 using Prominence.Controllers;
 using System.Runtime.CompilerServices;
 using Prominence.Model.Constants;
+using Prominence.Contexts;
 
 namespace Prominence.ViewModel
 {
     public class DialogueViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
         public ObservableCollection<Label> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
         private ImageSource _background { get; set; }
         public ImageSource Background 
         { 
-            get
-            {
-                return _background;
-            }
+            get => _background;
             set
             {
                 _background = value;
                 NotifyPropertyChanged("Background");
+            }
+        }
+        private ImageSource _menuButtonImage { get; set; }
+        public ImageSource MenuButtonImage
+        {
+            get => _menuButtonImage;
+            set
+            {
+                _menuButtonImage = value;
+                NotifyPropertyChanged("MenuButtonImage");
             }
         }
 
@@ -47,9 +50,15 @@ namespace Prominence.ViewModel
             Log = new ObservableCollection<Label>();
             Buttons = new ObservableCollection<Button>();
 
-            GameController.ViewModel = this;
-            //GameController.ChangeBackground(SequoiaConstants.Black);
-            GameController.Player = new PlayerModel("Ados");
+            MenuButtonImage = AssemblyContext.GetImageByName(SequoiaConstants.Gear);
+
+            GameController.DiagloueViewModel = this;
+            GameController.User = 
+                new UserModel(
+                    new UserSettingsModel(),
+                    new PlayerModel("Ados"),
+                    new AchievementsModel()
+                    );
 
             var seqFilm = new SequoiaFilm();
             seqFilm.Initialise(GameController.Player);
@@ -61,9 +70,7 @@ namespace Prominence.ViewModel
 
         public void ClearScreen(bool clearAll = false)
         {
-            if (clearAll) {
-                Log.Clear();
-            }
+            if (clearAll) Log.Clear();
             Buttons.Clear();
         }
 
@@ -163,12 +170,18 @@ namespace Prominence.ViewModel
         public void CheckBackground(string backgroundImage)
         {
             if (CurrentBackgroundImage != backgroundImage)
-                GameController.ChangeBackground(backgroundImage);
+                GameController.ChangeDialogueBackground(backgroundImage);
         }
 
         public void ChangeBackground(ImageSource source)
         {
             Background = source;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

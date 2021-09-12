@@ -15,8 +15,10 @@ namespace Prominence.Controllers
         public static IActModel CurrentAct;
         public static ISceneModel CurrentScene;
         public static FrameModel CurrentFrame;
-        public static PlayerModel Player;
-        public static DialogueViewModel ViewModel;
+        public static UserModel User;
+        public static PlayerModel Player { get => User.Player; }
+        public static DialogueViewModel DiagloueViewModel;
+        public static MenuViewModel MenuViewModel;
 
         public static FrameModel Traverse(LocationModel location)
         {
@@ -146,10 +148,16 @@ namespace Prominence.Controllers
                 CurrentAct.OnEnter.Invoke();
         }
 
-        public static void ChangeBackground(string background)
+        public static void ChangeDialogueBackground(string background)
         {
             var bg = AssemblyContext.GetImageByName(background);
-            ViewModel.ChangeBackground(bg);
+            DiagloueViewModel.ChangeBackground(bg);
+        }
+
+        public static void ChangeMenuBackground(string background)
+        {
+            var bg = AssemblyContext.GetImageByName(background);
+            MenuViewModel.ChangeBackground(bg);
         }
 
         public static void Visited(FrameModel frame)

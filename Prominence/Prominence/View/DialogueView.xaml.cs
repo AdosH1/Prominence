@@ -34,5 +34,11 @@ namespace Prominence.View
         {
             await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true);
         }
+
+        private async void LaunchMenuButton(object sender, EventArgs e)
+        {
+            var menuView = new MenuView();
+            await Application.Current.MainPage.Navigation.PushModalAsync(menuView);
+        }
     }
 }
