@@ -9,6 +9,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
+using Sequoia;
 
 namespace Prominence.ViewModel
 {
@@ -42,8 +43,8 @@ namespace Prominence.ViewModel
         public MenuViewModel()
         {
             GameController.MenuViewModel = this;
-            MenuButtonImage = AssemblyContext.GetImageByName(SequoiaConstants.Gear);
-            GameController.ChangeMenuBackground(SequoiaConstants.MenuScreen);
+            MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
+            GameController.ChangeMenuBackground(Constants.MenuScreen);
         }
 
         public void LoadAchievements()

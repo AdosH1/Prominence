@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Sequoia;
 
 namespace Prominence
 {
@@ -16,7 +17,7 @@ namespace Prominence
         {
             InitializeComponent();
 
-            AssemblyContext.Initialise();
+            AssemblyContext.Initialise(Constants.AssemblyName);
             MainPage = new DialogueView();
         }
 

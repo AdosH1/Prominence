@@ -7,8 +7,6 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using Prominence.Model;
-//using Prominence.Resources.DialogueData.Prominence;
-using Prominence.Resources.DialogueData.Sequoia;
 using Prominence.View;
 using Xamarin.Forms;
 using Utilities;
@@ -16,12 +14,14 @@ using Prominence.Controllers;
 using System.Runtime.CompilerServices;
 using Prominence.Model.Constants;
 using Prominence.Contexts;
+using Sequoia;
+using Core.Models;
 
 namespace Prominence.ViewModel
 {
     public class DialogueViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Label> Log { get; set; }
+        public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
         private ImageSource _background { get; set; }
@@ -47,10 +47,10 @@ namespace Prominence.ViewModel
 
         public DialogueViewModel()
         {
-            Log = new ObservableCollection<Label>();
+            Log = new ObservableCollection<DialogueLabel>();
             Buttons = new ObservableCollection<Button>();
 
-            MenuButtonImage = AssemblyContext.GetImageByName(SequoiaConstants.Gear);
+            MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
 
             GameController.DiagloueViewModel = this;
             GameController.User = 
@@ -60,7 +60,7 @@ namespace Prominence.ViewModel
                     new AchievementsModel()
                     );
 
-            var seqFilm = new SequoiaFilm();
+            var seqFilm = new Sequoia.SequoiaFilm();
             seqFilm.Initialise(GameController.Player);
             GameController.CurrentFilm = seqFilm;
 
@@ -74,7 +74,7 @@ namespace Prominence.ViewModel
             Buttons.Clear();
         }
 
-        public async Task<bool> SlowlyRevealText(Label label, string text)
+        public async Task<bool> SlowlyRevealText(DialogueLabel label, string text)
         {
             var len = text.Length;
             var currString = StringFunctions.ScrambleString(text, len);
@@ -97,22 +97,16 @@ namespace Prominence.ViewModel
             return true;
         }
 
+        // TODO: Convert this to a template
         public async void AddButtonClickedText(string text)
         {
-            string breaker = "--------------------------";
-
-            var label1 = new Label();
-            label1.Text = breaker;
+            var label1 = new DialogueLabel("----------------------------", LabelType.Ignore);
             label1.HorizontalTextAlignment = TextAlignment.Center;
             label1.FontSize = 12;
-            label1.TextColor = Color.Black;
+            label1.TextColor = Color.White;
             Log.Add(label1);
 
-            var label2 = new Label();
-            label2.Text = text;
-            label2.HorizontalTextAlignment = TextAlignment.Center;
-            label2.FontSize = 12;
-            label2.TextColor = Color.Red;
+            var label2 = new DialogueLabel(text, LabelType.Button);
             Log.Add(label2);
 
             Log.Add(label1);
@@ -128,11 +122,7 @@ namespace Prominence.ViewModel
             {
                 if (dialogue.Condition())
                 {
-                    var label = new Label();
-                    label.Text = dialogue.Text;
-                    label.TextColor = dialogue.Color;
-                    label.HorizontalTextAlignment = dialogue.TextAlignment;
-
+                    var label = new DialogueLabel(dialogue.Text, LabelType.Dialogue);
                     var result = await SlowlyRevealText(label, dialogue.Text).ConfigureAwait(true);
 
                     await dialogue.Action.Invoke().ConfigureAwait(false); ;

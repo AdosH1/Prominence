@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prominence.Model;
-using Prominence.Resources.DialogueData;
-using Prominence.Controllers;
-using Prominence.Model.Constants;
+using Core.Models;
 
-namespace Prominence.Resources.DialogueData.Sequoia
+namespace Sequoia
 {
     public class SequoiaFilm : FilmModel
     {
