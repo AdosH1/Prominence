@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prominence.Model;
-using Prominence.Resources.DialogueData;
+using Core.Models;
 
-namespace Prominence.Resources.DialogueData.Sequoia
+namespace Sequoia
 {
     public class AwakeningAct : ActModel
     {
         public static readonly string Name = "Awakening";// { get { return "Awakening"; } }
         public static IncubationScene IncubationScene;
         public static DroneRoomScene DroneRoomScene;
-        public AwakeningAct(string film, PlayerModel player) 
+        public AwakeningAct(string film, PlayerModel player)
         {
             Film = film;
             Player = player;
@@ -26,11 +25,11 @@ namespace Prominence.Resources.DialogueData.Sequoia
             };
         }
 
-        public void Initialise( Action onEnter = null, Action onExit = null)
+        public void Initialise(Action onEnter = null, Action onExit = null)
         {
             IncubationScene.Initialise();
             DroneRoomScene.Initialise();
-            
+
             OnEnter = onEnter;
             OnExit = onExit;
         }

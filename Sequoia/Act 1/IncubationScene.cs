@@ -2,14 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Prominence.Model;
-using Xamarin.Forms;
-using Prominence.Contexts;
-using Prominence.Model.Constants;
-using Prominence.Controllers;
-using Prominence.Resources.DialogueData.Sequoia;
+using Core.Models;
 
-namespace Prominence.Resources.DialogueData.Sequoia
+namespace Sequoia
 {
     public class IncubationScene : SceneModel
     {
@@ -32,12 +27,12 @@ namespace Prominence.Resources.DialogueData.Sequoia
             Act = act;
             Player = player;
 
-            Start = new FrameModel(Film, Act, Scene, "Start", SequoiaConstants.Black);
-            Silent = new FrameModel(Film, Act, Scene, "Silent", SequoiaConstants.Black);
-            TalkToDrone = new FrameModel(Film, Act, Scene, "TalkToDrone", SequoiaConstants.Black);
-            DroneLeaves = new FrameModel(Film, Act, Scene, "DroneLeaves", SequoiaConstants.Incubation);
-            InspectIncubationRoom = new FrameModel(Film, Act, Scene, "InspectIncubationRoom", SequoiaConstants.Incubation);
-            IncubationHallway = new FrameModel(Film, Act, Scene, "IncubationHallway", SequoiaConstants.Corridor);
+            Start = new FrameModel(Film, Act, Scene, "Start", Constants.Black);
+            Silent = new FrameModel(Film, Act, Scene, "Silent", Constants.Black);
+            TalkToDrone = new FrameModel(Film, Act, Scene, "TalkToDrone", Constants.Black);
+            DroneLeaves = new FrameModel(Film, Act, Scene, "DroneLeaves", Constants.Incubation);
+            InspectIncubationRoom = new FrameModel(Film, Act, Scene, "InspectIncubationRoom", Constants.Incubation);
+            IncubationHallway = new FrameModel(Film, Act, Scene, "IncubationHallway", Constants.Corridor);
 
             Frames = new Dictionary<string, FrameModel>() {
                 {Start.Name, Start},

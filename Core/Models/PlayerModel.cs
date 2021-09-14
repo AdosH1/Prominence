@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Prominence.Model;
-using Prominence.Model.Interfaces;
 
-namespace Prominence.Model
+namespace Core.Models
 {
     public class PlayerModel
     {

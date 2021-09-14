@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prominence.Model.Constants
+namespace Sequoia
 {
-    public static class SequoiaConstants
+    public static class Constants
     {
+        public static readonly string AssemblyName = "Sequoia";
+
         // Items
         public static readonly string DroneAccessCard = "Sequoia.DroneAccessCard";
         public static readonly string SpareBattery = "Sequoia.SpareBattery";
@@ -45,8 +47,6 @@ namespace Prominence.Model.Constants
         public static readonly string Firepower = "Firepower";
         public static readonly string PerfectEscape = "PerfectEscape";
         public static readonly string VespenergyAlwaysDelivers = "VespenergyAlwaysDelivers";
-
-
 
     }
 }

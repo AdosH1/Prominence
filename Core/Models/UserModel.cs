@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prominence.Model
+namespace Core.Models
 {
     public class UserModel
     {

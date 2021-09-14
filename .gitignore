@@ -1,11 +1,15 @@
 Combat/bin/
 Combat/obj/
+Core/bin/
+Core/obj/
 Prominence/Prominence.Android/bin/
 Prominence/Prominence.Android/obj/
 Prominence/Prominence.iOS/bin/
 Prominence/Prominence.iOS/obj/
 Prominence/Prominence/bin/
 Prominence/Prominence/obj/
+Sequoia/bin/
+Sequoia/obj/
 Utilities/bin/
 Utilities/obj/
 .vs/*

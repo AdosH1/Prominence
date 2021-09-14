@@ -2,46 +2,44 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
-namespace Prominence.Model
+namespace Core.Models
 {
+    public enum LabelType
+    {
+        Dialogue,
+        Button,
+        Ignore
+    }
+
     public class DialogueModel
     {
         public string Text;
+        public LabelType Type = LabelType.Dialogue;
         public Func<bool> Condition;
-        public Color Color;
-        public TextAlignment TextAlignment;
         public Func<Task> Action;
 
         public DialogueModel(
             string text,
             Func<bool> condition = null,
-            Color? color = null,
-            TextAlignment? textAlignment = null,
             Func<Task> action = null)
         {
             if (condition == null)
                 condition = () => { return true; };
-            if (color == null)
-                color = Color.White;
-            if (textAlignment == null)
-                textAlignment = TextAlignment.Start;
             if (action == null)
                 action = new Func<Task>(async () => { return; });
 
             Text = text;
             Condition = condition;
-            Color = (Color)color;
-            TextAlignment = (TextAlignment)textAlignment;
             Action = action;
         }
 
     }
 
-     public class ButtonModel
-     {
+    public class ButtonModel
+    {
         public string Text;
+        public LabelType Type = LabelType.Button;
         public LocationModel Jump;
         public Func<Task> Action;
         public Func<bool> Condition;
@@ -56,7 +54,7 @@ namespace Prominence.Model
             Condition = condition;
             Action = action;
         }
-     }
+    }
 
     /// <summary>
     /// An individual screen, displaying text and loading buttons.
@@ -76,7 +74,7 @@ namespace Prominence.Model
         {
             get
             {
-                if (_location == null) 
+                if (_location == null)
                     _location = new LocationModel(Film, Act, Scene, this.Name);
                 return _location;
             }
