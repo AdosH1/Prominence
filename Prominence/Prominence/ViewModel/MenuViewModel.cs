@@ -10,12 +10,13 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using Xamarin.Forms;
 using Sequoia;
+using Core.Models;
 
 namespace Prominence.ViewModel
 {
     public class MenuViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Label> Achievements { get; set; }
+        public ObservableCollection<Achievement> Achievements { get; set; }
         private ImageSource _background { get; set; }
         public ImageSource Background
         {
@@ -45,13 +46,17 @@ namespace Prominence.ViewModel
             GameController.MenuViewModel = this;
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
             GameController.ChangeMenuBackground(Constants.MenuScreen);
+
+            LoadAchievements();
         }
 
         public void LoadAchievements()
         {
-            Achievements = new ObservableCollection<Label>();
-
-
+            Achievements = new ObservableCollection<Achievement>();
+            foreach (var achievement in GameController.User.AchievementsModel.Achievements)
+            {
+                Achievements.Add(achievement);
+            }
         }
 
         public void ChangeBackground(ImageSource source)

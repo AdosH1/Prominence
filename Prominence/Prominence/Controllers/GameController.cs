@@ -16,7 +16,7 @@ namespace Prominence.Controllers
         public static ISceneModel CurrentScene;
         public static FrameModel CurrentFrame;
         public static UserModel User;
-        public static PlayerModel Player { get => User.Player; }
+        public static PlayerModel Player { get => User.PlayerModel; }
         public static DialogueViewModel DiagloueViewModel;
         public static MenuViewModel MenuViewModel;
 

@@ -57,12 +57,10 @@ namespace Prominence.ViewModel
                 new UserModel(
                     new UserSettingsModel(),
                     new PlayerModel("Ados"),
-                    new AchievementsModel()
+                    Sequoia.Controller.GetAchievements()
                     );
 
-            var seqFilm = new Sequoia.SequoiaFilm();
-            seqFilm.Initialise(GameController.Player);
-            GameController.CurrentFilm = seqFilm;
+            GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player);
 
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);

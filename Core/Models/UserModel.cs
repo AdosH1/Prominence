@@ -6,15 +6,15 @@ namespace Core.Models
 {
     public class UserModel
     {
-        public AchievementsModel Achievements;
-        public PlayerModel Player;
-        public UserSettingsModel Settings;
+        public AchievementsModel AchievementsModel;
+        public PlayerModel PlayerModel;
+        public UserSettingsModel SettingsModel;
 
         public UserModel(UserSettingsModel settings, PlayerModel player, AchievementsModel achievements)
         {
-            Settings = settings;
-            Player = player;
-            Achievements = achievements;
+            SettingsModel = settings;
+            PlayerModel = player;
+            AchievementsModel = achievements;
         }
     }
 }

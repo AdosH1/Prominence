@@ -41,12 +41,12 @@ namespace Sequoia
         public static readonly string TJunction = "Sequoia.TJunction";
 
         // Achievements
-        public static readonly string FullyCharged = "FullyCharged";
-        public static readonly string Merciful = "Merciful";
-        public static readonly string Persistent = "Persistent";
-        public static readonly string Firepower = "Firepower";
-        public static readonly string PerfectEscape = "PerfectEscape";
-        public static readonly string VespenergyAlwaysDelivers = "VespenergyAlwaysDelivers";
+        public static readonly string FullyCharged = "Sequoia.Fully Charged";
+        public static readonly string Merciful = "Sequoia.Merciful";
+        public static readonly string Persistent = "Sequoia.Persistent";
+        public static readonly string Firepower = "Sequoia.Firepower";
+        public static readonly string PerfectEscape = "Sequoia.Perfect Escape";
+        public static readonly string VespenergyAlwaysDelivers = "Sequoia.Vespenergy Always Delivers";
 
     }
 }

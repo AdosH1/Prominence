@@ -52,6 +52,10 @@ namespace Utilities
             return scrambledString.ToString();
         }
 
+        public static string RemoveFromString(string input, string remove)
+        {
+            return input.Replace(remove, string.Empty);
+        }
 
     }
 }
