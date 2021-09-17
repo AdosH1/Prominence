@@ -2,15 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Prominence.ViewModel"
+             xmlns:converter="clr-namespace:Prominence.Converters"
              x:Class="Prominence.View.MenuView"
              BackgroundImageSource="{Binding Background}">
     <ContentPage.BindingContext>
         <local:MenuViewModel/>
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:AchievementToStringConverter  x:Key="AchievementToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
   <ContentPage.Content>
         <Grid x:Name="ContextGrid" IsVisible="True">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -31,31 +38,40 @@
                         Source="{Binding MenuButtonImage}"
                         Clicked="ReturnFromMenuButton" />
             </Grid>
-            <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
-                <StackLayout>
-                    <CollectionView Grid.Row="1" Grid.Column="1" 
-                        x:Name="AchievementsCollection"
-                        ItemsSource="{Binding Achievements}" 
-                        BackgroundColor="Transparent" 
-                        VerticalOptions="End" 
-                        VerticalScrollBarVisibility="Always"
-                        ItemsUpdatingScrollMode="KeepLastItemInView">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout>
-                                    <Label
-                                        Margin="5"
-                                        Text="{Binding Text}" 
-                                        FontSize="Medium" 
-                                        HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
-                                        TextColor="{Binding TextColor}" 
-                                        BackgroundColor="Transparent"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                </StackLayout>
+            
+            <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Column="1">
+                        <Label TextColor="White" FontSize="Medium">Achievements:</Label>
+                        <CollectionView Grid.Row="1" Grid.Column="1" 
+                            x:Name="AchievementsCollection"
+                            ItemsSource="{Binding Achievements}" 
+                            BackgroundColor="Transparent" 
+                            VerticalOptions="End" 
+                            VerticalScrollBarVisibility="Always"
+                            ItemsUpdatingScrollMode="KeepLastItemInView">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Label
+                                            Text="{Binding ., Converter={StaticResource AchievementToStringConverter}}" 
+                                            FontSize="Default" 
+                                            HorizontalTextAlignment="Start" 
+                                            TextColor="White" 
+                                            BackgroundColor="Transparent"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Grid>
             </Grid>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
