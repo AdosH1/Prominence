@@ -5,8 +5,6 @@ using System.Linq;
 using System.Text;
 using Prominence.ViewModel;
 using Prominence.Contexts;
-using Prominence.Model.Constants;
-using Xamarin.Forms;
 
 namespace Prominence.Controllers
 {
