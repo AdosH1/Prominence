@@ -6,6 +6,7 @@ using System.Text;
 using Prominence.ViewModel;
 using Prominence.Contexts;
 using Prominence.Model.Constants;
+using Xamarin.Forms;
 
 namespace Prominence.Controllers
 {
@@ -17,7 +18,7 @@ namespace Prominence.Controllers
         public static FrameModel CurrentFrame;
         public static UserModel User;
         public static PlayerModel Player { get => User.PlayerModel; }
-        public static DialogueViewModel DiagloueViewModel;
+        public static DialogueViewModel DialogueViewModel;
         public static MenuViewModel MenuViewModel;
 
         public static FrameModel Traverse(LocationModel location)
@@ -151,13 +152,18 @@ namespace Prominence.Controllers
         public static void ChangeDialogueBackground(string background)
         {
             var bg = AssemblyContext.GetImageByName(background);
-            DiagloueViewModel.ChangeBackground(bg);
+            DialogueViewModel.ChangeBackground(bg);
         }
 
         public static void ChangeMenuBackground(string background)
         {
             var bg = AssemblyContext.GetImageByName(background);
             MenuViewModel.ChangeBackground(bg);
+        }
+
+        public static void ShowAchievement(string text)
+        {
+            DialogueViewModel.ShowAchievement(text);
         }
 
         public static void Visited(FrameModel frame)

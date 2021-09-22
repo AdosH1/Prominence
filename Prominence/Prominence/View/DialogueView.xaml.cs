@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 
 namespace Prominence.View
 {
@@ -23,6 +24,9 @@ namespace Prominence.View
         public DialogueView()
         {
             InitializeComponent();
+
+            DialogueViewModel.AchievementTab = AchievementTab;
+            AchievementTab.TranslateTo(0, -100);
         }
 
         protected override async void OnAppearing()
@@ -40,5 +44,6 @@ namespace Prominence.View
             var menuView = new MenuView();
             await Application.Current.MainPage.Navigation.PushModalAsync(menuView);
         }
+        
     }
 }

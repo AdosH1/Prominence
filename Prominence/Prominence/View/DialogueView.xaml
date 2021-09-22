@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Prominence.ViewModel"
+             xmlns:controls="clr-namespace:Prominence.View.Controls"
              mc:Ignorable="d"
              x:Class="Prominence.View.DialogueView"
              BackgroundImageSource="{Binding Background}">
@@ -11,77 +12,88 @@
         <local:DialogueViewModel/>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        
-        <Grid x:Name="DialogueGrid" IsVisible="True">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="1.85*"/>
-                <RowDefinition Height="0.1*"/>
                 <RowDefinition Height="1*"/>
+                <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.05*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.05*"/>
-            </Grid.ColumnDefinitions>
-            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
+            <Grid x:Name="DialogueGrid" IsVisible="True" Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="18.5*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.2*"/>
+                    <ColumnDefinition Width="0.05*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.05*"/>
                 </Grid.ColumnDefinitions>
-                <ImageButton x:Name="MenuButton"
-                        Grid.Column="0"
-                        BackgroundColor="Transparent"
-                        Source="{Binding MenuButtonImage}"
-                        Clicked="LaunchMenuButton" />
-                <Button x:Name="LaunchAdButton"
-                        Grid.Column="1"
-                        Clicked="LaunchInterstitialAd" Text="Ad-Test" />
+                <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton x:Name="MenuButton"
+                            Grid.Column="0"
+                            BackgroundColor="Transparent"
+                            Source="{Binding MenuButtonImage}"
+                            Clicked="LaunchMenuButton" />
+                    <Button x:Name="LaunchAdButton"
+                            Grid.Column="1"
+                            Clicked="LaunchInterstitialAd" Text="Ad-Test" />
+                    <Button x:Name="Test2"
+                            Grid.Column="3"
+                            Clicked="Test1" Text="yep" />
+                </Grid>
+                <CollectionView Grid.Row="1" Grid.Column="1"
+                        x:Name="LogCollection"
+                        ItemsSource="{Binding Log}" 
+                        BackgroundColor="Transparent" 
+                        VerticalOptions="End" 
+                        VerticalScrollBarVisibility="Always"
+                        ItemsUpdatingScrollMode="KeepLastItemInView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label
+                                    Margin="5"
+                                    Text="{Binding Text}" 
+                                    FontSize="Medium" 
+                                    HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
+                                    TextColor="{Binding TextColor}" 
+                                    BackgroundColor="Transparent"
+                                    />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <CollectionView Grid.Row="3" Grid.Column="1"
+                        ItemsSource="{Binding Buttons}" BackgroundColor="Transparent">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Button 
+                                    Text="{Binding Text}" 
+                                    Command="{Binding Command}" 
+                                    FontSize="Medium" 
+                                    HorizontalOptions="Center" 
+                                    TextColor="White" 
+                                    WidthRequest="350"
+                                    BackgroundColor="{Binding Color}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </Grid>
-
-            <CollectionView Grid.Row="1" Grid.Column="1"
-                    x:Name="LogCollection"
-                    ItemsSource="{Binding Log}" 
-                    BackgroundColor="Transparent" 
-                    VerticalOptions="End" 
-                    VerticalScrollBarVisibility="Always"
-                    ItemsUpdatingScrollMode="KeepLastItemInView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label
-                                Margin="5"
-                                Text="{Binding Text}" 
-                                FontSize="Medium" 
-                                HorizontalTextAlignment="{Binding HorizontalTextAlignment}" 
-                                TextColor="{Binding TextColor}" 
-                                BackgroundColor="Transparent"
-                                />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <CollectionView Grid.Row="3" Grid.Column="1"
-                    ItemsSource="{Binding Buttons}" BackgroundColor="Transparent">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Button 
-                                Text="{Binding Text}" 
-                                Command="{Binding Command}" 
-                                FontSize="Medium" 
-                                HorizontalOptions="Center" 
-                                TextColor="White" 
-                                WidthRequest="350"
-                                BackgroundColor="{Binding Color}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+            <Grid x:Name="AchievementTab" Grid.Row="0" BackgroundColor="Red" >
+                <Label BackgroundColor="Silver"
+                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                   Text="{Binding AchievementText}"/>
+            </Grid>
         </Grid>
-        
 
 
     </ContentPage.Content>
