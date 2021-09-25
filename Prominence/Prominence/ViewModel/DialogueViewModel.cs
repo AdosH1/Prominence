@@ -16,11 +16,14 @@ using Prominence.Model.Constants;
 using Prominence.Contexts;
 using Sequoia;
 using Core.Models;
+using Xamarin.Essentials;
 
 namespace Prominence.ViewModel
 {
     public class DialogueViewModel : INotifyPropertyChanged
     {
+        public double Height { get; set; }
+        public double Width { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
@@ -44,15 +47,30 @@ namespace Prominence.ViewModel
                 NotifyPropertyChanged("MenuButtonImage");
             }
         }
+        public static Grid AchievementTab;
+        public string _achievementText { get; set; }
+        public string AchievementText
+        {
+            get => _achievementText;
+            set
+            {
+                _achievementText = value;
+                NotifyPropertyChanged("AchievementText");
+            }
+        }
+        
 
         public DialogueViewModel()
         {
+            Height = DeviceDisplay.MainDisplayInfo.Height;
+            Width = DeviceDisplay.MainDisplayInfo.Width;
+
             Log = new ObservableCollection<DialogueLabel>();
             Buttons = new ObservableCollection<Button>();
 
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
 
-            GameController.DiagloueViewModel = this;
+            GameController.DialogueViewModel = this;
             GameController.User = 
                 new UserModel(
                     new UserSettingsModel(),
@@ -164,6 +182,15 @@ namespace Prominence.ViewModel
         public void ChangeBackground(ImageSource source)
         {
             Background = source;
+        }
+
+        public async void ShowAchievement(string text)
+        {
+            AchievementText = text;
+
+            AchievementTab.TranslateTo(0, 0);
+            await Task.Delay(2000);
+            AchievementTab.TranslateTo(0, -100);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

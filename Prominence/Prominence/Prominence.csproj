@@ -23,13 +23,10 @@
   <ItemGroup>
     <Compile Remove="Resources\DialogueData\NewFolder1\**" />
     <Compile Remove="Resources\DialogueData\NewFolder2\**" />
-    <Compile Remove="View\Controls\**" />
     <EmbeddedResource Remove="Resources\DialogueData\NewFolder1\**" />
     <EmbeddedResource Remove="Resources\DialogueData\NewFolder2\**" />
-    <EmbeddedResource Remove="View\Controls\**" />
     <None Remove="Resources\DialogueData\NewFolder1\**" />
     <None Remove="Resources\DialogueData\NewFolder2\**" />
-    <None Remove="View\Controls\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +43,9 @@
     <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\Controls\AchievementView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\DialogueView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
