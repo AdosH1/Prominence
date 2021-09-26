@@ -44,9 +44,9 @@
                     <Button x:Name="LaunchAdButton"
                             Grid.Column="1"
                             Clicked="LaunchInterstitialAd" Text="Ad-Test" />
-                    <Button x:Name="Test2"
+                    <!--<Button x:Name="Test2"
                             Grid.Column="3"
-                            Clicked="Test1" Text="yep" />
+                            Clicked="Test1" Text="yep" />-->
                 </Grid>
                 <CollectionView Grid.Row="1" Grid.Column="1"
                         x:Name="LogCollection"
