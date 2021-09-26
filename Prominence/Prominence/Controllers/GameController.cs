@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Prominence.ViewModel;
 using Prominence.Contexts;
+using Core.Controllers;
 
 namespace Prominence.Controllers
 {
@@ -164,10 +165,25 @@ namespace Prominence.Controllers
             DialogueViewModel.ShowAchievement(text);
         }
 
+        // This function doesn't currently wait when showing achievements
+        // Will need to be adjusted in the future to show multiple achievements at the same time
+        // Currently, achievements will overlap. Out of scope for the current iteration though.
+        public static void ShowAchievements(List<Achievement> achievements)
+        {
+            foreach (var achievement in achievements)
+            {
+                ShowAchievement(achievement.DisplayName);
+            }
+        }
+
         public static void Visited(FrameModel frame)
         {
-            Player.AddVisited(frame.CurrentLocation);
+            //Player.AddVisited(frame.CurrentLocation);
+            var newAchievements = AchievementsController.DoTaskAndEvaluateAchievements(Player.AddVisitedFunc(frame.CurrentLocation), User);
+            ShowAchievements(newAchievements);
         }
+
+
 
     }
 }

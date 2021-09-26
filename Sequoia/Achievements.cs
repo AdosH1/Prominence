@@ -38,11 +38,11 @@ namespace Sequoia
             var achievements = new Dictionary<string, Achievement>
             {
                 {FullyCharged.Name, FullyCharged },
-                {Merciful.Name, Merciful },
-                {Persistent.Name, Persistent },
-                {Firepower.Name, Firepower },
-                {PerfectEscape.Name, PerfectEscape },
-                {VespenergyAlwaysDelivers.Name, VespenergyAlwaysDelivers }
+                //{Merciful.Name, Merciful },
+                //{Persistent.Name, Persistent },
+                //{Firepower.Name, Firepower },
+                //{PerfectEscape.Name, PerfectEscape },
+                //{VespenergyAlwaysDelivers.Name, VespenergyAlwaysDelivers }
             };
             return new AchievementsModel() { Achievements = achievements };
         }

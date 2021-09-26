@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Core.Controllers
 {
@@ -14,13 +15,14 @@ namespace Core.Controllers
             var state = new Dictionary<string, AchievementState>();
             foreach (var achievement in model.Achievements)
             {
+                achievement.Value.Evaluate(player);
                 state.Add(achievement.Key, achievement.Value.ToState(player));
             }
 
             return new AchievementsState(state);
         }
 
-        public static List<Achievement> CompareState(AchievementsState initial, AchievementsState current)
+        public static List<Achievement> GetStateDifferences(AchievementsState initial, AchievementsState current)
         {
             var newAchievements = new List<Achievement>();
             foreach (var init in initial.State)
@@ -32,6 +34,16 @@ namespace Core.Controllers
             }
 
             return newAchievements;
+        }
+
+        public static List<Achievement> DoTaskAndEvaluateAchievements(Func<Task> task, UserModel user)
+        {
+            var initialState = GetState(user.AchievementsModel, user.PlayerModel);
+
+            task();
+
+            var currentState = GetState(user.AchievementsModel, user.PlayerModel);
+            return AchievementsController.GetStateDifferences(initialState, currentState);
         }
 
     }

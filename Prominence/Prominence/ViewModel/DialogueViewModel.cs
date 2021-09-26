@@ -71,14 +71,14 @@ namespace Prominence.ViewModel
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
 
             GameController.DialogueViewModel = this;
-            GameController.User = 
+
+            GameController.User =
                 new UserModel(
                     new UserSettingsModel(),
-                    new PlayerModel("Ados"),
-                    Sequoia.Controller.GetAchievements()
+                    new PlayerModel("Ados")
                     );
-
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player);
+            GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
 
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);

@@ -15,7 +15,7 @@ namespace Prominence.Converters
             if (achievement != null)
             {
                 string checkbox;
-                if (achievement.Count > 0) checkbox = "    [ x ]";
+                if (achievement.Completed) checkbox = "    [ x ]";
                 else checkbox = "    [   ]";
 
                 return $"{checkbox} {achievement.DisplayName}";
