@@ -10,6 +10,7 @@ namespace Sequoia
         public static readonly string Name = "Awakening";// { get { return "Awakening"; } }
         public static IncubationScene IncubationScene;
         public static DroneRoomScene DroneRoomScene;
+        public static ComputerRoomScene ComputerRoomScene;
         public AwakeningAct(string film, PlayerModel player)
         {
             Film = film;
@@ -17,11 +18,13 @@ namespace Sequoia
 
             IncubationScene = new IncubationScene(film, Name, player);
             DroneRoomScene = new DroneRoomScene(film, Name, player);
+            ComputerRoomScene = new ComputerRoomScene(film, Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
                 { IncubationScene.Scene, IncubationScene },
-                { DroneRoomScene.Scene, DroneRoomScene }
+                { DroneRoomScene.Scene, DroneRoomScene },
+                { ComputerRoomScene.Scene, ComputerRoomScene }
             };
         }
 
@@ -29,6 +32,7 @@ namespace Sequoia
         {
             IncubationScene.Initialise();
             DroneRoomScene.Initialise();
+            ComputerRoomScene.Initialise();
 
             OnEnter = onEnter;
             OnExit = onExit;

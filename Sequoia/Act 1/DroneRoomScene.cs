@@ -91,12 +91,13 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Enter Maintenance Room.", DroneRoom),
-                    new ButtonModel("Go towards the red light.", DroneRoom),//300, fun(): Boolean { return !GameState.HasVisited.contains(300)}, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.computerroom)}),
-                    //new ButtonModel("Head to the office.", DroneRoom, 
-                    //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(Constants.ComputerRoom); }) ),//fun(): Boolean {return GameState.HasVisited.contains(300)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.computerroom)}),
-                    new ButtonModel("Continue down the hallway.", DroneRoom), //400, fun(): Boolean {return !GameState.HasVisited.contains(400)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.researchdoor)}),
+                    new ButtonModel("Go towards the red light.", ComputerRoomScene.ComputerRoom,
+                        condition: new Func<bool>(() => { return !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })),
+                    new ButtonModel("Head to the office.", ComputerRoomScene.ComputerRoom,
+                        condition: new Func<bool>(() => { return Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })), // || Player.HasVisited(RandD.CurrentLocation);
+                    //new ButtonModel("Continue down the hallway.", DroneRoom), //400, fun(): Boolean {return !GameState.HasVisited.contains(400)},
                     //new ButtonModel("Head to R&D Exit.", DroneRoom, 
-                    //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(Constants.ComputerRoom); }))//400, fun(): Boolean {return GameState.HasVisited.contains(400)}, buttonActions = { GameState.GC?.ChangeBackground(R.drawable.researchdoor)})
+                    //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(Constants.ComputerRoom); }))//400, fun(): Boolean {return GameState.HasVisited.contains(400)},
                 });
         }
 
@@ -130,7 +131,7 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Investigate the table.", InspectTheTable),
-                    new ButtonModel("Inspect the drone.", InspectTheDrone1),//buttonActions = {if (!GameState.HasVisited.contains(203)) GameState.GC?.ChangeBackground(R.drawable.terminal)}),
+                    new ButtonModel("Inspect the drone.", InspectTheDrone1),
                     new ButtonModel("Exit the room.", Entrance)
                 });
         }
@@ -152,7 +153,8 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Take the chip.", TakeTheChip,
-                        condition: new Func<bool>(() => { return Player.HasItem(Constants.DroneAccessCard) && Player.HasVisited(InspectTheDrone1.CurrentLocation); })), //fun(): Unit { GameState.Inventory.add("Drone Id Card"); GC?.ShowItemNotification("Drone Access Card"); }),
+                        condition: new Func<bool>(() => { return Player.HasItem(Constants.DroneAccessCard) && Player.HasVisited(InspectTheDrone1.CurrentLocation); }),
+                        action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(Constants.DroneAccessCard); })),
                     new ButtonModel("Read the terminal.", InspectTheDrone2,
                         condition: new Func<bool>(() => { return !Player.HasVisited(InspectTheDrone1.CurrentLocation); })),
                     new ButtonModel("Inspect the room.", InspectTheRoom),
@@ -190,7 +192,7 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Take the chip.", TakeTheChip,
-                        condition: new Func<bool>(() => { return !Player.HasItem(Constants.DroneAccessCard); })), //GC?.ShowItemNotification("Drone Access Card");}
+                        condition: new Func<bool>(() => { return !Player.HasItem(Constants.DroneAccessCard); })),
                     new ButtonModel("Inspect the room.", InspectTheRoom),
                     new ButtonModel("Exit the room.", Entrance)
                 });
@@ -221,7 +223,7 @@ namespace Sequoia
                         condition: new Func<bool>(() => { return !Player.HasVisited(SmashDrawer.CurrentLocation) && !Player.HasVisited(LockpickDrawer.CurrentLocation); })),
                     new ButtonModel("Take the spare battery.", GrabBattery,
                         condition: new Func<bool>(() => { return Player.HasVisited(LockpickDrawer.CurrentLocation) && !Player.HasItem(Constants.SpareBattery); }),
-                        action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(Constants.SpareBattery); })),// GC?.ShowItemNotification("Spare Battery"); }),
+                        action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(Constants.SpareBattery); })),
                     new ButtonModel("Return.", DroneRoom)
                 });
         }
