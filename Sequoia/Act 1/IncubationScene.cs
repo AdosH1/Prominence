@@ -134,7 +134,7 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Follow the drone.", DroneRoomScene.Entrance),
-                    //new ButtonModel("Go towards the red light.", 300)/*, buttonActions = {GameState.GC?.ChangeBackground(R.drawable.computerroom)}*/
+                    new ButtonModel("Go towards the red light.", ComputerRoomScene.ComputerRoom)
                 }
             );
         }
