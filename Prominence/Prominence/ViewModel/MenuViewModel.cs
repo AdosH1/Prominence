@@ -55,7 +55,7 @@ namespace Prominence.ViewModel
             Achievements = new ObservableCollection<Achievement>();
             foreach (var achievement in GameController.User.AchievementsModel.Achievements)
             {
-                Achievements.Add(achievement);
+                Achievements.Add(achievement.Value);
             }
         }
 

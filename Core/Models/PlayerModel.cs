@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Core.Models
 {
@@ -42,6 +43,15 @@ namespace Core.Models
         {
             if (!Visited.Contains(location))
                 Visited.Add(location);
+        }
+
+        public Func<Task> AddVisitedFunc(string location)
+        {
+            return new Func<Task>(async () => {
+                if (!Visited.Contains(location))
+                    Visited.Add(location);
+            });
+            
         }
 
         public bool HasFlag(string flag)

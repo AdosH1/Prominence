@@ -16,5 +16,12 @@ namespace Core.Models
             PlayerModel = player;
             AchievementsModel = achievements;
         }
+
+        // Please add achievements model manually if you use this constructor.
+        public UserModel(UserSettingsModel settings, PlayerModel player)
+        {
+            SettingsModel = settings;
+            PlayerModel = player;
+        }
     }
 }
