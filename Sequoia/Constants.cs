@@ -11,6 +11,7 @@ namespace Sequoia
         // Items
         public static readonly string DroneAccessCard = "Sequoia.DroneAccessCard";
         public static readonly string SpareBattery = "Sequoia.SpareBattery";
+        public static readonly string SteinmannAccessCard = "Sequoia.SteinmannAccessCard";
 
         // Icons
         public static readonly string Battery = "Sequoia.Battery";
