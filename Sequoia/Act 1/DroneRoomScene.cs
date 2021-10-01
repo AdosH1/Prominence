@@ -77,16 +77,16 @@ namespace Sequoia
             frame.Initialise(
                 new List<DialogueModel>() {  
                     // Visit first
-                    new DialogueModel("The drone silently hovers further down the hallway.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
-                    new DialogueModel("As you follow it, you pass many other similar rooms, but there's no sign of any people around.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
-                    new DialogueModel("The drone enters a side room just as the hallway turns.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); })),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
-                    new DialogueModel("A sign outside the room reads:", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); })),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
-                    new DialogueModel("      Drone Maintenance Room", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); })),//fun(): Boolean { return !GameState.HasVisited.contains(200) && !GameState.HasVisited.contains(300) }),
+                    new DialogueModel("The drone silently hovers further down the hallway.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); }) ),
+                    new DialogueModel("As you follow it, you pass many other similar rooms, but there's no sign of any people around.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); }) ),
+                    new DialogueModel("The drone enters a side room just as the hallway turns.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })),
+                    new DialogueModel("A sign outside the room reads:", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })),
+                    new DialogueModel("      Drone Maintenance Room", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })),
                     // After first visit
-                    new DialogueModel("The hallway looks indifferent down both ends... perhaps the only way to find your bearings is to track the flickering lights above.", condition: new Func<bool>(() => { return Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return GameState.HasVisited.contains(200) }),
+                    new DialogueModel("The hallway looks indifferent down both ends... perhaps the only way to find your bearings is to track the flickering lights above.", condition: new Func<bool>(() => { return Player.HasVisited(DroneRoom.CurrentLocation); }) ),
                     // Computer room first
-                    new DialogueModel("You pass many rooms similar to the one you woke up in, but there's no sign of any people around..", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return !GameState.HasVisited.contains(200) && GameState.HasVisited.contains(300) }),
-                    new DialogueModel("You reach a room with a sign outside marked: Drone Maintenance Room.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation); }) ),//fun(): Boolean { return !GameState.HasVisited.contains(200) && GameState.HasVisited.contains(300) }) },
+                    new DialogueModel("You pass many rooms similar to the one you woke up in, but there's no sign of any people around..", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); }) ),
+                    new DialogueModel("You reach a room with a sign outside marked: Drone Maintenance Room.", condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoom.CurrentLocation) && Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); }) ),
                 },
                 new List<ButtonModel>()
                 {
@@ -94,10 +94,11 @@ namespace Sequoia
                     new ButtonModel("Go towards the red light.", ComputerRoomScene.ComputerRoom,
                         condition: new Func<bool>(() => { return !Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })),
                     new ButtonModel("Head to the office.", ComputerRoomScene.ComputerRoom,
-                        condition: new Func<bool>(() => { return Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation); })), // || Player.HasVisited(RandD.CurrentLocation);
-                    //new ButtonModel("Continue down the hallway.", DroneRoom), //400, fun(): Boolean {return !GameState.HasVisited.contains(400)},
-                    //new ButtonModel("Head to R&D Exit.", DroneRoom, 
-                    //    action: new Func<System.Threading.Tasks.Task>(async () => { GameController.ChangeBackground(Constants.ComputerRoom); }))//400, fun(): Boolean {return GameState.HasVisited.contains(400)},
+                        condition: new Func<bool>(() => { return Player.HasVisited(ComputerRoomScene.ComputerRoom.CurrentLocation)|| Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Continue down the hallway.", RnDScene.RnDExit,
+                        condition: new Func<bool>(() => { return !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Head to R&D Exit.", RnDScene.RnDExit,
+                        condition: new Func<bool>(() => { return Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
                 });
         }
 
