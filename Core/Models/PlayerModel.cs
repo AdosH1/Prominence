@@ -22,6 +22,7 @@ namespace Core.Models
         public PlayerModel(string name)
         {
             Name = name;
+            Energy = 3;
             Location = new LocationModel();
         }
 
@@ -32,6 +33,10 @@ namespace Core.Models
         public void AddItem(string item)
         {
             Inventory.Add(item);
+        }
+        public void RemoveItem(string item)
+        {
+            Inventory.Remove(item);
         }
 
         public bool HasVisited(string location)

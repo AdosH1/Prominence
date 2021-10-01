@@ -62,18 +62,19 @@ namespace Sequoia
                 new List<DialogueModel>() {
                     new DialogueModel("On top of a small desk stands a computer monitor shining a red light onto the floor."),
                     new DialogueModel("The room contains many shelves and cabinets filled with what looks like research papers and manuals."),
-                    new DialogueModel("The hallway continues out from one side of the room.") //, condition: new Func<bool>(() => { return !Player.HasVisited(RandD.CurrentLocation); })
+                    new DialogueModel("The hallway continues out from one side of the room.", 
+                        condition: new Func<bool>(() => { return !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })) 
                 },
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Investigate the research papers.", InvestigateTheResearch),
                     new ButtonModel("Investigate the computer.", InvestigateTheComputer),
 
-                    new ButtonModel("Head back towards drone.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation); })), // && !Player.HasVisited(RandD.CurrentLocation);
-                    new ButtonModel("Head towards the Maintenance Room.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation); })), // || Player.HasVisited(RandD.CurrentLocation);
+                    new ButtonModel("Head back towards drone.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation) && !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Head towards the Maintenance Room.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation) || Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
 
-                    //new ButtonModel("Continue through the hallway.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation); })), // && !Player.HasVisited(RandD.CurrentLocation);
-                    //new ButtonModel("Continue through the hallway.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation); })), // && !Player.HasVisited(RandD.CurrentLocation);
+                    new ButtonModel("Continue through the hallway.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation)  && !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Head to R&D Exit.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
                 });
         }
 
@@ -90,7 +91,7 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Take the card.", GrabSteinmannsCard,
-                        condition: new Func<bool>(() => { return Player.HasItem(Constants.SteinmannAccessCard); }),
+                        condition: new Func<bool>(() => { return !Player.HasItem(Constants.SteinmannAccessCard); }),
                         action: new Func<System.Threading.Tasks.Task>(async () => { Player.AddItem(Constants.SteinmannAccessCard); })),
                     new ButtonModel("Return.", ComputerRoom),
                 });
