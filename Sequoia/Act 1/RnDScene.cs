@@ -205,8 +205,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect
-                    new ButtonModel("Continue forward.", IncubationScene.Start),
+                    new ButtonModel("Continue forward.", TJunctionScene.HearSound),
                 });
         }
 

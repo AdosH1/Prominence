@@ -73,8 +73,8 @@ namespace Sequoia
                     new ButtonModel("Head back towards drone.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation) && !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
                     new ButtonModel("Head towards the Maintenance Room.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation) || Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
 
-                    new ButtonModel("Continue through the hallway.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return !Player.HasVisited(DroneRoomScene.Entrance.CurrentLocation)  && !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
-                    new ButtonModel("Head to R&D Exit.", DroneRoomScene.Entrance, condition: new Func<bool>(() => { return Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Continue through the hallway.", RnDScene.RnDExit, condition: new Func<bool>(() => { return !Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
+                    new ButtonModel("Head to R&D Exit.", RnDScene.RnDExit, condition: new Func<bool>(() => { return Player.HasVisited(RnDScene.RnDExit.CurrentLocation); })),
                 });
         }
 
