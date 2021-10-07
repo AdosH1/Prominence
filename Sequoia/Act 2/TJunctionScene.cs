@@ -343,8 +343,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Link to storage room scene
-                    //new ButtonModel("Continue.", EnterIntoStorageRoom)
+                    new ButtonModel("Continue.", StorageRoomScene.StorageRoomBase)
                 });
         }
 
@@ -360,8 +359,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Link to storage room scene
-                    //new ButtonModel("Continue.", EnterIntoStorageRoom)
+                    new ButtonModel("Continue.", StorageRoomScene.StorageRoomBase)
                 });
         }
     }
