@@ -12,5 +12,7 @@ Sequoia/bin/
 Sequoia/obj/
 Utilities/bin/
 Utilities/obj/
+CodeGenerator/bin/
+CodeGenerator/obj/
 .vs/*
 *.csproj.user

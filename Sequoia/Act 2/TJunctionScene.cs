@@ -97,9 +97,9 @@ namespace Sequoia
             frame.Initialise(
                 new List<DialogueModel>() {
                     new DialogueModel("It takes a while to readjust to the darker hallway."),
-                new DialogueModel("Most of the rooms in this sector are unpowered, leaving only the main path dimly lit."),
-                new DialogueModel("As you head further down the corridor, you can hear scampering in the vents above."),
-                new DialogueModel("The sound is nearby, but its hard to tell where, as there are several ventilation panels around.")
+                    new DialogueModel("Most of the rooms in this sector are unpowered, leaving only the main path dimly lit."),
+                    new DialogueModel("As you head further down the corridor, you can hear scampering in the vents above."),
+                    new DialogueModel("The sound is nearby, but its hard to tell where, as there are several ventilation panels around.")
                 },
                 new List<ButtonModel>()
                 {
