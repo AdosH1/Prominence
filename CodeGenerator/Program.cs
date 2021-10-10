@@ -83,7 +83,7 @@ namespace CodeGenerator
         {
             foreach (var frame in frames)
             {
-                writer.WriteLine($"InitialiseHearSound({frame});");
+                writer.WriteLine($"Initialise{frame}({frame});");
             }
         }
     }
