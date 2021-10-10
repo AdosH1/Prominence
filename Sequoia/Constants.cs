@@ -8,6 +8,15 @@ namespace Sequoia
     {
         public static readonly string AssemblyName = "Sequoia";
 
+        // Flags
+        public static readonly string Azul = "Sequoia.Azul";
+        public static readonly string Rojo = "Sequoia.Rojo";
+        public static readonly string Verde = "Sequoia.Verde";
+        public static readonly string BloodTypeXC = "Sequoia.BloodType.XC";
+        public static readonly string BloodTypeY = "Sequoia.BloodType.Y-";
+        public static readonly string BloodTypeZPlus = "Sequoia.BloodType.Z+";
+        public static readonly string FeralSaved = "Sequoia.FeralSaved";
+
         // Items
         public static readonly string DroneAccessCard = "Sequoia.DroneAccessCard";
         public static readonly string SpareBattery = "Sequoia.SpareBattery";

@@ -84,5 +84,13 @@ namespace Core.Models
                 Flags[flag] = 1;
             }
         }
+
+        public void DecrementFlag(string flag)
+        {
+            if (Flags.ContainsKey(flag))
+            {
+                Flags[flag] -= 1;
+            }
+        }
     }
 }
