@@ -8,36 +8,24 @@ namespace CodeGenerator
     {
         public static string FilePath = @"C:\Users\adenh\source\repos\Prominence\CodeGenerator\bin\Debug\net5.0\code.cs";
         public static List<string> Frames = new List<string>() {
-            "Entrance",
+            "InfirmaryBase",
             "HeadTowardsClosedDoor",
             "InvestigateVent",
-            "HopOntoDesk",
+            "VentEntrance",
             "ClimbThroughVent",
-            "FollowBloodTrail",
-            "RecoveryRoomBase",
-            "InspectTheFeral",
-            "InspectTheFeral2",
-            "InspectTheFeral3",
-            "InspectRecoveryRoom",
-            "InvestigateControlPanel",
-            "EjectTheBattery",
-            "MachinePowered",
-            "PowerMachineByHand",
-            "PowerMachineByHandFail",
-            "PowerMachineByHandFail2",
-            "ConfigureMachine",
-            "ConfigureMachine2",
-            "ConfigureMachine3",
-            "ConfigureMachine4",
-            "MachineRunning",
-            "MachineSuccess",
-            "MachineFailure",
-            "InvestigateTextBooks",
-            "ReadManual",
-            "ReadManual2",
-            "ReadManual3",
-            "InvestigateFeralSuccess",
-            "InvestigateFeralFail",
+            "ClimbThroughVent2",
+            "PushTheDoor",
+            "PushTheDoor2",
+            "PushTheDoor3",
+            "PushTheDoor4",
+            "PushTheDoor5",
+            "PushTheDoor6",
+            "PushTheDoor7",
+            "PushTheDoor8",
+            "PushTheDoor9",
+            "PushTheDoor10",
+            "PushTheDoor11",
+            "PushTheDoor12",
         };
 
         static void Main(string[] args)
@@ -65,7 +53,7 @@ namespace CodeGenerator
         {
             foreach (var frame in frames)
             {
-                writer.WriteLine($"{frame} = new FrameModel(Film, Act, Scene, {frame}, Constants.RecoveryRoom);");
+                writer.WriteLine($"{frame} = new FrameModel(Film, Act, Scene, \"{frame}\", Constants.RecoveryRoom);");
             }
         }
 
