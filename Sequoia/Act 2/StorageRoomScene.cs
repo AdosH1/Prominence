@@ -295,8 +295,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Go to recovery room
-                    //new ButtonModel("Continue.", StorageRoomBase),
+                    new ButtonModel("Continue.", InfirmaryScene.InfirmaryBase),
                 });
         }
 
@@ -326,8 +325,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to recovery room
-                    //new ButtonModel("Continue.", RushToVentExit),
+                    new ButtonModel("Continue.", InfirmaryScene.InfirmaryBase),
                 });
         }
 

@@ -151,8 +151,7 @@ namespace Sequoia
                     new ButtonModel("Inspect the feral..", InspectTheFeral3,
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectTheFeral.CurrentLocation) && Player.HasVisited(InspectTheFeral2.CurrentLocation); })),
                     new ButtonModel("Inspect the room.", InspectRecoveryRoom),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
 
                 });
         }
@@ -165,13 +164,13 @@ namespace Sequoia
                     new DialogueModel("You can see its chest slightly raise and depress as it fights to catch each breath."),
                     new DialogueModel("Is it fear in its eyes?"),
                     new DialogueModel("You can just make out a dog tag hanging around the feral's neck, the tag reads:",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Name: Jorge Del Sierra",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Gender: Male",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Bloodtype: Z+",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                 },
                 new List<ButtonModel>()
                 {
@@ -183,8 +182,7 @@ namespace Sequoia
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
                     new ButtonModel("Investigate text books.", InvestigateTextBooks,
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
 
                 });
         }
@@ -196,13 +194,13 @@ namespace Sequoia
                     new DialogueModel("The feral weakly raises its hand towards you, but after a brief moment, its hand drops."),
                     new DialogueModel("It now lays motionless in the chamber."),
                     new DialogueModel("You can just make out a dog tag hanging around the feral's neck, the tag reads:",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Name: Jorge Del Sierra",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Gender: Male",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Bloodtype: Z+",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                 },
                 new List<ButtonModel>()
                 {
@@ -214,8 +212,7 @@ namespace Sequoia
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
                     new ButtonModel("Investigate text books.", InvestigateTextBooks,
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
 
                 });
         }
@@ -226,13 +223,13 @@ namespace Sequoia
                 new List<DialogueModel>() {
                     new DialogueModel("The feral lies motionless in the chamber."),
                     new DialogueModel("You can just make out a dog tag hanging around the feral's neck, the tag reads:",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Name: Jorge Del Sierra",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Gender: Male",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                     new DialogueModel("    Bloodtype: Z+",
-                        condition: new Func<bool>(() => { return !Player.HasVisited(ReadManual3.CurrentLocation); })),
+                        condition: new Func<bool>(() => { return Player.HasVisited(ReadManual3.CurrentLocation); })),
                 },
                 new List<ButtonModel>()
                 {
@@ -244,8 +241,7 @@ namespace Sequoia
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
                     new ButtonModel("Investigate text books.", InvestigateTextBooks,
                         condition: new Func<bool>(() => { return Player.HasVisited(InspectRecoveryRoom.CurrentLocation); })),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
 
                 });
         }
@@ -275,8 +271,7 @@ namespace Sequoia
                     new ButtonModel("Inspect the feral..", InvestigateFeralFail,
                         condition: new Func<bool>(() => { return Player.HasVisited(MachineFailure.CurrentLocation); })),
                     new ButtonModel("Inspect the room.", InspectRecoveryRoom),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
                 });
         }
 
@@ -341,8 +336,7 @@ namespace Sequoia
                     // Feral Machine Fail
                     new ButtonModel("Inspect the feral..", InvestigateFeralFail,
                         condition: new Func<bool>(() => { return Player.HasVisited(MachineFailure.CurrentLocation); })),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
                 });
         }
 
@@ -372,8 +366,7 @@ namespace Sequoia
                     new ButtonModel("Inspect the feral..", InvestigateFeralFail,
                         condition: new Func<bool>(() => { return Player.HasVisited(MachineFailure.CurrentLocation); })),
                     new ButtonModel("Inspect the room.", InspectRecoveryRoom),
-                    //TODO: Link to Infirmary
-                    //new ButtonModel("Leave.", ComputerRoomScene.ComputerRoom),
+                    new ButtonModel("Leave.", InfirmaryScene.InfirmaryBase),
                 });
         }
 
@@ -574,6 +567,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
+                    new ButtonModel("Read manual.", ReadManual),
                     new ButtonModel("Return.", InspectRecoveryRoom),
                 });
         }
