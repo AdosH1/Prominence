@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using Core.Models;
+using Core.Models.SaveModels;
 
 namespace Prominence.Model
 {
@@ -38,5 +39,7 @@ namespace Prominence.Model
                 throw new Exception("LabelType not implemented.");
             }
         }
+
+        public DialogueLabel(LabelSaveModel theSaveModel) : this(theSaveModel.Text, theSaveModel.Type) { }
     }
 }
