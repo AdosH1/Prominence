@@ -23,5 +23,25 @@ namespace Sequoia
             return film;
         }
 
+        // Sets player variables when jumping scenes.
+        // Don't need to set visited histories as its mostly irrelevant (I think there's only one (insubstantial) passage late in the game)
+        public static void SetTJunctionScene(this PlayerModel player)
+        {
+            player.Reset();
+            player.AddItem(Constants.DroneAccessCard);
+            player.AddItem(Constants.SpareBattery);
+            player.AddItem(Constants.SteinmannAccessCard);
+        }
+
+        public static void SetInfirmaryScene(this PlayerModel player)
+        {
+            player.Reset();
+            player.AddItem(Constants.DroneAccessCard);
+            player.AddItem(Constants.SpareBattery);
+            player.AddItem(Constants.SteinmannAccessCard);
+        }
+
+
+
     }
 }

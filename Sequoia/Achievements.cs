@@ -27,8 +27,8 @@ namespace Sequoia
             // Requires initialization as LocationModels are only created at runtime, otherwise, it'd be great to keep this compile time friendly
             // TODO: All  these achievements need to be updated (conditions) in order to work (we don't have enough story done to implement them atm)
             FullyCharged = new Achievement(Constants.FullyCharged, GetDisplayName(Constants.FullyCharged), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
-            //Merciful = new Achievement(Constants.Merciful, GetDisplayName(Constants.Merciful), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
-            //Persistent = new Achievement(Constants.Persistent, GetDisplayName(Constants.Persistent), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
+            Merciful = new Achievement(Constants.Merciful, GetDisplayName(Constants.Merciful), AchievementHelper.PlayerVisitedCondition(RecoveryRoomScene.MachineSuccess.CurrentLocation));
+            Persistent = new Achievement(Constants.Persistent, GetDisplayName(Constants.Persistent), AchievementHelper.PlayerVisitedCondition(InfirmaryScene.PushTheDoor11.CurrentLocation));
             //Firepower = new Achievement(Constants.Firepower, GetDisplayName(Constants.Firepower), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
             //PerfectEscape = new Achievement(Constants.PerfectEscape, GetDisplayName(Constants.PerfectEscape), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
             //VespenergyAlwaysDelivers = new Achievement(Constants.VespenergyAlwaysDelivers, GetDisplayName(Constants.VespenergyAlwaysDelivers), AchievementHelper.PlayerVisitedCondition(IncubationScene.IncubationHallway.CurrentLocation));
