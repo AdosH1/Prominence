@@ -44,6 +44,9 @@
                     <Button x:Name="LaunchAdButton"
                             Grid.Column="1"
                             Clicked="LaunchInterstitialAd" Text="Ad-Test" />
+                    <Button x:Name="TeleportButton"
+                            Grid.Column="3"
+                            Command="{Binding TeleporterCmd}" Text="Teleport" />
                 </Grid>
                 <CollectionView Grid.Row="1" Grid.Column="1"
                         x:Name="LogCollection"

@@ -8,23 +8,23 @@ namespace Sequoia
     public class MiscellaneousAct : ActModel
     {
         public static readonly string Name = "Miscellaneous";
-        public static IncubationScene IncubationScene;
+        public static MiscellaneousScene MiscellaneousScene;
         public MiscellaneousAct(string film, PlayerModel player)
         {
             Film = film;
             Player = player;
 
-            IncubationScene = new IncubationScene(film, Name, player);
+            MiscellaneousScene = new MiscellaneousScene(film, Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
-                { IncubationScene.Scene, IncubationScene },
+                { MiscellaneousScene.Scene, MiscellaneousScene },
             };
         }
 
         public void Initialise(Action onEnter = null, Action onExit = null)
         {
-            IncubationScene.Initialise();
+            MiscellaneousScene.Initialise();
 
             OnEnter = onEnter;
             OnExit = onExit;

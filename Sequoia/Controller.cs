@@ -23,6 +23,11 @@ namespace Sequoia
             return film;
         }
 
+        public static LocationModel GetTeleporterLocation()
+        {
+            return MiscellaneousScene.Teleport.Location;
+        }
+
         // Sets player variables when jumping scenes.
         // Don't need to set visited histories as its mostly irrelevant (I think there's only one (insubstantial) passage late in the game)
         public static void SetTJunctionScene(this PlayerModel player)

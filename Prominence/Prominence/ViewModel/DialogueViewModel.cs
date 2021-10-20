@@ -58,7 +58,18 @@ namespace Prominence.ViewModel
                 NotifyPropertyChanged("AchievementText");
             }
         }
-        
+
+        private Command _teleporterCmd { get; set; }
+        public Command TeleporterCmd 
+        {
+            get => _teleporterCmd;
+            set
+            {
+                _teleporterCmd = value;
+                NotifyPropertyChanged("TeleporterCmd");
+            }
+        }
+
 
         public DialogueViewModel()
         {
@@ -79,6 +90,12 @@ namespace Prominence.ViewModel
                     );
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player);
             GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
+            TeleporterCmd = new Command(() => 
+            {
+                Log.Clear();
+                var tp = GameController.Traverse(Sequoia.Controller.GetTeleporterLocation());
+                LoadFrame(tp);
+            });
 
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);
