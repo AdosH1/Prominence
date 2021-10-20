@@ -51,7 +51,8 @@ namespace Sequoia
                 },
                     new List<ButtonModel>()
                 {
-                    new ButtonModel("Continue.", IncubationScene.Start)
+                    new ButtonModel("Continue.", IncubationScene.Start,
+                        action: new Func<Task>(async () => { Player.Reset(); }))
                 }
             );
         }
@@ -68,7 +69,6 @@ namespace Sequoia
                     new DialogueModel("Please select a memory below.")
                },
                new List<ButtonModel>() {
-                   // TODO: Create a reset for player / option item adding
                     new ButtonModel("Start.", IncubationScene.Start,
                         action: new Func<Task>(async () => { Player.Reset(); })),
                     new ButtonModel("T-Junction.", RnDScene.LeaveScene,

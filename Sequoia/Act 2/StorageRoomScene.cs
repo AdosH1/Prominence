@@ -341,8 +341,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to death screen
-                    //new ButtonModel("Continue.", RushToVentExit),
+                    new ButtonModel("Continue.", MiscellaneousScene.Dead),
                 });
         }
 
