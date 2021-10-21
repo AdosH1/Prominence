@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Models.SaveModels;
+using Xamarin.Forms;
 
 namespace Core.Models
 {
@@ -17,7 +19,7 @@ namespace Core.Models
 
         public List<string> Inventory = new List<string>(); // use item hashes?
         public List<string> Visited = new List<string>();
-        public List<DialogueLabel> Log = new List<DialogueLabel>();
+        public ObservableCollection<DialogueLabel> Log = new ObservableCollection<DialogueLabel>();
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
         public PlayerModel(string name)
@@ -40,9 +42,9 @@ namespace Core.Models
             Flags = thePlayerSaveModel.Flags;
         }
 
-        public List<DialogueLabel> CreateDialogueLabelLog(List<LabelSaveModel> theLog)
+        public ObservableCollection<DialogueLabel> CreateDialogueLabelLog(List<LabelSaveModel> theLog)
         {
-            List<DialogueLabel> outputLog = new List<DialogueLabel>();
+            ObservableCollection<DialogueLabel> outputLog = new ObservableCollection<DialogueLabel>();
 
             foreach(LabelSaveModel label in theLog)
             {

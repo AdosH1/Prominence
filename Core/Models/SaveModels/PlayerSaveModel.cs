@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Core.Models;
 
@@ -30,7 +31,7 @@ namespace Core.Models.SaveModels
             Flags = thePlayerModel.Flags;
         }
 
-        public List<LabelSaveModel> CreateLabelSaveModelLog(List<DialogueLabel> theLog)
+        public List<LabelSaveModel> CreateLabelSaveModelLog(ObservableCollection<DialogueLabel> theLog)
         {
             List<LabelSaveModel> outputLog = new List<LabelSaveModel>();
 
