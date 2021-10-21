@@ -256,8 +256,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Make fail scene
-                    //new ButtonModel("Continue.", DodgeThePounce)
+                    new ButtonModel("Continue.", MiscellaneousScene.Dead)
                 });
         }
 
@@ -326,8 +325,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Create fail state
-                    //new ButtonModel("Continue.", EnterIntoStorageRoom)
+                    new ButtonModel("Continue.", MiscellaneousScene.Dead)
                 });
         }
 

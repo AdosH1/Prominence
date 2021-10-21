@@ -15,15 +15,18 @@ namespace Sequoia
             Player = player;
             var awakeningAct = new AwakeningAct(Name, player);
             var discoveryAct = new DiscoveryAct(Name, player);
+            var miscAct = new MiscellaneousAct(Name, player);
 
             awakeningAct.Initialise();
             discoveryAct.Initialise();
+            miscAct.Initialise();
 
 
             Acts = new Dictionary<string, IActModel>()
             {
                 { AwakeningAct.Name, awakeningAct },
-                { DiscoveryAct.Name, discoveryAct }
+                { DiscoveryAct.Name, discoveryAct },
+                { MiscellaneousAct.Name, miscAct }
             };
         }
     }

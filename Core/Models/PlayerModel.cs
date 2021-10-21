@@ -92,5 +92,16 @@ namespace Core.Models
                 Flags[flag] -= 1;
             }
         }
+
+        public void Reset()
+        {
+            Inventory.Clear();
+            Visited.Clear();
+            Log.Clear();
+            Flags.Clear();
+
+            Energy = 3;
+            Location = new LocationModel();
+        }
     }
 }
