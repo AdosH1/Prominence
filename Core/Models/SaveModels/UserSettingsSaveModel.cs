@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Core.Models.SaveModels;
 
-namespace Core.Models
+namespace Core.Models.SaveModels
 {
-    public class UserSettingsModel
+    public class UserSettingsSaveModel
     {
-
         public bool DisplayAds;
         public bool MuteSound;
 
-        public UserSettingsModel(UserSettingsSaveModel theModel)
+        public UserSettingsSaveModel(UserSettingsModel theModel)
         {
             DisplayAds = theModel.DisplayAds;
             MuteSound = theModel.MuteSound;
