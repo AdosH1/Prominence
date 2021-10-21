@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using Core.Models;
 using Core.Models.SaveModels;
 
-namespace Prominence.Model
+namespace Core.Models
 {
     /// <summary>
     /// Just do label with text type?

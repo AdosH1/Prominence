@@ -9,7 +9,7 @@ namespace Core.Models.SaveModels
         public string Text { get; set; }
         public LabelType Type { get; set; }
 
-        public LabelSaveModel(DialogueModel theLabel)
+        public LabelSaveModel(DialogueLabel theLabel)
         {
             Text = theLabel.Text;
             Type = theLabel.Type;
