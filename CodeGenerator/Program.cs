@@ -8,24 +8,18 @@ namespace CodeGenerator
     {
         public static string FilePath = @"C:\Users\adenh\source\repos\Prominence\CodeGenerator\bin\Debug\net5.0\code.cs";
         public static List<string> Frames = new List<string>() {
-            "InfirmaryBase",
-            "HeadTowardsClosedDoor",
-            "InvestigateVent",
-            "VentEntrance",
-            "ClimbThroughVent",
-            "ClimbThroughVent2",
-            "PushTheDoor",
-            "PushTheDoor2",
-            "PushTheDoor3",
-            "PushTheDoor4",
-            "PushTheDoor5",
-            "PushTheDoor6",
-            "PushTheDoor7",
-            "PushTheDoor8",
-            "PushTheDoor9",
-            "PushTheDoor10",
-            "PushTheDoor11",
-            "PushTheDoor12",
+            "PreNavigationBase",
+            "NavigationDoor",
+            "NavigationDoor2",
+            "InspectTheRoom",
+            "ExamineThePapers",
+            "Note1",
+            "Note2",
+            "SideRoomBase",
+            "ExamineTheBody",
+            "InspectSideRoom",
+            "CheckUnderSeat",
+            "GrabMagazine",
         };
 
         static void Main(string[] args)
@@ -53,7 +47,7 @@ namespace CodeGenerator
         {
             foreach (var frame in frames)
             {
-                writer.WriteLine($"{frame} = new FrameModel(Film, Act, Scene, \"{frame}\", Constants.RecoveryRoom);");
+                writer.WriteLine($"{frame} = new FrameModel(Film, Act, Scene, \"{frame}\", Constants.Black);");
             }
         }
 

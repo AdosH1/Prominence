@@ -11,6 +11,12 @@ namespace Core.Models
         public bool DisplayAds;
         public bool MuteSound;
 
+        public UserSettingsModel()
+        {
+            DisplayAds = true;
+            MuteSound = false;
+        }
+
         public UserSettingsModel(UserSettingsSaveModel theModel)
         {
             DisplayAds = theModel.DisplayAds;
