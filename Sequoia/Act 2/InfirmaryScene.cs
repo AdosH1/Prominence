@@ -38,25 +38,25 @@ namespace Sequoia
             Act = act;
             Player = player;
 
-            InfirmaryBase = new FrameModel(Film, Act, Scene, "InfirmaryBase", Constants.Infirmary);
-            HeadTowardsClosedDoor = new FrameModel(Film, Act, Scene, "HeadTowardsClosedDoor", Constants.Infirmary);
-            InvestigateVent = new FrameModel(Film, Act, Scene, "InvestigateVent", Constants.Infirmary);
-            VentEntrance = new FrameModel(Film, Act, Scene, "VentEntrance", Constants.Infirmary);
-            ClimbThroughVent = new FrameModel(Film, Act, Scene, "ClimbThroughVent", Constants.Infirmary);
-            ClimbThroughVent2 = new FrameModel(Film, Act, Scene, "ClimbThroughVent2", Constants.Infirmary);
-            FollowBloodTrail = new FrameModel(Film, Act, Scene, "FollowBloodTrail", Constants.Infirmary);
-            PushTheDoor = new FrameModel(Film, Act, Scene, "PushTheDoor", Constants.Infirmary);
-            PushTheDoor2 = new FrameModel(Film, Act, Scene, "PushTheDoor2", Constants.Infirmary);
-            PushTheDoor3 = new FrameModel(Film, Act, Scene, "PushTheDoor3", Constants.Infirmary);
-            PushTheDoor4 = new FrameModel(Film, Act, Scene, "PushTheDoor4", Constants.Infirmary);
-            PushTheDoor5 = new FrameModel(Film, Act, Scene, "PushTheDoor5", Constants.Infirmary);
-            PushTheDoor6 = new FrameModel(Film, Act, Scene, "PushTheDoor6", Constants.Infirmary);
-            PushTheDoor7 = new FrameModel(Film, Act, Scene, "PushTheDoor7", Constants.Infirmary);
-            PushTheDoor8 = new FrameModel(Film, Act, Scene, "PushTheDoor8", Constants.Infirmary);
-            PushTheDoor9 = new FrameModel(Film, Act, Scene, "PushTheDoor9", Constants.Infirmary);
-            PushTheDoor10 = new FrameModel(Film, Act, Scene, "PushTheDoor10", Constants.Infirmary);
-            PushTheDoor11 = new FrameModel(Film, Act, Scene, "PushTheDoor11", Constants.Infirmary);
-            HeadThroughGap = new FrameModel(Film, Act, Scene, "HeadThroughGap", Constants.Infirmary);
+            InfirmaryBase = new FrameModel(Film, Act, Scene, "InfirmaryBase", Constants.RecoveryBase);
+            HeadTowardsClosedDoor = new FrameModel(Film, Act, Scene, "HeadTowardsClosedDoor", Constants.RecoveryBase);
+            InvestigateVent = new FrameModel(Film, Act, Scene, "InvestigateVent", Constants.RecoveryBase);
+            VentEntrance = new FrameModel(Film, Act, Scene, "VentEntrance", Constants.RecoveryBase);
+            ClimbThroughVent = new FrameModel(Film, Act, Scene, "ClimbThroughVent", Constants.RecoveryBase);
+            ClimbThroughVent2 = new FrameModel(Film, Act, Scene, "ClimbThroughVent2", Constants.Black);
+            FollowBloodTrail = new FrameModel(Film, Act, Scene, "FollowBloodTrail", Constants.RecoveryBase);
+            PushTheDoor = new FrameModel(Film, Act, Scene, "PushTheDoor", Constants.RecoveryBase);
+            PushTheDoor2 = new FrameModel(Film, Act, Scene, "PushTheDoor2", Constants.RecoveryBase);
+            PushTheDoor3 = new FrameModel(Film, Act, Scene, "PushTheDoor3", Constants.RecoveryBase);
+            PushTheDoor4 = new FrameModel(Film, Act, Scene, "PushTheDoor4", Constants.RecoveryBase);
+            PushTheDoor5 = new FrameModel(Film, Act, Scene, "PushTheDoor5", Constants.RecoveryBase);
+            PushTheDoor6 = new FrameModel(Film, Act, Scene, "PushTheDoor6", Constants.RecoveryBase);
+            PushTheDoor7 = new FrameModel(Film, Act, Scene, "PushTheDoor7", Constants.RecoveryBase);
+            PushTheDoor8 = new FrameModel(Film, Act, Scene, "PushTheDoor8", Constants.RecoveryBase);
+            PushTheDoor9 = new FrameModel(Film, Act, Scene, "PushTheDoor9", Constants.RecoveryBase);
+            PushTheDoor10 = new FrameModel(Film, Act, Scene, "PushTheDoor10", Constants.RecoveryBase);
+            PushTheDoor11 = new FrameModel(Film, Act, Scene, "PushTheDoor11", Constants.RecoveryBase);
+            HeadThroughGap = new FrameModel(Film, Act, Scene, "HeadThroughGap", Constants.Black);
 
             Frames = new Dictionary<string, FrameModel>() {
                 {InfirmaryBase.Name,InfirmaryBase},
@@ -154,7 +154,7 @@ namespace Sequoia
                     new ButtonModel("Push the door.", PushTheDoor,
                         condition: new Func<bool>(() => { return Player.HasVisited(HeadTowardsClosedDoor.CurrentLocation) && !Player.HasVisited(PushTheDoor11.CurrentLocation); })),
                     // Made it to the end
-                    new ButtonModel("Head through the gap.", PushTheDoor,
+                    new ButtonModel("Head through the gap.", HeadThroughGap,
                         condition: new Func<bool>(() => { return Player.HasVisited(PushTheDoor11.CurrentLocation); })),
                     // Investigate vent (have not been to entrance)
                     new ButtonModel("Investigate vent.", InvestigateVent,
@@ -237,8 +237,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to PreNavigation Scene
-                    new ButtonModel("Jump down.", ClimbThroughVent2),
+                    new ButtonModel("Jump down.", PreNavigationScene.PreNavigationBase),
                 });
         }
 
@@ -510,8 +509,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to pre-navigation scene
-                    new ButtonModel("Continue.", HeadThroughGap),
+                    new ButtonModel("Continue.", PreNavigationScene.PreNavigationBase),
                 });
         }
 

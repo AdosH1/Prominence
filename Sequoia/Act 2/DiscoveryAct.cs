@@ -12,6 +12,8 @@ namespace Sequoia
         public static StorageRoomScene StorageRoomScene;
         public static RecoveryRoomScene RecoveryRoomScene;
         public static InfirmaryScene InfirmaryScene;
+        public static PreNavigationScene PreNavigationScene;
+
         public DiscoveryAct(string film, PlayerModel player)
         {
             Film = film;
@@ -21,13 +23,15 @@ namespace Sequoia
             StorageRoomScene = new StorageRoomScene(film, Name, player);
             RecoveryRoomScene = new RecoveryRoomScene(film, Name, player);
             InfirmaryScene = new InfirmaryScene(film, Name, player);
+            PreNavigationScene = new PreNavigationScene(film, Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
                 { TJunctionScene.Scene, TJunction },
                 { StorageRoomScene.Scene, StorageRoomScene },
                 { RecoveryRoomScene.Scene, RecoveryRoomScene },
-                { InfirmaryScene.Scene, InfirmaryScene }
+                { InfirmaryScene.Scene, InfirmaryScene },
+                { PreNavigationScene.Scene, PreNavigationScene }
             };
         }
 
@@ -37,6 +41,7 @@ namespace Sequoia
             StorageRoomScene.Initialise();
             RecoveryRoomScene.Initialise();
             InfirmaryScene.Initialise();
+            PreNavigationScene.Initialise();
 
             OnEnter = onEnter;
             OnExit = onExit;
