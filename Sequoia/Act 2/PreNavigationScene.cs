@@ -121,8 +121,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to Navigation Room
-                    //new ButtonModel("Continue.", NavigationDoor2),
+                    new ButtonModel("Continue.", NavigationRoomScene.Entrance),
                     new ButtonModel("Return.", PreNavigationBase)
                 });
         }

@@ -89,7 +89,11 @@ namespace Core.Models
 
         public bool HasFlag(string flag)
         {
-            return Flags.ContainsKey(flag);
+            if (Flags.ContainsKey(flag))
+            {
+                return Flags[flag] > 0;
+            }
+            return false;
         }
 
         public int GetFlag(string flag)

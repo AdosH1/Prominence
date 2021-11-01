@@ -75,9 +75,8 @@ namespace Sequoia
                         action: new Func<Task>(async () => { Player.SetTJunctionScene(); })),
                     new ButtonModel("Infirmary.", InfirmaryScene.InfirmaryBase,
                         action: new Func<Task>(async () => { Player.SetInfirmaryScene(); })),
-                    // TODO: Add navigation room
-                    //new ButtonModel("Navigation Room.", InfirmaryScene.InfirmaryBase,
-                    //    action: new Func<Task>(async () => { })),
+                    new ButtonModel("Navigation Room.", NavigationRoomScene.Entrance,
+                        action: new Func<Task>(async () => { Player.SetNavigationScene(); })),
                }
             );
         }
