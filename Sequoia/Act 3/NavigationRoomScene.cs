@@ -605,8 +605,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to Escape Corridor
-                    //new ButtonModel("Run.", ActivateEvacuationProtocol3),
+                    new ButtonModel("Run.", EscapeCorridorScene.HeadToCorridor),
                 });
         }
     }

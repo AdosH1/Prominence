@@ -17,6 +17,7 @@ namespace Sequoia
         public static readonly string BloodTypeZPlus = "Sequoia.BloodType.Z+";
         public static readonly string FeralSaved = "Sequoia.FeralSaved";
         public static readonly string JanHasBullets = "Sequoia.JanHasBullets";
+        public static readonly string FeralsDead = "Sequoia.FeralsDead";
 
         // Items
         public static readonly string DroneAccessCard = "Sequoia.DroneAccessCard";

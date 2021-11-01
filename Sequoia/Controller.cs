@@ -46,6 +46,16 @@ namespace Sequoia
             player.AddItem(Constants.SteinmannAccessCard);
         }
 
+        public static void SetNavigationScene(this PlayerModel player)
+        {
+            player.Reset();
+            player.AddItem(Constants.DroneAccessCard);
+            player.AddItem(Constants.SpareBattery);
+            player.AddItem(Constants.SpareMagazine);
+            player.AddItem(Constants.SteinmannAccessCard);
+            player.IncrementFlag(Constants.FeralSaved);
+        }
+
 
 
     }
