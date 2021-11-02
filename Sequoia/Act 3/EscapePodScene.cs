@@ -12,7 +12,17 @@ namespace Sequoia
         public static string Scene = "EscapePod";
         public static PlayerModel Player;
 
-        public static FrameModel StorageRoomBase;
+        public static FrameModel ContinueToEscapePods;
+        public static FrameModel HelpJanWithBullets;
+        public static FrameModel HelpJanWithBullets2;
+        public static FrameModel HelpJanNoBullets;
+        public static FrameModel HelpJanNoBullets2;
+        public static FrameModel KeepLooking;
+        public static FrameModel KeepLookingJanEntersWithBullets;
+        public static FrameModel KeepLookingJanEntersNoBullets;
+        public static FrameModel ContinueToEscapePodsBothInside;
+        public static FrameModel JanReadsTerminal;
+        public static FrameModel KeepLooking2;
 
         public EscapePodScene(string film, string act, PlayerModel player)
         {
@@ -20,34 +30,249 @@ namespace Sequoia
             Act = act;
             Player = player;
 
-            StorageRoomBase = new FrameModel(Film, Act, Scene, "StorageRoomBase", Constants.StorageRoom);
+            ContinueToEscapePods = new FrameModel(Film, Act, Scene, "ContinueToEscapePods", Constants.Black);
+            HelpJanWithBullets = new FrameModel(Film, Act, Scene, "HelpJanWithBullets", Constants.Black);
+            HelpJanWithBullets2 = new FrameModel(Film, Act, Scene, "HelpJanWithBullets2", Constants.Black);
+            HelpJanNoBullets = new FrameModel(Film, Act, Scene, "HelpJanNoBullets", Constants.Black);
+            HelpJanNoBullets2 = new FrameModel(Film, Act, Scene, "HelpJanNoBullets2", Constants.Black);
+            KeepLooking = new FrameModel(Film, Act, Scene, "KeepLooking", Constants.Black);
+            KeepLookingJanEntersWithBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersWithBullets", Constants.Black);
+            KeepLookingJanEntersNoBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersNoBullets", Constants.Black);
+            ContinueToEscapePodsBothInside = new FrameModel(Film, Act, Scene, "ContinueToEscapePodsBothInside", Constants.Black);
+            JanReadsTerminal = new FrameModel(Film, Act, Scene, "JanReadsTerminal", Constants.Black);
+            KeepLooking2 = new FrameModel(Film, Act, Scene, "KeepLooking2", Constants.Black);
 
             Frames = new Dictionary<string, FrameModel>() {
-                {StorageRoomBase.Name, StorageRoomBase},
+                {ContinueToEscapePods.Name,ContinueToEscapePods},
+                {HelpJanWithBullets.Name,HelpJanWithBullets},
+                {HelpJanWithBullets2.Name,HelpJanWithBullets2},
+                {HelpJanNoBullets.Name,HelpJanNoBullets},
+                {HelpJanNoBullets2.Name,HelpJanNoBullets2},
+                {KeepLooking.Name,KeepLooking},
+                {KeepLookingJanEntersWithBullets.Name,KeepLookingJanEntersWithBullets},
+                {KeepLookingJanEntersNoBullets.Name,KeepLookingJanEntersNoBullets},
+                {ContinueToEscapePodsBothInside.Name,ContinueToEscapePodsBothInside},
+                {JanReadsTerminal.Name,JanReadsTerminal},
+                {KeepLooking2.Name,KeepLooking2},
             };
         }
 
         public static void Initialise()
         {
-            InitialiseStorageRoomBase(StorageRoomBase);
+            InitialiseContinueToEscapePods(ContinueToEscapePods);
+            InitialiseHelpJanWithBullets(HelpJanWithBullets);
+            InitialiseHelpJanWithBullets2(HelpJanWithBullets2);
+            InitialiseHelpJanNoBullets(HelpJanNoBullets);
+            InitialiseHelpJanNoBullets2(HelpJanNoBullets2);
+            InitialiseKeepLooking(KeepLooking);
+            InitialiseKeepLookingJanEntersWithBullets(KeepLookingJanEntersWithBullets);
+            InitialiseKeepLookingJanEntersNoBullets(KeepLookingJanEntersNoBullets);
+            InitialiseContinueToEscapePodsBothInside(ContinueToEscapePodsBothInside);
+            InitialiseJanReadsTerminal(JanReadsTerminal);
+            InitialiseKeepLooking2(KeepLooking2);
         }
 
-        public static void InitialiseStorageRoomBase(FrameModel frame)
+        public static void InitialiseContinueToEscapePods(FrameModel frame)
         {
             frame.Initialise(
                 new List<DialogueModel>() {
-                    new DialogueModel("In the storage room, a dim light shines from the ceiling above."),
-                    new DialogueModel("There are many shelves in the room, filled with an assortment of miscellaneous boxes."),
-                    new DialogueModel("The shelves cast large shadows, keeping the corners of the room dark. It gives you an uneasy feeling.")
+                    new DialogueModel("As you enter the room, you make your way immediately to the evacuation terminal."),
+                    new DialogueModel("    > ERROR: Electricity reserve is at critical capacity."),
+                    new DialogueModel("    > Systems will automatically shutdown in 3 minutes."),
+                    new DialogueModel("    > ERROR: Insufficient power to launch escape pods."),
+                    new DialogueModel("You hit the panel. You are stuck.")
                 },
                 new List<ButtonModel>()
                 {
-                    new ButtonModel("Examine the boxes.", StorageRoomBase),
-                    new ButtonModel("Inspect the room.", StorageRoomBase,
-                        condition: new Func<bool>(() => { return !Player.HasVisited(StorageRoomBase.CurrentLocation); })),
+                    new ButtonModel("Help Jan.", HelpJanWithBullets,
+                        condition: new Func<bool>(() => { return Player.HasFlag(Constants.JanHasBullets); })),
+                    new ButtonModel("Help Jan.", HelpJanNoBullets,
+                        condition: new Func<bool>(() => { return !Player.HasFlag(Constants.JanHasBullets); })),
+                    new ButtonModel("Keep looking.", KeepLooking),
                 });
         }
 
+        public static void InitialiseHelpJanWithBullets(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You hear the fighting continue outside until suddenly, many shots are fired, followed by two distinct clicks."),
+                    new DialogueModel("You bump into Jan as he enters the room. There's blood all over him, but its not his."),
+                    new DialogueModel("He locks the exit with his access card and gives out a sigh."),
+                    new DialogueModel("\"Are we ready to go?\"."),
+                    new DialogueModel("You shake your head.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", HelpJanWithBullets2),
+                });
+        }
+
+        public static void InitialiseHelpJanWithBullets2(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Reading over the terminal, Jan gives a few nods."),
+                    new DialogueModel("\"We must've used all the power sending the others to the surface...\""),
+                    new DialogueModel("He takes a seat by the escape pod."),
+                    new DialogueModel("\"It's not all bad, we saved the others. Perhaps they'll be able to continue our mission...\""),
+                    new DialogueModel("\"...All we can do now is sit it out and relax, the ship is flooding out anyway.\"")
+                },
+                new List<ButtonModel>()
+                {
+                    // TODO: Connect to finale Join Jan
+                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Keep looking.", KeepLooking,
+                        condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
+                    // TODO: Connect to finale Power Escape Pod
+                    //new ButtonModel("Keep looking.", PowerEscapePod,
+                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
+                });
+        }
+
+        public static void InitialiseHelpJanNoBullets(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You hear the fighting continue outside until suddenly, a brutal crack is heard."),
+                    new DialogueModel("As you head through the doorway you bump into Jan. He is covered in blood, stemming from a wound in his chest."),
+                    new DialogueModel("He slaps his bloodied access card on you, \"Close the door will you?\"."),
+                    new DialogueModel("Looking out, you see the large feral has been defeated outside. You close the door."),
+                    new DialogueModel("\"Are we ready to go?\" You shake your head.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", HelpJanNoBullets2),
+                });
+        }
+
+        public static void InitialiseHelpJanNoBullets2(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Collapsing over the terminal, Jan steadies himself to read. He gives a couple weak nods."),
+                    new DialogueModel("\"Makes sense, we must've used all the power sending the others to the surface...\""),
+                    new DialogueModel("He takes a seat by the escape pod."),
+                    new DialogueModel("\"It's not all bad, we saved the others. Perhaps they'll be able to continue our mission...\""),
+                    new DialogueModel("\"...All we can do now is sit it out and relax, I'm not long for this world anyway.\"")
+                },
+                new List<ButtonModel>()
+                {
+                    // TODO: Connect to finale Join Jan
+                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Keep looking.", KeepLooking,
+                        condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
+                    // TODO: Connect to finale Power Escape Pod
+                    //new ButtonModel("Keep looking.", PowerEscapePod,
+                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
+                });
+        }
+
+        public static void InitialiseKeepLooking(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You keep looking for an alternative solution."),
+                    new DialogueModel("Suddenly, you remember that there were hidden power panels around the doors in the ship."),
+                    new DialogueModel("And certainly enough, you found one connected to the escape pod.")
+                },
+                new List<ButtonModel>()
+                {
+                    // TODO: Connect to finale Join Jan
+                    //new ButtonModel("Join Jan.", JoinJan),
+                    // TODO: Connect to finale Power Escape Pod
+                    //new ButtonModel("Keep looking.", PowerEscapePod,
+                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
+
+                    new ButtonModel("Keep looking.", KeepLooking,
+                        condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
+                    
+                });
+        }
+
+
+
+        public static void InitialiseKeepLookingJanEntersWithBullets(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Many shots are fired outside followed by a couple mechanical clicks."),
+                    new DialogueModel("Jan enters into the room. There's blood all over him - but its not his."),
+                    new DialogueModel("He locks the exit with his access card and gives out a sigh."),
+                    new DialogueModel("\"Are we ready to go?\" You shake your head.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", HelpJanWithBullets2),
+                });
+        }
+
+        public static void InitialiseKeepLookingJanEntersNoBullets(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You hear the fighting continue outside until suddenly, a brutal crack is heard."),
+                    new DialogueModel("Jan enters the room, bumping into the access panel, he uses his bloodied access card to close the doorway."),
+                    new DialogueModel("It looks like he is suffering from a wound on his chest."),
+                    new DialogueModel("\"Are we ready to go?\" He asks."),
+                    new DialogueModel("You shake your head.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", HelpJanNoBullets2),
+                });
+        }
+
+        public static void InitialiseContinueToEscapePodsBothInside(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You and Jan enter the room and lock the door behind, you make your way immediately to the escape pod terminal."),
+                    new DialogueModel("  > ERROR: Electricity reserve is at critical capacity."),
+                    new DialogueModel("  > Systems will automatically shutdown in 3 minutes."),
+                    new DialogueModel("  > ERROR: Insufficient power to launch escape pods."),
+                    new DialogueModel("You hit the panel. You are stuck.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Continue.", JanReadsTerminal),
+                });
+        }
+
+        public static void InitialiseJanReadsTerminal(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Reading over the terminal, Jan gives a few nods."),
+                    new DialogueModel("\"We must've used all the power sending the others to the surface..\""),
+                    new DialogueModel("He takes a seat by the escape pod."),
+                    new DialogueModel("\"It's not all bad, we saved the others. Perhaps they'll be able to continue our mission...\""),
+                    new DialogueModel("\"...All we can do now is sit it out and relax, the ship is going to shutdown soon anyway.\"")
+                },
+                new List<ButtonModel>()
+                {
+                    // TODO: Connect to finale Join Jan
+                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Keep looking.", KeepLooking2),
+                });
+        }
+
+        public static void InitialiseKeepLooking2(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("You keep looking for an alternative solution."),
+                    new DialogueModel("Suddenly, you remember that there were hidden power panels around the doors in the ship."),
+                    new DialogueModel("And certainly enough, you found one connected to the escape pod.")
+                },
+                new List<ButtonModel>()
+                {
+                    // TODO: Connect to finale Join Jan
+                    //new ButtonModel("Join Jan.", JoinJan),
+                    // TODO: Connect to finale Power The Escape Pod
+                    //new ButtonModel("Power the escape pod.", KeepLooking2),
+                });
+        }
 
     }
 }

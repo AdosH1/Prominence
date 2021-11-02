@@ -294,8 +294,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Conntect to escape pods scene
-                    //new ButtonModel("Continue.", MiscellaneousScene.Dead)
+                    new ButtonModel("Continue.", EscapePodScene.ContinueToEscapePods)
                 });
         }
 
@@ -313,8 +312,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Conntect to Continue to Escape Pods Both Jan and You Inside
-                    //new ButtonModel("Enter evacuation room.", MiscellaneousScene.Dead)
+                    new ButtonModel("Continue.", EscapePodScene.ContinueToEscapePodsBothInside)
                 });
         }
 
@@ -333,8 +331,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Conntect to Continue to Escape Pod
-                    //new ButtonModel("Enter evacuation room.", MiscellaneousScene.Dead)
+                    new ButtonModel("Continue.", EscapePodScene.ContinueToEscapePods)
                 });
         }
 
