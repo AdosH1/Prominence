@@ -30,17 +30,17 @@ namespace Sequoia
             Act = act;
             Player = player;
 
-            ContinueToEscapePods = new FrameModel(Film, Act, Scene, "ContinueToEscapePods", Constants.Black);
-            HelpJanWithBullets = new FrameModel(Film, Act, Scene, "HelpJanWithBullets", Constants.Black);
-            HelpJanWithBullets2 = new FrameModel(Film, Act, Scene, "HelpJanWithBullets2", Constants.Black);
-            HelpJanNoBullets = new FrameModel(Film, Act, Scene, "HelpJanNoBullets", Constants.Black);
-            HelpJanNoBullets2 = new FrameModel(Film, Act, Scene, "HelpJanNoBullets2", Constants.Black);
-            KeepLooking = new FrameModel(Film, Act, Scene, "KeepLooking", Constants.Black);
-            KeepLookingJanEntersWithBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersWithBullets", Constants.Black);
-            KeepLookingJanEntersNoBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersNoBullets", Constants.Black);
-            ContinueToEscapePodsBothInside = new FrameModel(Film, Act, Scene, "ContinueToEscapePodsBothInside", Constants.Black);
-            JanReadsTerminal = new FrameModel(Film, Act, Scene, "JanReadsTerminal", Constants.Black);
-            KeepLooking2 = new FrameModel(Film, Act, Scene, "KeepLooking2", Constants.Black);
+            ContinueToEscapePods = new FrameModel(Film, Act, Scene, "ContinueToEscapePods", Constants.EscapePods);
+            HelpJanWithBullets = new FrameModel(Film, Act, Scene, "HelpJanWithBullets", Constants.EscapePods);
+            HelpJanWithBullets2 = new FrameModel(Film, Act, Scene, "HelpJanWithBullets2", Constants.EscapePods);
+            HelpJanNoBullets = new FrameModel(Film, Act, Scene, "HelpJanNoBullets", Constants.EscapePods);
+            HelpJanNoBullets2 = new FrameModel(Film, Act, Scene, "HelpJanNoBullets2", Constants.EscapePods);
+            KeepLooking = new FrameModel(Film, Act, Scene, "KeepLooking", Constants.EscapePods);
+            KeepLookingJanEntersWithBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersWithBullets", Constants.EscapePods);
+            KeepLookingJanEntersNoBullets = new FrameModel(Film, Act, Scene, "KeepLookingJanEntersNoBullets", Constants.EscapePods);
+            ContinueToEscapePodsBothInside = new FrameModel(Film, Act, Scene, "ContinueToEscapePodsBothInside", Constants.EscapePods);
+            JanReadsTerminal = new FrameModel(Film, Act, Scene, "JanReadsTerminal", Constants.EscapePods);
+            KeepLooking2 = new FrameModel(Film, Act, Scene, "KeepLooking2", Constants.EscapePods);
 
             Frames = new Dictionary<string, FrameModel>() {
                 {ContinueToEscapePods.Name,ContinueToEscapePods},
@@ -120,13 +120,11 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to finale Join Jan
-                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Join Jan.", FinaleScene.JoinJanEnding),
                     new ButtonModel("Keep looking.", KeepLooking,
                         condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
-                    // TODO: Connect to finale Power Escape Pod
-                    //new ButtonModel("Keep looking.", PowerEscapePod,
-                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
+                    new ButtonModel("Keep looking.", FinaleScene.PowerEscapePod,
+                        condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
                 });
         }
 
@@ -158,13 +156,11 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to finale Join Jan
-                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Join Jan.", FinaleScene.JoinJanEnding),
                     new ButtonModel("Keep looking.", KeepLooking,
                         condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
-                    // TODO: Connect to finale Power Escape Pod
-                    //new ButtonModel("Keep looking.", PowerEscapePod,
-                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
+                    new ButtonModel("Keep looking.", FinaleScene.PowerEscapePod,
+                        condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
                 });
         }
 
@@ -178,12 +174,9 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to finale Join Jan
-                    //new ButtonModel("Join Jan.", JoinJan),
-                    // TODO: Connect to finale Power Escape Pod
-                    //new ButtonModel("Keep looking.", PowerEscapePod,
-                    //    condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
-
+                    new ButtonModel("Join Jan.", FinaleScene.JoinJanEnding),
+                    new ButtonModel("Keep looking.", FinaleScene.PowerEscapePod,
+                        condition: new Func<bool>(() => { return Player.HasVisited(KeepLooking.CurrentLocation); })),
                     new ButtonModel("Keep looking.", KeepLooking,
                         condition: new Func<bool>(() => { return !Player.HasVisited(KeepLooking.CurrentLocation); })),
                     
@@ -251,8 +244,7 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to finale Join Jan
-                    //new ButtonModel("Join Jan.", JoinJan),
+                    new ButtonModel("Join Jan.", FinaleScene.JoinJanEnding),
                     new ButtonModel("Keep looking.", KeepLooking2),
                 });
         }
@@ -267,10 +259,8 @@ namespace Sequoia
                 },
                 new List<ButtonModel>()
                 {
-                    // TODO: Connect to finale Join Jan
-                    //new ButtonModel("Join Jan.", JoinJan),
-                    // TODO: Connect to finale Power The Escape Pod
-                    //new ButtonModel("Power the escape pod.", KeepLooking2),
+                    new ButtonModel("Join Jan.", FinaleScene.JoinJanEnding),
+                    new ButtonModel("Power escape pod.", FinaleScene.PowerEscapePod),
                 });
         }
 

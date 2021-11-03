@@ -16,6 +16,8 @@ namespace Sequoia
         public static FrameModel Dead;
         public static FrameModel Teleport;
         public static FrameModel UncompletedSections;
+        public static FrameModel ThankYouForPlaying;
+        public static FrameModel ThankYouForPlayingGoodEnding;
         public MiscellaneousScene() { }
 
         public MiscellaneousScene(string film, string act, PlayerModel player)
@@ -27,11 +29,15 @@ namespace Sequoia
             Dead = new FrameModel(Film, Act, Scene, "Dead", Constants.Black);
             Teleport = new FrameModel(Film, Act, Scene, "Teleport", Constants.Black);
             UncompletedSections = new FrameModel(Film, Act, Scene, "UncompletedSections", Constants.Black);
-            
+            ThankYouForPlaying = new FrameModel(Film, Act, Scene, "ThankYouForPlaying", Constants.Black);
+            ThankYouForPlayingGoodEnding = new FrameModel(Film, Act, Scene, "ThankYouForPlayingGoodEnding", Constants.Sea);
+
             Frames = new Dictionary<string, FrameModel>() {
                 {Dead.Name, Dead},
                 {Teleport.Name, Teleport},
                 {UncompletedSections.Name, UncompletedSections},
+                {ThankYouForPlaying.Name, ThankYouForPlaying},
+                {ThankYouForPlayingGoodEnding.Name, ThankYouForPlayingGoodEnding},
             };
         }
 
@@ -40,6 +46,7 @@ namespace Sequoia
             InitialiseDead(Dead);
             InitialiseTeleport(Teleport);
             InitialiseUncompletedSections(UncompletedSections);
+            InitialiseThankYouForPlaying(ThankYouForPlaying);
         }
 
         public static void InitialiseDead(FrameModel frame)
@@ -92,6 +99,42 @@ namespace Sequoia
                 new List<ButtonModel>()
                 {
                     new ButtonModel("Ascend.", IncubationScene.Start),
+                }
+            );
+        }
+
+        public static void InitialiseThankYouForPlaying(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Thank you for playing."),
+                    new DialogueModel("If you would like to explore what you missed or hunt for achievements, feel free to restart the game."),
+                    new DialogueModel("Alternatively, you may access the archives by tapping on the special thanks area in the settings menu. This will allow you to skip to certain parts of the story."),
+                    new DialogueModel("If you would like to hear more about our titles in the future, please consider providing your email below.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Restart.", IncubationScene.Start, 
+                        action: new Func<Task>(async() =>{ Player.Reset(); })),
+                    //new ButtonModel("Let me know about future titles.", IncubationScene.Start),
+                }
+            );
+        }
+
+        public static void InitialiseThankYouForPlayingGoodEnding(FrameModel frame)
+        {
+            frame.Initialise(
+                new List<DialogueModel>() {
+                    new DialogueModel("Thank you for playing."),
+                    new DialogueModel("If you would like to explore what you missed or hunt for achievements, feel free to restart the game."),
+                    new DialogueModel("Alternatively, you may access the archives by tapping on the special thanks area in the settings menu. This will allow you to skip to certain parts of the story."),
+                    new DialogueModel("If you would like to hear more about our titles in the future, please consider providing your email below.")
+                },
+                new List<ButtonModel>()
+                {
+                    new ButtonModel("Restart.", IncubationScene.Start,
+                        action: new Func<Task>(async() =>{ Player.Reset(); })),
+                    //new ButtonModel("Let me know about future titles.", IncubationScene.Start),
                 }
             );
         }

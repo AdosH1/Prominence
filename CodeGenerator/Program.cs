@@ -8,17 +8,23 @@ namespace CodeGenerator
     {
         public static string FilePath = @"C:\Users\adenh\source\repos\Prominence\CodeGenerator\bin\Debug\net5.0\code.cs";
         public static List<string> Frames = new List<string>() {
-            "ContinueToEscapePods",
-            "HelpJanWithBullets",
-            "HelpJanWithBullets2",
-            "HelpJanNoBullets",
-            "HelpJanNoBullets2",
-            "KeepLooking",
-            "KeepLookingJanEntersWithBullets",
-            "KeepLookingJanEntersNoBullets",
-            "ContinueToEscapePodsBothInside",
-            "JanReadsTerminal",
-            "KeepLooking2",
+            "JoinJanEnding",
+            "JoinJanEnding2",
+            "PowerEscapePod",
+            "NoEnergyEnding",
+            "NoEnergyEnding2",
+            "PowerEscapePod2",
+            "MediumEnergyEnding",
+            "MediumEnergyEnding2",
+            "HighEnergyEnding",
+            "HighEnergyEnding2",
+            "HighEnergyEnding3",
+            "HighEnergyEnding4",
+            "BatteryEnding1",
+            "BatteryEnding2",
+            "BatteryEnding3",
+            "BatteryEnding4",
+            "BatteryEnding5",
         };
 
         static void Main(string[] args)

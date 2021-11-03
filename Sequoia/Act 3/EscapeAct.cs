@@ -11,7 +11,7 @@ namespace Sequoia
         public static NavigationRoomScene NavigationRoomScene;
         public static EscapeCorridorScene EscapeCorridorScene;
         public static EscapePodScene EscapePodScene;
-        public static FinishScene FinishScene;
+        public static FinaleScene FinishScene;
         public EscapeAct(string film, PlayerModel player)
         {
             Film = film;
@@ -20,14 +20,14 @@ namespace Sequoia
             NavigationRoomScene = new NavigationRoomScene(film, Name, player);
             EscapeCorridorScene = new EscapeCorridorScene(film, Name, player);
             EscapePodScene = new EscapePodScene(film, Name, player);
-            FinishScene = new FinishScene(film, Name, player);
+            FinishScene = new FinaleScene(film, Name, player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {
                 { NavigationRoomScene.Scene, NavigationRoomScene },
                 { EscapeCorridorScene.Scene, EscapeCorridorScene },
                 { EscapePodScene.Scene, EscapePodScene },
-                { FinishScene.Scene, FinishScene },
+                { FinaleScene.Scene, FinishScene },
 
             };
         }
@@ -37,7 +37,7 @@ namespace Sequoia
             NavigationRoomScene.Initialise();
             EscapeCorridorScene.Initialise();
             EscapePodScene.Initialise();
-            FinishScene.Initialise();
+            FinaleScene.Initialise();
 
             OnEnter = onEnter;
             OnExit = onExit;
