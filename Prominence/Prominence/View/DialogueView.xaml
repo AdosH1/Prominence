@@ -78,9 +78,9 @@
                                 <Button 
                                     Text="{Binding Text}" 
                                     Command="{Binding Command}" 
-                                    FontSize="Medium" 
+                                    FontSize="Small" 
                                     HorizontalOptions="Center" 
-                                    TextColor="White" 
+                                    TextColor="Black" 
                                     WidthRequest="350"
                                     BackgroundColor="{Binding Color}"/>
                             </StackLayout>
@@ -88,10 +88,14 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Grid>
-            <Grid x:Name="AchievementTab" Grid.Row="0" BackgroundColor="Red" >
-                <Label BackgroundColor="Silver"
-                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
-                   Text="{Binding AchievementText}"/>
+            <Grid x:Name="AchievementTab" Grid.Row="0" BackgroundColor="DarkGoldenrod" Padding="5" >
+                <Grid Grid.Row="0" BackgroundColor="Goldenrod" Padding="5" >
+                    <Grid Grid.Row="0" BackgroundColor="Gold" Padding="5" >
+                        <Label BackgroundColor="LightGray"
+                                HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" FontSize="Small"
+                                Text="{Binding AchievementText}"/>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
 

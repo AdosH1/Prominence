@@ -15,10 +15,12 @@ namespace Sequoia
             Player = player;
             var awakeningAct = new AwakeningAct(Name, player);
             var discoveryAct = new DiscoveryAct(Name, player);
+            var escapeAct = new EscapeAct(Name, player);
             var miscAct = new MiscellaneousAct(Name, player);
 
             awakeningAct.Initialise();
             discoveryAct.Initialise();
+            escapeAct.Initialise();
             miscAct.Initialise();
 
 
@@ -26,6 +28,7 @@ namespace Sequoia
             {
                 { AwakeningAct.Name, awakeningAct },
                 { DiscoveryAct.Name, discoveryAct },
+                { EscapeAct.Name, escapeAct},
                 { MiscellaneousAct.Name, miscAct }
             };
         }
