@@ -28,7 +28,6 @@ namespace Sequoia
                 { EscapeCorridorScene.Scene, EscapeCorridorScene },
                 { EscapePodScene.Scene, EscapePodScene },
                 { FinaleScene.Scene, FinishScene },
-
             };
         }
 
