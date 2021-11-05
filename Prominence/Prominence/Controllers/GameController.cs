@@ -20,6 +20,8 @@ namespace Prominence.Controllers
         public static DialogueViewModel DialogueViewModel;
         public static MenuViewModel MenuViewModel;
 
+        public static LocationModel TeleporterLocation;
+
         public static FrameModel Traverse(LocationModel location)
         {
             // Attempt to find frame in current scene

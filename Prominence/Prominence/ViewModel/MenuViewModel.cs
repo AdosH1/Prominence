@@ -41,11 +41,44 @@ namespace Prominence.ViewModel
             }
         }
 
+        private Command _teleporterCmd { get; set; }
+        public Command TeleporterCmd
+        {
+            get => _teleporterCmd;
+            set
+            {
+                _teleporterCmd = value;
+                NotifyPropertyChanged("TeleporterCmd");
+            }
+        }
+
+        private Command _closeMenuCmd { get; set; }
+        public Command CloseMenuCmd
+        {
+            get => _closeMenuCmd;
+            set
+            {
+                _closeMenuCmd = value;
+                NotifyPropertyChanged("CloseMenuCmd");
+            }
+        }
+
         public MenuViewModel()
         {
             GameController.MenuViewModel = this;
             MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
             GameController.ChangeMenuBackground(Constants.MenuScreen);
+            TeleporterCmd = new Command(async () =>
+            {
+                GameController.DialogueViewModel.Log.Clear();
+                var tp = GameController.Traverse(GameController.TeleporterLocation);
+                GameController.DialogueViewModel.LoadFrame(tp);
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+            });
+            CloseMenuCmd = new Command(async () =>
+            {
+                await Application.Current.MainPage.Navigation.PopModalAsync();
+            });
 
             LoadAchievements();
         }
