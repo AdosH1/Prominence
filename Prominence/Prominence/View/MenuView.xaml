@@ -16,9 +16,10 @@
   <ContentPage.Content>
         <Grid x:Name="ContextGrid" IsVisible="True">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="15*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.05*"/>
@@ -36,7 +37,7 @@
                         Grid.Column="0"
                         BackgroundColor="Transparent"
                         Source="{Binding MenuButtonImage}"
-                        Clicked="ReturnFromMenuButton" />
+                        Command="{Binding CloseMenuCmd}"/>
             </Grid>
             
             <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
@@ -71,7 +72,10 @@
                     </StackLayout>
                 </Grid>
             </Grid>
-            
+
+            <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                <Button BackgroundColor="Transparent" Command="{Binding TeleporterCmd}"/>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -16,10 +16,5 @@ namespace Prominence.View
         {
             InitializeComponent();
         }
-
-        private async void ReturnFromMenuButton(object sender, EventArgs e)
-        {
-            await Application.Current.MainPage.Navigation.PopModalAsync();
-        }
     }
 }
