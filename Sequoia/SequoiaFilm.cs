@@ -10,7 +10,7 @@ namespace Sequoia
         public static readonly string Name = "Sequoia";
         public SequoiaFilm() { }
 
-        public void Initialise(PlayerModel player)
+        public void Initialise(PlayerModel player, Action showInterstitalAd = null)
         {
             Player = player;
             var awakeningAct = new AwakeningAct(Name, player);
@@ -19,17 +19,17 @@ namespace Sequoia
             var miscAct = new MiscellaneousAct(Name, player);
 
             awakeningAct.Initialise();
-            discoveryAct.Initialise();
-            escapeAct.Initialise();
+            discoveryAct.Initialise(onEnter: showInterstitalAd);
+            escapeAct.Initialise(onEnter: showInterstitalAd);
             miscAct.Initialise();
 
 
             Acts = new Dictionary<string, IActModel>()
             {
-                { AwakeningAct.Name, awakeningAct },
-                { DiscoveryAct.Name, discoveryAct },
-                { EscapeAct.Name, escapeAct},
-                { MiscellaneousAct.Name, miscAct }
+                { awakeningAct.Name(), awakeningAct },
+                { discoveryAct.Name(), discoveryAct },
+                { escapeAct.Name(), escapeAct},
+                { miscAct.Name(), miscAct }
             };
         }
     }

@@ -13,10 +13,10 @@ namespace Sequoia
             return Achievements.GetAchievements();
         }
 
-        public static FilmModel GetFilm(PlayerModel player)
+        public static FilmModel GetFilm(PlayerModel player, Action showInterstitialAd = null)
         {
             var film = new Sequoia.SequoiaFilm();
-            film.Initialise(player);
+            film.Initialise(player, showInterstitialAd);
 
             Achievements.Initialise();
 

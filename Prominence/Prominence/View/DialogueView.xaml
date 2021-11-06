@@ -40,10 +40,7 @@
                             Grid.Column="0"
                             BackgroundColor="Transparent"
                             Source="{Binding MenuButtonImage}"
-                            Clicked="LaunchMenuButton" />
-                    <Button x:Name="LaunchAdButton"
-                            Grid.Column="1"
-                            Clicked="LaunchInterstitialAd" Text="Ad-Test" />
+                            Command="{Binding MenuCmd}"/>
                 </Grid>
                 <CollectionView Grid.Row="1" Grid.Column="1"
                         x:Name="LogCollection"

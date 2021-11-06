@@ -78,7 +78,7 @@ namespace Sequoia
                new List<ButtonModel>() {
                     new ButtonModel("Start.", IncubationScene.Start,
                         action: new Func<Task>(async () => { Player.Reset(); })),
-                    new ButtonModel("T-Junction.", RnDScene.LeaveScene,
+                    new ButtonModel("T-Junction.", TJunctionScene.HearSound,
                         action: new Func<Task>(async () => { Player.SetTJunctionScene(); })),
                     new ButtonModel("Infirmary.", InfirmaryScene.InfirmaryBase,
                         action: new Func<Task>(async () => { Player.SetInfirmaryScene(); })),
