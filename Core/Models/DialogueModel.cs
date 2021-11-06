@@ -155,14 +155,15 @@ namespace Core.Models
     public class ActModel : IActModel
     {
         public string Film { get; set; }
-        public string Name { get; }
+        //public string Name { get; }
+        public virtual string Name() { /*return "Uninitialized";*/ throw new Exception("Uninitialized"); }
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
         public Action OnExit { get; set; }
         public Dictionary<string, ISceneModel> Scenes { get; set; }
         public LocationModel Location()
         {
-            return new LocationModel(Film, this.Name);
+            return new LocationModel(Film, this.Name());
         }
     }
 
@@ -207,7 +208,8 @@ namespace Core.Models
     public interface IActModel
     {
         public string Film { get; set; }
-        public string Name { get; }
+        //public string Name { get; }
+        public string Name();
         public PlayerModel Player { get; set; }
         public Action OnEnter { get; set; }
         public Action OnExit { get; set; }

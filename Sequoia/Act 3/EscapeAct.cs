@@ -7,7 +7,7 @@ namespace Sequoia
 {
     public class EscapeAct : ActModel
     {
-        public static readonly string Name = "Escape";
+        public override string Name() { return "Escape"; }
         public static NavigationRoomScene NavigationRoomScene;
         public static EscapeCorridorScene EscapeCorridorScene;
         public static EscapePodScene EscapePodScene;
@@ -17,10 +17,10 @@ namespace Sequoia
             Film = film;
             Player = player;
 
-            NavigationRoomScene = new NavigationRoomScene(film, Name, player);
-            EscapeCorridorScene = new EscapeCorridorScene(film, Name, player);
-            EscapePodScene = new EscapePodScene(film, Name, player);
-            FinishScene = new FinaleScene(film, Name, player);
+            NavigationRoomScene = new NavigationRoomScene(film, Name(), player);
+            EscapeCorridorScene = new EscapeCorridorScene(film, Name(), player);
+            EscapePodScene = new EscapePodScene(film, Name(), player);
+            FinishScene = new FinaleScene(film, Name(), player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {

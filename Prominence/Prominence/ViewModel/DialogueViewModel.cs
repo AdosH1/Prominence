@@ -17,6 +17,7 @@ using Prominence.Contexts;
 using Sequoia;
 using Core.Models;
 using Xamarin.Essentials;
+using Prominence.Model.Interfaces;
 
 namespace Prominence.ViewModel
 {
@@ -24,6 +25,7 @@ namespace Prominence.ViewModel
     {
         public double Height { get; set; }
         public double Width { get; set; }
+        public MenuView MenuView { get; set; }
         public ObservableCollection<DialogueLabel> Log { get; set; }
         public ObservableCollection<Button> Buttons { get; set; }
         private string CurrentBackgroundImage { get; set; }
@@ -47,6 +49,17 @@ namespace Prominence.ViewModel
                 NotifyPropertyChanged("MenuButtonImage");
             }
         }
+        private Command _menuCmd { get; set; }
+        public Command MenuCmd
+        {
+            get => _menuCmd;
+            set
+            {
+                _menuCmd = value;
+                NotifyPropertyChanged("MenuCmd");
+            }
+        }
+
         public static Grid AchievementTab;
         public string _achievementText { get; set; }
         public string AchievementText
@@ -67,18 +80,22 @@ namespace Prominence.ViewModel
             Log = new ObservableCollection<DialogueLabel>();
             Buttons = new ObservableCollection<Button>();
 
-            MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
-
             GameController.DialogueViewModel = this;
-
             GameController.User =
                 new UserModel(
                     new UserSettingsModel(),
                     new PlayerModel("Ados")
                     );
-            GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player);
+            var showInterstitalAd = new Action(async () => { await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true); });
+            GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
             GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
+
+            MenuView = new MenuView();
+            MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
+            MenuCmd = new Command(async () => {
+                await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
+            });
 
             var destinationFrame = GameController.Traverse(GameController.Player.Location);
             LoadFrame(destinationFrame);

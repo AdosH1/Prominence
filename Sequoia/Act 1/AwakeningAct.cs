@@ -7,7 +7,7 @@ namespace Sequoia
 {
     public class AwakeningAct : ActModel
     {
-        public static readonly string Name = "Awakening";// { get { return "Awakening"; } }
+        public override string Name() { return "Awakening";  }
         public static IncubationScene IncubationScene;
         public static DroneRoomScene DroneRoomScene;
         public static ComputerRoomScene ComputerRoomScene;
@@ -17,10 +17,10 @@ namespace Sequoia
             Film = film;
             Player = player;
 
-            IncubationScene = new IncubationScene(film, Name, player);
-            DroneRoomScene = new DroneRoomScene(film, Name, player);
-            ComputerRoomScene = new ComputerRoomScene(film, Name, player);
-            RnDScene = new RnDScene(film, Name, player);
+            IncubationScene = new IncubationScene(film, Name(), player);
+            DroneRoomScene = new DroneRoomScene(film, Name(), player);
+            ComputerRoomScene = new ComputerRoomScene(film, Name(), player);
+            RnDScene = new RnDScene(film, Name(), player);
 
             Scenes = new Dictionary<string, ISceneModel>()
             {

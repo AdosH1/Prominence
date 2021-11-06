@@ -140,14 +140,21 @@ namespace Prominence.Controllers
 
             if (CurrentAct != null)
             {
-                if (CurrentAct.OnExit != null)
-                    CurrentAct.OnExit.Invoke();
+                if (CurrentAct.Name() != act.Name() &&
+                    CurrentAct.OnExit != null)
+                        CurrentAct.OnExit.Invoke();
+
+                if (CurrentAct.Name() != act.Name() &&
+                    act.OnEnter != null)
+                        act.OnEnter.Invoke();
+            }
+            else
+            {
+                CurrentAct?.OnEnter?.Invoke();
             }
 
             CurrentAct = act;
 
-            if (CurrentAct.OnEnter != null)
-                CurrentAct.OnEnter.Invoke();
         }
 
         public static void ChangeDialogueBackground(string background)
