@@ -25,7 +25,7 @@ namespace Sequoia
         {
             // Create achievements here
             // Requires initialization as LocationModels are only created at runtime, otherwise, it'd be great to keep this compile time friendly
-            FullyCharged = new Achievement(Constants.FullyCharged, GetDisplayName(Constants.FullyCharged), AchievementHelper.PlayerVisitedCondition(StorageRoomScene.OpenBatteryBox.CurrentLocation));
+            FullyCharged = new Achievement(Constants.FullyCharged, GetDisplayName(Constants.FullyCharged), AchievementHelper.PlayerVisitedCondition(StorageRoomScene.UsePRK.CurrentLocation));
             Merciful = new Achievement(Constants.Merciful, GetDisplayName(Constants.Merciful), AchievementHelper.PlayerVisitedCondition(RecoveryRoomScene.MachineSuccess.CurrentLocation));
             Persistent = new Achievement(Constants.Persistent, GetDisplayName(Constants.Persistent), AchievementHelper.PlayerVisitedCondition(InfirmaryScene.PushTheDoor11.CurrentLocation));
             Firepower = new Achievement(Constants.Firepower, GetDisplayName(Constants.Firepower), AchievementHelper.PlayerVisitedCondition(NavigationRoomScene.GiveSpareMagazine.CurrentLocation));

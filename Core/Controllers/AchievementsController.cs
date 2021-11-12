@@ -36,15 +36,5 @@ namespace Core.Controllers
             return newAchievements;
         }
 
-        public static List<Achievement> DoTaskAndEvaluateAchievements(Func<Task> task, UserModel user)
-        {
-            var initialState = GetState(user.AchievementsModel, user.PlayerModel);
-
-            task();
-
-            var currentState = GetState(user.AchievementsModel, user.PlayerModel);
-            return AchievementsController.GetStateDifferences(initialState, currentState);
-        }
-
     }
 }
