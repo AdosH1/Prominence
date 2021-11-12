@@ -39,14 +39,24 @@ namespace Prominence.ViewModel
                 NotifyPropertyChanged("Background");
             }
         }
-        private ImageSource _menuButtonImage { get; set; }
-        public ImageSource MenuButtonImage
+        private ImageSource _energyIcon { get; set; }
+        public ImageSource EnergyIcon
         {
-            get => _menuButtonImage;
+            get => _energyIcon;
             set
             {
-                _menuButtonImage = value;
-                NotifyPropertyChanged("MenuButtonImage");
+                _energyIcon = value;
+                NotifyPropertyChanged("EnergyIcon");
+            }
+        }
+        private ImageSource _menuButtonIcon { get; set; }
+        public ImageSource MenuButtonIcon
+        {
+            get => _menuButtonIcon;
+            set
+            {
+                _menuButtonIcon = value;
+                NotifyPropertyChanged("MenuButtonIcon");
             }
         }
         private Command _menuCmd { get; set; }
@@ -57,6 +67,39 @@ namespace Prominence.ViewModel
             {
                 _menuCmd = value;
                 NotifyPropertyChanged("MenuCmd");
+            }
+        }
+
+        private bool _showEnergyIcon1 { get; set; }
+        public bool ShowEnergyIcon1
+        {
+            get => _showEnergyIcon1;
+            set
+            {
+                _showEnergyIcon1 = value;
+                NotifyPropertyChanged("ShowEnergyIcon1");
+            }
+        }
+
+        private bool _showEnergyIcon2 { get; set; }
+        public bool ShowEnergyIcon2
+        {
+            get => _showEnergyIcon2;
+            set
+            {
+                _showEnergyIcon2 = value;
+                NotifyPropertyChanged("ShowEnergyIcon2");
+            }
+        }
+
+        private bool _showEnergyIcon3 { get; set; }
+        public bool ShowEnergyIcon3
+        {
+            get => _showEnergyIcon3;
+            set
+            {
+                _showEnergyIcon3 = value;
+                NotifyPropertyChanged("ShowEnergyIcon3");
             }
         }
 
@@ -92,7 +135,8 @@ namespace Prominence.ViewModel
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
 
             MenuView = new MenuView();
-            MenuButtonImage = AssemblyContext.GetImageByName(Constants.Gear);
+            MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
+            EnergyIcon = AssemblyContext.GetImageByName(Constants.Battery);
             MenuCmd = new Command(async () => {
                 await Application.Current.MainPage.Navigation.PushModalAsync(MenuView);
             });
@@ -188,6 +232,7 @@ namespace Prominence.ViewModel
             // Set player visited
             // I'd love to take this logic out - but visited must be done after frame is loaded, otherwise conditional dialogue logic does not work 
             GameController.Visited(frame);
+            UpdateEnergyLevels();
         }
 
         public void CheckBackground(string backgroundImage)
@@ -208,6 +253,19 @@ namespace Prominence.ViewModel
             AchievementTab.TranslateTo(0, 0);
             await Task.Delay(2000);
             AchievementTab.TranslateTo(0, -100);
+        }
+
+        public async void UpdateEnergyLevels()
+        {
+            // Reset energy icons
+            ShowEnergyIcon1 = false;
+            ShowEnergyIcon2 = false;
+            ShowEnergyIcon3 = false;
+
+            // Turn on based on player energy
+            if (GameController.Player.Energy >= 1) ShowEnergyIcon1 = true;
+            if (GameController.Player.Energy >= 2) ShowEnergyIcon2 = true;
+            if (GameController.Player.Energy >= 3) ShowEnergyIcon3 = true;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

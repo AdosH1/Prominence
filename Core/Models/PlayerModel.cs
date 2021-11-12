@@ -8,13 +8,14 @@ using Xamarin.Forms;
 
 namespace Core.Models
 {
+
     public class PlayerModel
     {
         public string Name { get; set; } = "Ados";
         public LocationModel Location { get; set; }
 
         public double Energy;
-        public double MaxEnergy;
+        public double MaxEnergy = 3;
         public DateTime LastLogin;
 
         public List<string> Inventory = new List<string>(); // use item hashes?
@@ -25,7 +26,7 @@ namespace Core.Models
         public PlayerModel(string name)
         {
             Name = name;
-            Energy = 3;
+            Energy = 2;
             Location = new LocationModel();
         }
 

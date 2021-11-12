@@ -187,12 +187,10 @@ namespace Prominence.Controllers
 
         public static void Visited(FrameModel frame)
         {
-            //Player.AddVisited(frame.CurrentLocation);
-            var newAchievements = AchievementsController.DoTaskAndEvaluateAchievements(Player.AddVisitedFunc(frame.CurrentLocation), User);
-            ShowAchievements(newAchievements);
+            // Here we want to create a generate state comparison, and handle events accordingly
+            var stateDifferences = PlayerStateController.DoTaskAndEvaluate(Player.AddVisitedFunc(frame.CurrentLocation), User);
+            ShowAchievements(stateDifferences.Achievements);
         }
-
-
 
     }
 }
