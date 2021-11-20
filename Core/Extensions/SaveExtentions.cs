@@ -60,6 +60,20 @@ namespace Core.Extensions
             };
         }
 
+        public static DialogueLabel GetDialogueLabel(this LabelSaveModel saveModel)
+        {
+            return new DialogueLabel(saveModel);
+        }
+
+        public static LabelSaveModel GetSaveModel(this DialogueLabel label)
+        {
+            return new LabelSaveModel()
+            {
+                Text = label.Text,
+                Type = label.Type
+            };
+        }
+
 
     }
 }

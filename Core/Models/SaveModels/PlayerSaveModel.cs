@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Core.Models;
+using Core.Extensions;
 
 namespace Core.Models.SaveModels
 {
@@ -24,7 +25,7 @@ namespace Core.Models.SaveModels
 
             foreach(DialogueLabel label in log)
             {
-                LabelSaveModel labelSaveModel = new LabelSaveModel(label);
+                LabelSaveModel labelSaveModel = label.GetSaveModel();
                 outputLog.Add(labelSaveModel);
             }
             return outputLog;

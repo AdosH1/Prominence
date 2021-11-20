@@ -120,9 +120,6 @@ namespace Prominence.ViewModel
             Height = DeviceDisplay.MainDisplayInfo.Height;
             Width = DeviceDisplay.MainDisplayInfo.Width;
 
-            Log = new ObservableCollection<DialogueLabel>();
-            Buttons = new ObservableCollection<Button>();
-
             GameController.DialogueViewModel = this;
             var savedUser = SaveController.LoadUser();
             if (savedUser != null)
@@ -134,6 +131,9 @@ namespace Prominence.ViewModel
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
             GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
+
+            Log = GameController.Player.Log;
+            Buttons = new ObservableCollection<Button>();
 
             MenuView = new MenuView();
             MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
