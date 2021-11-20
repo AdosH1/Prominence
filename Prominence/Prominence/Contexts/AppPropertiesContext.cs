@@ -15,7 +15,9 @@ namespace Prominence.Contexts
 
         public static string Load()
         {
-            return App.Current.Properties[ACCESSKEY] as string;
+            if (App.Current.Properties.ContainsKey(ACCESSKEY))
+                return App.Current.Properties[ACCESSKEY] as string;
+            return null;
         }
 
         public static bool IsAvailable()

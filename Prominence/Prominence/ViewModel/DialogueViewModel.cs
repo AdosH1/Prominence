@@ -124,11 +124,12 @@ namespace Prominence.ViewModel
             Buttons = new ObservableCollection<Button>();
 
             GameController.DialogueViewModel = this;
-            GameController.User =
-                new UserModel(
-                    new UserSettingsModel(),
-                    new PlayerModel("Ados")
-                    );
+            var savedUser = SaveController.LoadUser();
+            if (savedUser != null)
+                GameController.User = savedUser;
+            else
+                GameController.User = new UserModel(new UserSettingsModel(), new PlayerModel("Ados"));
+
             var showInterstitalAd = new Action(async () => { await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true); });
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
             GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
@@ -233,6 +234,7 @@ namespace Prominence.ViewModel
             // I'd love to take this logic out - but visited must be done after frame is loaded, otherwise conditional dialogue logic does not work 
             GameController.Visited(frame);
             UpdateEnergyLevels();
+            SaveController.SaveUser(GameController.User);
         }
 
         public void CheckBackground(string backgroundImage)

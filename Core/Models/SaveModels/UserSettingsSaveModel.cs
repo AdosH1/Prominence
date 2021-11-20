@@ -8,11 +8,5 @@ namespace Core.Models.SaveModels
     {
         public bool DisplayAds;
         public bool MuteSound;
-
-        public UserSettingsSaveModel(UserSettingsModel theModel)
-        {
-            DisplayAds = theModel.DisplayAds;
-            MuteSound = theModel.MuteSound;
-        }
     }
 }
