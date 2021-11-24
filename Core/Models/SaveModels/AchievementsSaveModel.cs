@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Core.Models.SaveModels
 {
-    public class UserSettingsSaveModel
+    public class AchievementsSaveModel
     {
-        public bool DisplayAds;
-        public bool MuteSound;
+        public List<string> Achievements { get; set; }
     }
 }

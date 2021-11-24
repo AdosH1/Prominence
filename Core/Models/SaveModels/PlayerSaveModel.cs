@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using Core.Models;
+using Core.Extensions;
 
 namespace Core.Models.SaveModels
 {
@@ -18,28 +19,23 @@ namespace Core.Models.SaveModels
         public List<LabelSaveModel> Log = new List<LabelSaveModel>();
         public Dictionary<string, int> Flags = new Dictionary<string, int>();
 
-        public PlayerSaveModel(PlayerModel thePlayerModel)
-        {
-            Name = thePlayerModel.Name;
-            Location = thePlayerModel.Location.Location;
-            Energy = thePlayerModel.Energy;
-            MaxEnergy = thePlayerModel.MaxEnergy;
-            LastLogin = thePlayerModel.LastLogin;
-            Inventory = thePlayerModel.Inventory;
-            Visited = thePlayerModel.Visited;
-            Log = CreateLabelSaveModelLog(thePlayerModel.Log);
-            Flags = thePlayerModel.Flags;
-        }
-
-        public List<LabelSaveModel> CreateLabelSaveModelLog(ObservableCollection<DialogueLabel> theLog)
+        public static List<LabelSaveModel> CreateLogSaveModel(ObservableCollection<DialogueLabel> log)
         {
             List<LabelSaveModel> outputLog = new List<LabelSaveModel>();
 
-            foreach(DialogueLabel label in theLog)
+            foreach(DialogueLabel label in log)
             {
-                LabelSaveModel newLabelSaveModel = new LabelSaveModel(label);
-                outputLog.Add(newLabelSaveModel);
+                LabelSaveModel labelSaveModel = label.GetSaveModel();
+                outputLog.Add(labelSaveModel);
             }
+
+            var count = outputLog.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                if (outputLog[i].Type == LabelType.Dialogue) outputLog.RemoveAt(i);
+                else break;
+            }
+
             return outputLog;
         }
     }

@@ -119,20 +119,29 @@ namespace Prominence.ViewModel
         {
             Height = DeviceDisplay.MainDisplayInfo.Height;
             Width = DeviceDisplay.MainDisplayInfo.Width;
-
-            Log = new ObservableCollection<DialogueLabel>();
-            Buttons = new ObservableCollection<Button>();
-
+            
             GameController.DialogueViewModel = this;
-            GameController.User =
-                new UserModel(
-                    new UserSettingsModel(),
-                    new PlayerModel("Ados")
-                    );
+
+            var savedUser = SaveController.LoadUser();
+            if (savedUser != null)
+            {
+                GameController.User = savedUser;
+            }
+            else
+            {
+                GameController.User = new UserModel(new UserSettingsModel(), new PlayerModel("Ados"));
+            }
+
             var showInterstitalAd = new Action(async () => { await DependencyService.Get<IInterstitialAd>().Display(AdConstants.DebugInterstitialId).ConfigureAwait(true); });
             GameController.CurrentFilm = Sequoia.Controller.GetFilm(GameController.Player, showInterstitalAd);
-            GameController.User.AchievementsModel = Sequoia.Controller.GetAchievements();
             GameController.TeleporterLocation = Sequoia.Controller.GetTeleporterLocation();
+
+            var StoryAchievements = Sequoia.Controller.GetAchievements();
+            if (savedUser != null) GameController.User.AchievementsModel = GameController.LoadAchievements(savedUser.AchievementsModel, StoryAchievements);
+            else GameController.User.AchievementsModel = StoryAchievements;
+
+            Log = GameController.Player.Log;
+            Buttons = new ObservableCollection<Button>();
 
             MenuView = new MenuView();
             MenuButtonIcon = AssemblyContext.GetImageByName(Constants.Gear);
@@ -177,10 +186,7 @@ namespace Prominence.ViewModel
         // TODO: Convert this to a template
         public async void AddButtonClickedText(string text)
         {
-            var label1 = new DialogueLabel("----------------------------", LabelType.Ignore);
-            label1.HorizontalTextAlignment = TextAlignment.Center;
-            label1.FontSize = 12;
-            label1.TextColor = Color.White;
+            var label1 = new DialogueLabel("----------------------------", LabelType.Break);
             Log.Add(label1);
 
             var label2 = new DialogueLabel(text, LabelType.Button);
@@ -233,6 +239,7 @@ namespace Prominence.ViewModel
             // I'd love to take this logic out - but visited must be done after frame is loaded, otherwise conditional dialogue logic does not work 
             GameController.Visited(frame);
             UpdateEnergyLevels();
+            SaveController.SaveUser(GameController.User);
         }
 
         public void CheckBackground(string backgroundImage)

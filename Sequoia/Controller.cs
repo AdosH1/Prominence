@@ -10,6 +10,7 @@ namespace Sequoia
     {
         public static AchievementsModel GetAchievements()
         {
+            Achievements.Initialise();
             return Achievements.GetAchievements();
         }
 
@@ -17,8 +18,6 @@ namespace Sequoia
         {
             var film = new Sequoia.SequoiaFilm();
             film.Initialise(player, showInterstitialAd);
-
-            Achievements.Initialise();
 
             return film;
         }

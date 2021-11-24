@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Models.SaveModels;
+using Core.Extensions;
 
 namespace Core.Models
 {
@@ -15,6 +17,13 @@ namespace Core.Models
             SettingsModel = settings;
             PlayerModel = player;
             AchievementsModel = achievements;
+        }
+
+        public UserModel(UserSaveModel saveModel)
+        {
+            SettingsModel = saveModel.Settings.GetSettingsModel();
+            PlayerModel = saveModel.Player.GetPlayerModel();
+            AchievementsModel = saveModel.Achievements.GetAchievementsModel();
         }
 
         // Please add achievements model manually if you use this constructor.

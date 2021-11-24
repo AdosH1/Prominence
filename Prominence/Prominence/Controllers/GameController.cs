@@ -188,8 +188,22 @@ namespace Prominence.Controllers
         public static void Visited(FrameModel frame)
         {
             // Here we want to create a generate state comparison, and handle events accordingly
+            Player.Location = frame.Location;
             var stateDifferences = PlayerStateController.DoTaskAndEvaluate(Player.AddVisitedFunc(frame.CurrentLocation), User);
             ShowAchievements(stateDifferences.Achievements);
+        }
+
+        /// Load achievements from saveData, save data will only store whether its completed or not.
+        public static AchievementsModel LoadAchievements(AchievementsModel user, AchievementsModel storyAchievements)
+        {
+            foreach (var achievement in user.Achievements)
+            {
+                if (storyAchievements.Achievements.ContainsKey(achievement.Key))
+                {
+                    storyAchievements.Achievements[achievement.Key].Completed = true;
+                }
+            }
+            return storyAchievements;
         }
 
     }

@@ -14,5 +14,7 @@ Utilities/bin/
 Utilities/obj/
 CodeGenerator/bin/
 CodeGenerator/obj/
+Test.Core/bin/
+Test.Core/obj/
 .vs/*
 *.csproj.user

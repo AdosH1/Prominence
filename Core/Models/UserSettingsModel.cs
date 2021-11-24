@@ -17,10 +17,10 @@ namespace Core.Models
             MuteSound = false;
         }
 
-        public UserSettingsModel(UserSettingsSaveModel theModel)
+        public UserSettingsModel(UserSettingsSaveModel settings)
         {
-            DisplayAds = theModel.DisplayAds;
-            MuteSound = theModel.MuteSound;
+            DisplayAds = settings.DisplayAds;
+            MuteSound = settings.MuteSound;
         }
     }
 }

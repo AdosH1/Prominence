@@ -30,6 +30,12 @@ namespace Core.Models
                 FontSize = 12;
                 TextColor = Color.Red;
             }
+            else if (type == LabelType.Break)
+            {
+                HorizontalTextAlignment = TextAlignment.Center;
+                FontSize = 12;
+                TextColor = Color.White;
+            }
             else if (type == LabelType.Ignore)
             {
 
