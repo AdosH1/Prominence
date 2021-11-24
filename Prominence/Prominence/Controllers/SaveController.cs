@@ -24,12 +24,13 @@ namespace Prominence.Controllers
 
             PlayerSaveModel playerSaveModel = player.GetSaveModel();
             UserSettingsSaveModel settingsSaveModel = settings.GetSaveModel();
-            // TODO: Achievements
+            AchievementsSaveModel achievementsSaveModel = achievements.GetSaveModel();
 
             UserSaveModel userSaveModel = new UserSaveModel()
             {
                 Player = playerSaveModel,
-                Settings = settingsSaveModel
+                Settings = settingsSaveModel,
+                Achievements = achievementsSaveModel
             };
 
             var serializedUser = JsonSerializer.Serialize(userSaveModel);
@@ -43,16 +44,6 @@ namespace Prominence.Controllers
             if (saveData != null)
             {
                 var deserializedUser = JsonSerializer.Deserialize<UserSaveModel>(saveData);
-
-                //PlayerSaveModel playerSaveModel = deserializedUser.Player;
-                //UserSettingsSaveModel settingsSaveModel = deserializedUser.Settings;
-                //// TODO: Achievements
-
-                //var player = new PlayerModel(playerSaveModel);
-                //var settings = new UserSettingsModel(settingsSaveModel);
-                //// TODO: Achievements
-                
-
                 return deserializedUser.GetUserModel();
             }
             return null;

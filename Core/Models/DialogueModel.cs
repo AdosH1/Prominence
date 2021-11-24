@@ -9,6 +9,7 @@ namespace Core.Models
     {
         Dialogue,
         Button,
+        Break,
         Ignore
     }
 

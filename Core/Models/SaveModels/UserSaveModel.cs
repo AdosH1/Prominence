@@ -8,6 +8,6 @@ namespace Core.Models.SaveModels
     {
         public PlayerSaveModel Player { get; set; }
         public UserSettingsSaveModel Settings { get; set; }
-        // TODO: Add achievements
+        public AchievementsSaveModel Achievements { get; set; }
     }
 }

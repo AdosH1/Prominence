@@ -193,5 +193,18 @@ namespace Prominence.Controllers
             ShowAchievements(stateDifferences.Achievements);
         }
 
+        /// Load achievements from saveData, save data will only store whether its completed or not.
+        public static AchievementsModel LoadAchievements(AchievementsModel user, AchievementsModel storyAchievements)
+        {
+            foreach (var achievement in user.Achievements)
+            {
+                if (storyAchievements.Achievements.ContainsKey(achievement.Key))
+                {
+                    storyAchievements.Achievements[achievement.Key].Completed = true;
+                }
+            }
+            return storyAchievements;
+        }
+
     }
 }

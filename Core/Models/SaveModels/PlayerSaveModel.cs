@@ -28,6 +28,14 @@ namespace Core.Models.SaveModels
                 LabelSaveModel labelSaveModel = label.GetSaveModel();
                 outputLog.Add(labelSaveModel);
             }
+
+            var count = outputLog.Count;
+            for (int i = count - 1; i >= 0; i--)
+            {
+                if (outputLog[i].Type == LabelType.Dialogue) outputLog.RemoveAt(i);
+                else break;
+            }
+
             return outputLog;
         }
     }

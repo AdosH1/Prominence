@@ -23,7 +23,7 @@ namespace Core.Models
         {
             SettingsModel = saveModel.Settings.GetSettingsModel();
             PlayerModel = saveModel.Player.GetPlayerModel();
-            AchievementsModel = new AchievementsModel();
+            AchievementsModel = saveModel.Achievements.GetAchievementsModel();
         }
 
         // Please add achievements model manually if you use this constructor.

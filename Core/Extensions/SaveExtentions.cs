@@ -56,7 +56,8 @@ namespace Core.Extensions
             return new UserSaveModel()
             {
                 Player = userModel.PlayerModel.GetSaveModel(),
-                Settings = userModel.SettingsModel.GetSaveModel()
+                Settings = userModel.SettingsModel.GetSaveModel(),
+                Achievements = userModel.AchievementsModel.GetSaveModel()
             };
         }
 
@@ -74,6 +75,27 @@ namespace Core.Extensions
             };
         }
 
+        public static AchievementsSaveModel GetSaveModel(this AchievementsModel achievementModel)
+        {
+            var completedAchievements = new List<string>();
+            foreach (var ach in achievementModel.Achievements)
+            {
+                if (ach.Value.Completed)
+                    completedAchievements.Add(ach.Value.Name);
+            }
+            return new AchievementsSaveModel() { Achievements = completedAchievements };
+        }
+
+        // Achievements here are purely to track completed, we'll properly load this in the game controller
+        public static AchievementsModel GetAchievementsModel(this AchievementsSaveModel saveModel)
+        {
+            var achievements = new Dictionary<string, Achievement>();
+            foreach(var save in saveModel.Achievements)
+            {
+                achievements[save] = null;
+            }
+            return new AchievementsModel() { Achievements = achievements };
+        }
 
     }
 }

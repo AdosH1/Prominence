@@ -54,6 +54,30 @@ namespace Test.Core
         }
 
         [Test]
+        public void TestAchievementsSerialization()
+        {
+            // Assemble
+            var achievementsModel = new AchievementsModel()
+            {
+                Achievements = new System.Collections.Generic.Dictionary<string, Achievement>() {
+                    {
+                        "Test", new Achievement("Test", "TestDisplay", new System.Func<PlayerModel, bool>((PlayerModel p) => { return true; })) { Completed = true }
+                    }
+                }
+            };
+            var saveModel = achievementsModel.GetSaveModel();
+
+            // Act
+            var serialised = JsonSerializer.Serialize(saveModel);
+            var deserialised = JsonSerializer.Deserialize<AchievementsSaveModel>(serialised);
+            var savedAchievements = deserialised.GetAchievementsModel();
+
+            // Assert
+            Assert.IsTrue(savedAchievements.Achievements.Count > 0);
+
+        }
+
+        [Test]
         public void TestUserSerialization()
         {
             // Assemble
@@ -62,12 +86,22 @@ namespace Test.Core
             var muteSound = false;
 
             var player = new PlayerModel(playerName);
-            var settings = new UserSettingsModel() { 
-                DisplayAds = displayAds, 
-                MuteSound = muteSound  
+            var settings = new UserSettingsModel()
+            {
+                DisplayAds = displayAds,
+                MuteSound = muteSound
             };
 
-            var user = new UserModel(settings, player);
+            var achievementsModel = new AchievementsModel()
+            {
+                Achievements = new System.Collections.Generic.Dictionary<string, Achievement>() {
+                    {
+                        "Test", new Achievement("Test", "TestDisplay", new System.Func<PlayerModel, bool>((PlayerModel p) => { return true; })) { Completed = true }
+                    }
+                }
+            };
+
+            var user = new UserModel(settings, player, achievementsModel);
             var saveModel = user.GetSaveModel();
 
             // Act
@@ -79,7 +113,7 @@ namespace Test.Core
             Assert.AreEqual(playerName, savedUser.PlayerModel.Name);
             Assert.AreEqual(displayAds, savedUser.SettingsModel.DisplayAds);
             Assert.AreEqual(muteSound, savedUser.SettingsModel.MuteSound);
-
+            Assert.IsTrue(savedUser.AchievementsModel.Achievements.Count > 0);
 
         }
     }
